@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/layout/activity_fragment_menu.xml" value="0.5190217391304348" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/drawable/ic_home_black.xml" value="0.1125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/drawable/ic_home_green.xml" value="0.1125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/drawable/ic_person_black.xml" value="0.1125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/drawable/ic_person_green.xml" value="0.1125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/drawable/ic_restaurant_black.xml" value="0.1125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/drawable/ic_restaurant_green.xml" value="0.1125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/drawable/ic_search_green.xml" value="0.1125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/layout/activity_fragment_menu.xml" value="0.25" />
         <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/layout/activity_main.xml" value="0.2658514492753623" />
         <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/layout/fragment_menu.xml" value="0.14817629179331307" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/fooddeliveryproject/app/src/main/res/menu/menu.xml" value="0.1" />
       </map>
     </option>
   </component>
