@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "161251227577",
+    "project_id": "woopwoop-e6ec7",
+    "storage_bucket": "woopwoop-e6ec7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161251227577:android:880a0fbbf8225d02eba868",
+        "android_client_info": {
+          "package_name": "com.example.fooddeliveryproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161251227577-sns9n1i8ladv1k1n6tqel56n3125kjtb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtTDjE0J0wNyiP2gbO5JmuFhi-1R7vFUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161251227577-sns9n1i8ladv1k1n6tqel56n3125kjtb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
