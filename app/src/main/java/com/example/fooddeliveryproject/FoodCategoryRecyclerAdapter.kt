@@ -8,52 +8,55 @@ import androidx.recyclerview.widget.RecyclerView
 import fragment.ExploreFragment
 
 
-class FoodCategoryRecyclerAdapter(val context: ExploreFragment, val foodCategories: List<FoodCategory>) :
+class FoodCategoryRecyclerAdapter(
+    val context: ExploreFragment,
+    val foodCategories: List<FoodCategory>
+) :
     RecyclerView.Adapter<FoodCategoryRecyclerAdapter.ViewHolder>() {
 
     //onClickListener setup
-    private lateinit var mListener : onItemClickListener
-    interface onItemClickListener{
+    private lateinit var mListener: onItemClickListener
 
+    interface onItemClickListener {
         fun onItemClick(position: Int)
     }
-    fun setOnItemClickListener(listener: onItemClickListener){
+
+    fun setOnItemClickListener(listener: onItemClickListener) {
         mListener = listener
     }
 
-
-  //  val layoutInflater = LayoutInflater.from(context)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.food_categories_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.food_categories_list_item, parent, false)
         return ViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //när en list_view ska visas så tar vi rätt person från vår lista
+        //Takes the right foodCategory from the list
         val foodCategory = foodCategories[position]
-        //sätter in bild
+        //Assigns the right image
         holder.categoryImageVIew.setImageResource(foodCategory.image)
 
     }
 
-    //räknar hur många det finns i listan
     override fun getItemCount(): Int {
+        //counts how many categories there are in the list
         return foodCategories.size
     }
 
 
-    class ViewHolder(itemView: View, listener: onItemClickListener): RecyclerView.ViewHolder(itemView){
-        //när en viewholder skapas så letar vi reda på två textviews som finns inne i vår itemview
-        // (vår itemview är skapad utifrån vår list_item layout)
+    class ViewHolder(itemView: View, listener: onItemClickListener) :
+        RecyclerView.ViewHolder(itemView) {
+        //When a viewHolder is created, it finds the ImageView in our itemView
         var categoryImageVIew = itemView.findViewById<ImageView>(R.id.foodCategoryImageView)
+
+        //init of the clicklistener that checks position
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
         }
     }
-
 
 
 }

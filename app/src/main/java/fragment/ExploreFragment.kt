@@ -33,7 +33,7 @@ class ExploreFragment : Fragment() {
     private lateinit var adapter: FoodCategoryRecyclerAdapter
     private lateinit var recyclerView: RecyclerView
 
-
+    // List of categories
     var categories = mutableListOf<FoodCategory>(
         FoodCategory(R.drawable.hamburger_category),
         FoodCategory(R.drawable.pizza_category),
@@ -86,13 +86,16 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Setup of the layoutManager
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.foodCategoryRecyclerView)
+        //Makes the layout horizontal
         recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
         recyclerView.setHasFixedSize(true)
         adapter = FoodCategoryRecyclerAdapter(this, categories)
         recyclerView.adapter = adapter
 
+        // Handler for the clicks on the items in the list
         val intent = Intent(context, HamburgersActivity::class.java)
         adapter.setOnItemClickListener(object: FoodCategoryRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {

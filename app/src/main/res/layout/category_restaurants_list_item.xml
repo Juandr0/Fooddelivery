@@ -6,39 +6,52 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="320dp"
-        android:layout_height="139dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="36dp" />
+        android:id="@+id/restaurantHeaderImageVIew"
+        android:layout_width="319dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/restaurantNameView"
         android:layout_width="250dp"
         android:layout_height="20dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
         android:text="TextView"
         android:textColor="#000000"
+        android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="166dp" />
+        app:layout_constraintEnd_toStartOf="@+id/restaurantRatingView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantHeaderImageVIew" />
 
     <TextView
         android:id="@+id/restaurantRatingView"
         android:layout_width="60dp"
         android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="38dp"
         android:text="TextView"
         android:textAlignment="textEnd"
         android:textColor="#000000"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="295dp"
-        tools:layout_editor_absoluteY="166dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantHeaderImageVIew" />
 
     <TextView
         android:id="@+id/restaurantDeliveryFeeView"
         android:layout_width="250dp"
         android:layout_height="20dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="197dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantNameView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
