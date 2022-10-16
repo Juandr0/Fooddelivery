@@ -1,10 +1,18 @@
 package fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.fooddeliveryproject.FoodCategory
+import com.example.fooddeliveryproject.FoodCategoryRecyclerAdapter
+import com.example.fooddeliveryproject.HamburgersActivity
 import com.example.fooddeliveryproject.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +29,23 @@ class ExploreFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var adapter: FoodCategoryRecyclerAdapter
+    private lateinit var recyclerView: RecyclerView
+
+
+    var categories = mutableListOf<FoodCategory>(
+        FoodCategory(R.drawable.hamburger_category),
+        FoodCategory(R.drawable.pizza_category),
+        FoodCategory(R.drawable.kebab_category),
+        FoodCategory(R.drawable.sushi_category),
+        FoodCategory(R.drawable.indian_category),
+        FoodCategory(R.drawable.vegetarian_category),
+        FoodCategory(R.drawable.italian_category),
+        FoodCategory(R.drawable.thai_category),
+        FoodCategory(R.drawable.mexican_category)
+
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,4 +82,37 @@ class ExploreFragment : Fragment() {
                 }
             }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val layoutManager = LinearLayoutManager(context)
+        recyclerView = view.findViewById(R.id.foodCategoryRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.setHasFixedSize(true)
+        adapter = FoodCategoryRecyclerAdapter(this, categories)
+        recyclerView.adapter = adapter
+
+        val intent = Intent(context, HamburgersActivity::class.java)
+        adapter.setOnItemClickListener(object: FoodCategoryRecyclerAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                Toast.makeText(context, "you clicked on item no. $position", Toast.LENGTH_SHORT).show()
+
+                when(position){
+                    0->{
+                        startActivity(intent)
+                    }
+                    1->{
+                    }
+                    2->{
+                    }
+                }
+            }
+
+        })
+    }
+
+
+
+
 }
