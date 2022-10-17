@@ -7,6 +7,8 @@
     <string name="all_categories">All categories</string>
     <string name="hamburgers">Hamburgers</string>
     <string name="delivery_fee">"Delivery fee   ${restaurant.deliveryFee} kr"</string>
+    <string name="order_again">"Order again"</string>
+    <string name="order_history">"Order history"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
