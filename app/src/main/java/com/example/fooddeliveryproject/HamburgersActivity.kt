@@ -37,7 +37,7 @@ class HamburgersActivity : AppCompatActivity() {
 
         // Handler for the clicks on the items in the list
         //Need to find a better way to assign actions to different positions!! has to be automatic
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, FragmentMenuActivity::class.java)
         adapter.setOnItemClickListener(object : RestaurantRecyclerAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 //toast to check if clicking works
