@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
+    android:background="#078BC34A"
     tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/puturadress"
-        android:layout_width="250dp"
+        android:layout_width="287dp"
         android:layout_height="48dp"
         android:layout_marginTop="340dp"
         android:ems="10"
+        android:hint="@string/put_uradress"
         android:inputType="textPersonName"
-        android:text="@string/put_uradress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintVertical_bias="0.04" />
 
     <TextView
         android:id="@+id/textView4"
@@ -69,14 +69,14 @@
         android:id="@+id/continuebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="357dp"
-        android:layout_marginBottom="326dp"
+        android:layout_marginStart="153dp"
+        android:layout_marginEnd="148dp"
+        android:backgroundTint="#8BC34A"
         android:text="@string/continue."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/puturadress"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.628" />
 </androidx.constraintlayout.widget.ConstraintLayout>
