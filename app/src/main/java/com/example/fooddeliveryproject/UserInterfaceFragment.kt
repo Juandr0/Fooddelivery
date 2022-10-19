@@ -11,6 +11,7 @@ import fragment.*
 
 //Testat och kopplingen fungerar
 val db = Firebase.firestore
+val auth = Firebase.auth
 
 class FragmentMenuActivity : AppCompatActivity() {
 
@@ -21,9 +22,6 @@ class FragmentMenuActivity : AppCompatActivity() {
     private val loginFragment = LoginFragment()
 
     private lateinit var navigationMenu : BottomNavigationView
-    val auth = Firebase.auth
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,10 +73,13 @@ class FragmentMenuActivity : AppCompatActivity() {
 // Add a new document with a generated ID
 
 
+
     private fun isLoggedInCheck() : Boolean{
         val currentUser = auth.currentUser
         return (currentUser != null)
-    }
+        }
+
+
 
     private fun setCurrentFragment(fragment : Fragment){
             val transaction = supportFragmentManager.beginTransaction()

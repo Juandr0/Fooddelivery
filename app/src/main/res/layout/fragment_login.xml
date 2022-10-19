@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/loginUserNameTextView"
+            android:id="@+id/loginUserNameEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="184dp"
@@ -18,13 +18,14 @@
             android:hint="@string/username"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textColorLink="@color/woopwoop_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/loginUserPasswordTextView"
+            android:id="@+id/loginUserPasswordEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -35,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginUserNameTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/loginUserNameEditText" />
 
         <TextView
             android:id="@+id/textView7"
@@ -51,12 +52,26 @@
             android:id="@+id/loginUserSignInButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in"
             android:backgroundTint="@color/woopwoop_green"
+            android:text="@string/sign_in"
+            app:layout_constraintBaseline_toBaselineOf="@+id/loginUserSignUpButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.311"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+
+            android:id="@+id/loginUserSignUpButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/woopwoop_green"
+            android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.204"
+            app:layout_constraintStart_toEndOf="@+id/loginUserSignInButton"
+            app:layout_constraintTop_toBottomOf="@+id/loginUserPasswordEditText"
+            app:layout_constraintVertical_bias="0.116" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
