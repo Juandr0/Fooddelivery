@@ -43,7 +43,17 @@ class FragmentMenuActivity : AppCompatActivity() {
                 R.id.ic_explore -> setCurrentFragment(exploreFragment)
                 R.id.ic_restaurants -> setCurrentFragment(restaurantsFragment)
                 R.id.ic_search -> setCurrentFragment(searchFragment)
-                R.id.ic_profile -> setCurrentFragment(profileFragment)
+                R.id.ic_profile -> {
+                    // if-sats som kollar ifall användaren är inloggad -> om false skicka anv till
+                    // login-fragment
+
+
+                    // if-sats som kollar ifall användaren är en admin eller ett företag ->
+                    // skicka användaren till admin/företag aktivitet med rätt funtkionalitet
+                    // annars skicka användaren till sin profil
+
+                setCurrentFragment(profileFragment)
+                }
             }
             true
         }

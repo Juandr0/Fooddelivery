@@ -13,6 +13,10 @@
     <string name="welcome">WELCOME</string>
     <string name="continue_button">Continue</string>
 
+    <string name="username">Enter username</string>
+    <string name="password">Enter password</string>
+    <string name="signIn">Sign in</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
