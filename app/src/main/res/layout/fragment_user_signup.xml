@@ -12,17 +12,17 @@
         tools:layout_editor_absoluteY="36dp">
 
         <TextView
-            android:id="@+id/Woop1"
+            android:id="@+id/WoopTV1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:text="Woop!"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            app:layout_constraintEnd_toStartOf="@+id/Woop2"
-            app:layout_constraintTop_toBottomOf="@+id/Woop2" />
+            app:layout_constraintEnd_toStartOf="@+id/WoopTV2"
+            app:layout_constraintTop_toBottomOf="@+id/WoopTV2" />
 
         <TextView
-            android:id="@+id/Woop2"
+            android:id="@+id/WoopTV2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -46,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Woop1" />
+            app:layout_constraintTop_toBottomOf="@+id/WoopTV1" />
 
         <EditText
             android:id="@+id/newUserPasswordEditText"
@@ -60,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newUserAddressEditText2" />
+            app:layout_constraintTop_toBottomOf="@+id/newUserPhoneNumberEditText" />
 
         <EditText
             android:id="@+id/newUserAddressEditText"
@@ -77,7 +77,7 @@
             app:layout_constraintTop_toBottomOf="@+id/newUsernameEditText" />
 
         <EditText
-            android:id="@+id/newUserAddressEditText2"
+            android:id="@+id/newUserPhoneNumberEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/newUserAddressEditText" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/newUserSignupButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="52dp"
@@ -103,14 +103,14 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/registerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="24dp"
             android:text="@string/register"
-            app:layout_constraintStart_toEndOf="@+id/Woop1"
-            app:layout_constraintTop_toBottomOf="@+id/Woop2" />
+            app:layout_constraintStart_toEndOf="@+id/WoopTV1"
+            app:layout_constraintTop_toBottomOf="@+id/WoopTV2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
