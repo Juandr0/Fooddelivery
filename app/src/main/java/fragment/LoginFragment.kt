@@ -1,4 +1,4 @@
-package fragment.user
+package fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,7 @@ import android.widget.EditText
 import com.example.fooddeliveryproject.R
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
+import fragment.user.SignupFragment
 
 
 class LoginFragment : Fragment()  {
