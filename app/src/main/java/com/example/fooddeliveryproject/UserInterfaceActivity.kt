@@ -14,7 +14,7 @@ import fragment.user.*
 val db = Firebase.firestore
 val auth = Firebase.auth
 
-class FragmentMenuActivity : AppCompatActivity() {
+class UserInterfaceActivity : AppCompatActivity() {
 
     private val exploreFragment = ExploreFragment()
     private val restaurantsFragment = RestaurantsFragment()
