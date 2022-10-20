@@ -13,8 +13,12 @@
     <string name="welcome">WELCOME</string>
     <string name="continue_button">Continue</string>
 
-    <string name="username">Enter username</string>
-    <string name="password">Enter password</string>
+    <string name="username">E-mail</string>
+    <string name="password">Password</string>
+    <string name="address">Address</string>
+    <string name="phonenumer">Phone number</string>
+    <string name="register">Register</string>
+
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
 

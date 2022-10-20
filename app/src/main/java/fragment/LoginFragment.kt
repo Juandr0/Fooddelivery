@@ -1,5 +1,6 @@
 package fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.RestaurantPageActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import fragment.user.SignupFragment
@@ -23,6 +26,10 @@ class LoginFragment : Fragment()  {
     private lateinit var signUpButton : Button
     private var userSignupFragment = SignupFragment()
 
+    private var restaurantPageActivity = RestaurantPageActivity()
+
+    // Implementeras när aktiviteten finns
+    // private var adminPageActivity = AdminPageActivity()
 
 
 
@@ -41,28 +48,48 @@ class LoginFragment : Fragment()  {
         userEmailEditText = v.findViewById(R.id.loginUserNameEditText)
         userPasswordEditText = v.findViewById(R.id.loginUserPasswordEditText)
 
+
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //Onclick listener som försöker att logga in ifall inte edittext för anvnamn eller lösenord är empty
+
+        //Ska använda funktionen newActivity och skicka användaren till Admin eller Company-sidorna beroende på
+        //om användaren == isCompany eller == isAdmin
+
+
         signInButton.setOnClickListener{
+            /*
             if (userEmailEditText.text.toString().isEmpty() || userPasswordEditText.text.toString().isEmpty()){
                 Log.d("!!!", "Empty")
             } else {
                 signIn()
             }
+
+             */
+            // if user == company
+            startNewActivity(restaurantPageActivity)
         }
+
+
 
 
         signUpButton.setOnClickListener{
             setCurrentFragment(userSignupFragment)
+
         }
 
     }
 
+
+    private fun startNewActivity(newActivity : AppCompatActivity) {
+    val intent = Intent(activity, newActivity::class.java)
+        startActivity(intent)
+    }
     private fun setCurrentFragment(fragment : Fragment){
 
         val fragmentManager = parentFragmentManager
