@@ -1,4 +1,4 @@
-package fragment
+package fragment.user
 
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +21,9 @@ class LoginFragment : Fragment()  {
     private lateinit var userPasswordEditText : EditText
     private lateinit var signInButton : Button
     private lateinit var signUpButton : Button
+    private var userSignupFragment = SignupFragment()
+
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +58,17 @@ class LoginFragment : Fragment()  {
 
 
         signUpButton.setOnClickListener{
-            logOnClick()
+            setCurrentFragment(userSignupFragment)
         }
 
     }
 
-    fun logOnClick() {
-        Log.d("!!!", "Klick")
+    private fun setCurrentFragment(fragment : Fragment){
+
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 
     fun signIn() {

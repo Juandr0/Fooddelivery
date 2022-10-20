@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import fragment.ExploreFragment
+import fragment.user.ExploreFragment
 
 
 class FoodCategoryRecyclerAdapter(
