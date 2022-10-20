@@ -1,4 +1,4 @@
-package fragment
+package fragment.user
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
