@@ -15,6 +15,7 @@ import com.example.fooddeliveryproject.RestaurantInterfaceActivity
 import com.example.fooddeliveryproject.RestaurantPageActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import fragment.user.ProfileFragment
 import fragment.user.SignupFragment
 
 
@@ -25,7 +26,10 @@ class LoginFragment : Fragment()  {
     private lateinit var userPasswordEditText : EditText
     private lateinit var signInButton : Button
     private lateinit var signUpButton : Button
+    private lateinit var signOutButton : Button
     private var userSignupFragment = SignupFragment()
+
+    private val profileFragment = ProfileFragment()
 
     private var restaurantPageActivity = RestaurantPageActivity()
 
@@ -51,6 +55,7 @@ class LoginFragment : Fragment()  {
         signUpButton = v.findViewById(R.id.loginUserSignUpButton)
         userEmailEditText = v.findViewById(R.id.loginUserNameEditText)
         userPasswordEditText = v.findViewById(R.id.loginUserPasswordEditText)
+        signOutButton = v.findViewById(R.id.signOut)
 
 
         return v
@@ -80,12 +85,16 @@ class LoginFragment : Fragment()  {
         }
 
 
-
+        signOutButton.setOnClickListener{
+            if (auth.currentUser != null) {
+                auth.signOut()
+                Log.d("!!!","Logged out!")
+            }
+        }
 
         signUpButton.setOnClickListener{
             auth.signOut()
             setCurrentFragment(userSignupFragment)
-
         }
 
         restaurantTestButton.setOnClickListener {
@@ -109,16 +118,28 @@ class LoginFragment : Fragment()  {
     }
 
     fun signIn() {
-    auth.signInWithEmailAndPassword(userEmailEditText.text.toString(), userPasswordEditText.text.toString())
-        .addOnCompleteListener{ task ->
-            if (task.isSuccessful){
-                Log.d("!!!", "Logged in!")
-            } else {
-                Log.d("!!!", "Sign in Fail")
-            }
 
+        val user = fragment.user.auth.currentUser
+        if (user == null) {
+            auth.signInWithEmailAndPassword(userEmailEditText.text.toString(), userPasswordEditText.text.toString())
+                .addOnCompleteListener{ task ->
+                    if (task.isSuccessful){
+                        Log.d("!!!", "Logged in!")
+                        userTypeCheck()
+                    } else {
+                        Log.d("!!!", "Sign in Fail")
+                    }
+                }
+        } else  {
+            Log.d("!!!", "redan inloggad")
+            //userTypeCheck
         }
+    }
 
+    // Ska dra ner användaren från databasen och kolla värdet på "type"
+    // Skicka användaren till olika fragment / aktiviteter beroende på vilken typ
+    fun userTypeCheck() {
+        setCurrentFragment(profileFragment)
     }
 
 }
