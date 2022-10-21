@@ -20,15 +20,16 @@ val auth = Firebase.auth
 
 class SignupFragment : Fragment() {
 
-    private lateinit var woopTV1 : TextView
-    private lateinit var woopTV2 : TextView
+    private lateinit var woopTV1: TextView
+    private lateinit var woopTV2: TextView
     private lateinit var registerTextView: TextView
-    private lateinit var newUserNameEditText : EditText
-    private lateinit var newUserEmailEditText : EditText
-    private lateinit var newUserAddressEditText : EditText
-    private lateinit var newUserPhoneNumberEditText : EditText
-    private lateinit var newUserPasswordEditText : EditText
-    private lateinit var newUserSignupButton : Button
+    private lateinit var newUserNameEditText: EditText
+    private lateinit var newUserEmailEditText: EditText
+    private lateinit var newUserAddressEditText: EditText
+    private lateinit var newUserPhoneNumberEditText: EditText
+    private lateinit var newUserPasswordEditText: EditText
+    private lateinit var newUserSignupButton: Button
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,65 +57,95 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        newUserSignupButton.setOnClickListener{
-
-           createUserToDBCatalougeFromSignupField()
-           createAuthUserFromSignupField()
+        newUserSignupButton.setOnClickListener {
+            createNewUser()
         }
 
+
+
     }
+
     private fun onClick() {
 
     }
 
 
-
-    private fun createUserToDBCatalougeFromSignupField() {
+    private fun createUserToDBCatalougeFromSignupFieldHelperFunction() {
 
         val name = newUserNameEditText.text.toString()
         val email = newUserEmailEditText.text.toString()
         val address = newUserAddressEditText.text.toString()
         val phoneNumber = newUserPhoneNumberEditText.text
+        val user = auth.currentUser
 
 
-        if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()){
+
+
+        if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
             Log.d("!!!", "empty fields, no user created")
         } else {
 
-           val newUser = User(name = name, email = email, address = address, phoneNumber = phoneNumber.toString().toInt())
-           db.collection("users").document().set(newUser)
-               .addOnSuccessListener { task ->
-                   Log.d("!!!", "user created to DB")
-               }
-               .addOnFailureListener{
-                   Log.d("!!!", "No user created to DB")
-               }
+            val newUser = User(
+                name = name,
+                email = email,
+                address = address,
+                phoneNumber = phoneNumber.toString().toInt(),
+                uID = user?.uid
+            )
+
+
+            if (user != null) {
+                db.collection("users").document(user.uid).collection("info").add(newUser)
+                    .addOnCompleteListener {
+                        Log.d("!!!", "user created to DB")
+
+                    }
+                    .addOnFailureListener {
+                        Log.d("!!!", "No user created to DB")
+                    }
+            }
         }
 
 
     }
 
-    private fun createAuthUserFromSignupField(){
-        auth.createUserWithEmailAndPassword(newUserEmailEditText.text.toString(), newUserPasswordEditText.text.toString())
-            .addOnSuccessListener {  Log.d("!!!", "user created to AUTHlogin")
-            } .addOnFailureListener {
+    private fun createNewUser(){
+        auth.createUserWithEmailAndPassword(
+            newUserEmailEditText.text.toString(),
+            newUserPasswordEditText.text.toString()
+        )
+            .addOnSuccessListener {
+                Log.d("!!!", "user created to AUTHlogin")
+                createUserToDBCatalougeFromSignupFieldHelperFunction()
+            }.addOnFailureListener {
                 Log.d("!!!", "No user created to AUTHlogin")
             }
-        signIn()
+
     }
 
 
     fun signIn() {
 
-        //Checka om man är inloggad
-        auth.signInWithEmailAndPassword(newUserEmailEditText.text.toString(), newUserPasswordEditText.text.toString())
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful){
-                    Log.d("!!!", "Logged in!")
-                } else {
-                    Log.d("!!!", "Sign in Fail")
+        val user = auth.currentUser
+        if (user == null) {
+            Log.d("!!!", "Inte inloggad")
+            return
+        } else {
+
+            auth.signInWithEmailAndPassword(
+                newUserEmailEditText.text.toString(),
+                newUserPasswordEditText.text.toString()
+            )
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("!!!", "Logged in!")
+                    } else {
+                        Log.d("!!!", "Sign in Fail")
+                    }
                 }
-            }
+        }
     }
+
+
 }
 

@@ -83,6 +83,7 @@ class LoginFragment : Fragment()  {
 
 
         signUpButton.setOnClickListener{
+            auth.signOut()
             setCurrentFragment(userSignupFragment)
 
         }
