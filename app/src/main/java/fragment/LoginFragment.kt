@@ -67,16 +67,16 @@ class LoginFragment : Fragment()  {
 
 
         signInButton.setOnClickListener{
-            /*
+
             if (userEmailEditText.text.toString().isEmpty() || userPasswordEditText.text.toString().isEmpty()){
                 Log.d("!!!", "Empty")
             } else {
                 signIn()
             }
 
-             */
+
             // if user == company
-            startNewActivity(restaurantPageActivity)
+            //startNewActivity(restaurantPageActivity)
         }
 
 
