@@ -74,17 +74,30 @@
             app:layout_constraintVertical_bias="0.116" />
 
         <Button
+
+            android:id="@+id/signOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:text="Sign out (for test)"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginUserPasswordEditText"
+            app:layout_constraintVertical_bias="0.32" />
+
+        <Button
             android:id="@+id/restaurantTestButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="73dp"
+            android:layout_marginTop="112dp"
             android:layout_marginEnd="73dp"
-            android:layout_marginBottom="252dp"
             android:text="RESTAURANT TEST BUTTON"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginUserSignInButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
