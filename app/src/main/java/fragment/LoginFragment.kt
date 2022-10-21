@@ -3,14 +3,15 @@ package fragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.RestaurantInterfaceActivity
 import com.example.fooddeliveryproject.RestaurantPageActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -31,7 +32,7 @@ class LoginFragment : Fragment()  {
     // Implementeras när aktiviteten finns
     // private var adminPageActivity = AdminPageActivity()
 
-
+    private lateinit var restaurantTestButton: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -42,6 +43,9 @@ class LoginFragment : Fragment()  {
         //knappar & edittext i onCreateView inflatern för att de annars inte
         //går att nå på ett enkelt sätt.
 
+        //TEST
+        restaurantTestButton = v.findViewById(R.id.restaurantTestButton)
+        //TEST SLUT
 
         signInButton = v.findViewById(R.id.loginUserSignInButton)
         signUpButton = v.findViewById(R.id.loginUserSignUpButton)
@@ -81,6 +85,11 @@ class LoginFragment : Fragment()  {
         signUpButton.setOnClickListener{
             setCurrentFragment(userSignupFragment)
 
+        }
+
+        restaurantTestButton.setOnClickListener {
+            val intent = Intent(context, RestaurantInterfaceActivity::class.java)
+            startActivity(intent)
         }
 
     }
