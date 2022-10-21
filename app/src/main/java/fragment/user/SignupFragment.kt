@@ -58,14 +58,13 @@ class SignupFragment : Fragment() {
 
         newUserSignupButton.setOnClickListener{
 
-            createUserToDBCatalougeFromSignupField()
-            createAuthUserFromSignupField(newUserEmailEditText.text.toString(), newUserPasswordEditText.text.toString())
-
+           createUserToDBCatalougeFromSignupField()
+           createAuthUserFromSignupField()
         }
 
     }
     private fun onClick() {
-        Log.d("!!!","Klick")
+
     }
 
 
@@ -75,13 +74,14 @@ class SignupFragment : Fragment() {
         val name = newUserNameEditText.text.toString()
         val email = newUserEmailEditText.text.toString()
         val address = newUserAddressEditText.text.toString()
+        val phoneNumber = newUserPhoneNumberEditText.text
 
 
-        if (name.isEmpty() || email.isEmpty() || address.isEmpty() ){
+        if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()){
             Log.d("!!!", "empty fields, no user created")
         } else {
 
-           val newUser = User(name = name, email = email, address = address)
+           val newUser = User(name = name, email = email, address = address, phoneNumber = phoneNumber.toString().toInt())
            db.collection("users").document().set(newUser)
                .addOnSuccessListener { task ->
                    Log.d("!!!", "user created to DB")
@@ -94,12 +94,27 @@ class SignupFragment : Fragment() {
 
     }
 
-    private fun createAuthUserFromSignupField(name : String, email : String){
-        auth.createUserWithEmailAndPassword(name, email)
+    private fun createAuthUserFromSignupField(){
+        auth.createUserWithEmailAndPassword(newUserEmailEditText.text.toString(), newUserPasswordEditText.text.toString())
             .addOnSuccessListener {  Log.d("!!!", "user created to AUTHlogin")
             } .addOnFailureListener {
                 Log.d("!!!", "No user created to AUTHlogin")
             }
+        signIn()
     }
 
+
+    fun signIn() {
+
+        //Checka om man är inloggad
+        auth.signInWithEmailAndPassword(newUserEmailEditText.text.toString(), newUserPasswordEditText.text.toString())
+            .addOnCompleteListener{ task ->
+                if (task.isSuccessful){
+                    Log.d("!!!", "Logged in!")
+                } else {
+                    Log.d("!!!", "Sign in Fail")
+                }
+            }
+    }
 }
+
