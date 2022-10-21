@@ -125,29 +125,5 @@ class SignupFragment : Fragment() {
 
     }
 
-
-    fun signIn() {
-
-        val user = auth.currentUser
-        if (user == null) {
-            Log.d("!!!", "Inte inloggad")
-            return
-        } else {
-
-            auth.signInWithEmailAndPassword(
-                newUserEmailEditText.text.toString(),
-                newUserPasswordEditText.text.toString()
-            )
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d("!!!", "Logged in!")
-                    } else {
-                        Log.d("!!!", "Sign in Fail")
-                    }
-                }
-        }
-    }
-
-
 }
 
