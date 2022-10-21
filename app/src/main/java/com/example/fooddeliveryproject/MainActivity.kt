@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
           continuebutton.setOnClickListener(){
               val userAdressInput= userAdressInput.text.toString()
 
-              val intent = Intent(this, FragmentMenuActivity::class.java)
+              val intent = Intent(this, UserInterfaceActivity::class.java)
               if (userAdressInput != null || userAdressInput != "") {
                   intent.getStringExtra(userAdressInput)
 

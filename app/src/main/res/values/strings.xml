@@ -4,6 +4,8 @@
     <string name="restaurants">Restaurants</string>
     <string name="search">Search</string>
     <string name="profile">Profile</string>
+    <string name="menu">Menu</string>
+    <string name="images">Images</string>
     <string name="all_categories">All categories</string>
     <string name="hamburgers">Hamburgers</string>
     <string name="delivery_fee">"Delivery fee   ${restaurant.deliveryFee} kr"</string>
@@ -12,6 +14,15 @@
     <string name="user_adress">Type your address</string>
     <string name="welcome">WELCOME</string>
     <string name="continue_button">Continue</string>
+
+    <string name="username">E-mail</string>
+    <string name="password">Password</string>
+    <string name="address">Address</string>
+    <string name="phonenumer">Phone number</string>
+    <string name="register">Register</string>
+
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

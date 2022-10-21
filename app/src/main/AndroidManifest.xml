@@ -14,10 +14,24 @@
         android:theme="@style/Theme.Fooddeliveryproject"
         tools:targetApi="31">
         <activity
+            android:name=".RestaurantInterfaceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RestaurantPageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".HamburgersActivity"
             android:exported="false" />
         <activity
-            android:name=".FragmentMenuActivity"
+            android:name=".UserInterfaceActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
