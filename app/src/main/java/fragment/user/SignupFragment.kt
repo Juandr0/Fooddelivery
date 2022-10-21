@@ -60,6 +60,7 @@ class SignupFragment : Fragment() {
 
             createUserToDBCatalougeFromSignupField()
             createAuthUserFromSignupField(newUserEmailEditText.text.toString(), newUserPasswordEditText.text.toString())
+
         }
 
     }
@@ -81,7 +82,7 @@ class SignupFragment : Fragment() {
         } else {
 
            val newUser = User(name = name, email = email, address = address)
-           db.collection("users").document("user").set(newUser)
+           db.collection("users").document().set(newUser)
                .addOnSuccessListener { task ->
                    Log.d("!!!", "user created to DB")
                }
