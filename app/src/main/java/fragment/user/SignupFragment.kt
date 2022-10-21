@@ -30,6 +30,8 @@ class SignupFragment : Fragment() {
     private lateinit var newUserPasswordEditText: EditText
     private lateinit var newUserSignupButton: Button
 
+    private var profileFragment = ProfileFragment()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,12 +63,13 @@ class SignupFragment : Fragment() {
             createNewUser()
         }
 
-
-
     }
+    private fun setCurrentFragment(fragment : Fragment){
 
-    private fun onClick() {
-
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 
 
@@ -77,7 +80,6 @@ class SignupFragment : Fragment() {
         val address = newUserAddressEditText.text.toString()
         val phoneNumber = newUserPhoneNumberEditText.text
         val user = auth.currentUser
-
 
 
 
@@ -98,7 +100,7 @@ class SignupFragment : Fragment() {
                 db.collection("users").document(user.uid).collection("info").add(newUser)
                     .addOnCompleteListener {
                         Log.d("!!!", "user created to DB")
-
+                        setCurrentFragment(profileFragment)
                     }
                     .addOnFailureListener {
                         Log.d("!!!", "No user created to DB")
