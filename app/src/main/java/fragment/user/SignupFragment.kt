@@ -97,7 +97,7 @@ class SignupFragment : Fragment() {
 
 
             if (user != null) {
-                db.collection("users").document(user.uid).collection("info").add(newUser)
+                db.collection("users").document(user.uid).set(newUser)
                     .addOnCompleteListener {
                         Log.d("!!!", "user created to DB")
                         setCurrentFragment(profileFragment)
