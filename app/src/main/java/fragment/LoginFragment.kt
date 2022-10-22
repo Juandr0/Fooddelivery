@@ -124,14 +124,14 @@ class LoginFragment : Fragment()  {
 
     private fun signIn() {
 
-        val user = fragment.user.auth.currentUser
+        val user = auth.currentUser
         if (user == null) {
             auth.signInWithEmailAndPassword(userEmailEditText.text.toString(), userPasswordEditText.text.toString())
                 .addOnCompleteListener{ task ->
                     if (task.isSuccessful){
-                        var typeCheck = userTypeCheck()
+
                         Log.d("!!!", "Logged in!")
-                        Log.d("!!!", typeCheck)
+                        userTypeCheck()
                     } else {
                         Log.d("!!!", "Sign in Fail")
                     }
@@ -144,13 +144,13 @@ class LoginFragment : Fragment()  {
     // Ska dra ner användaren från databasen och kolla värdet på "type"
     // Skicka användaren till olika fragment / aktiviteter beroende på vilken typ
 
-    fun userTypeCheck() : String{
+    fun userTypeCheck() {
 
         var type = ""
         val currentUser = auth.currentUser
 
         if (currentUser == null){
-            return "fail"
+            return
         }
 
         val docRef = db.collection("users").document(currentUser.uid)
@@ -159,24 +159,10 @@ class LoginFragment : Fragment()  {
                 val user = document.toObject<User>()
                 if (user != null){
                     type = user.type.toString()
+                    Log.d("!!!", "user type i funktionen före return " + type)
                 }
             }
-/*
-        if (currentUser != null) {
-            db.collection("users").document(currentUser.uid)
-                .collection("info")
-                .addSnapshotListener{ snapshot, e ->
-                    if (snapshot != null){
-                        for (document in snapshot.documents) {
-                            val newUser = document.toObject<User>()
-                            type = newUser!!.type.toString()
-                        }
-                    }
-                }
-        }
 
-        */
-        return type
     }
 
 }
