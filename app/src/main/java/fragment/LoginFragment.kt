@@ -1,6 +1,5 @@
 package fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +26,7 @@ class LoginFragment : Fragment()  {
     private lateinit var auth : FirebaseAuth
     private lateinit var db : FirebaseFirestore
 
+
     private lateinit var userEmailEditText : EditText
     private lateinit var userPasswordEditText : EditText
     private lateinit var signInButton : Button
@@ -35,8 +35,8 @@ class LoginFragment : Fragment()  {
     private var userSignupFragment = SignupFragment()
 
     private val profileFragment = ProfileFragment()
-
-    private var restaurantPageActivity = RestaurantPageActivity()
+    private var restaurantPageActivity = RestaurantInterfaceActivity()
+    private var currentUserType = ""
 
     // Implementeras när aktiviteten finns
     // private var adminPageActivity = AdminPageActivity()
@@ -83,9 +83,6 @@ class LoginFragment : Fragment()  {
                 signIn()
             }
 
-
-            // if user == company
-            //startNewActivity(restaurantPageActivity)
         }
 
 
@@ -109,7 +106,6 @@ class LoginFragment : Fragment()  {
     }
 
 
-    @SuppressLint("SuspiciousIndentation")
     private fun startNewActivity(newActivity : AppCompatActivity) {
     val intent = Intent(activity, newActivity::class.java)
         startActivity(intent)
@@ -129,15 +125,15 @@ class LoginFragment : Fragment()  {
             auth.signInWithEmailAndPassword(userEmailEditText.text.toString(), userPasswordEditText.text.toString())
                 .addOnCompleteListener{ task ->
                     if (task.isSuccessful){
-
                         Log.d("!!!", "Logged in!")
                         userTypeCheck()
                     } else {
                         Log.d("!!!", "Sign in Fail")
                     }
                 }
+
         } else  {
-            var userType = userTypeCheck()
+        return
         }
     }
 
@@ -146,7 +142,7 @@ class LoginFragment : Fragment()  {
 
     fun userTypeCheck() {
 
-        var type = ""
+        var type : String
         val currentUser = auth.currentUser
 
         if (currentUser == null){
@@ -159,10 +155,31 @@ class LoginFragment : Fragment()  {
                 val user = document.toObject<User>()
                 if (user != null){
                     type = user.type.toString()
-                    Log.d("!!!", "user type i funktionen före return " + type)
+                    currentUserType = type
+                    activateCorrectProfile(type)
                 }
             }
+    }
 
+    fun activateCorrectProfile(userType : String){
+
+        if (currentUserType == ""){
+            return
+        } else {
+            when (currentUserType){
+                "user" -> {
+                    setCurrentFragment(profileFragment)
+                }
+                "admin" -> {
+
+                }
+                "restaurant" -> {
+                    startNewActivity(restaurantPageActivity)
+                }
+        }
+
+
+        }
     }
 
 }
