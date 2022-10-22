@@ -119,7 +119,6 @@ class LoginFragment : Fragment()  {
     }
 
     private fun signIn() {
-
         val user = auth.currentUser
         if (user == null) {
             auth.signInWithEmailAndPassword(userEmailEditText.text.toString(), userPasswordEditText.text.toString())
@@ -140,7 +139,7 @@ class LoginFragment : Fragment()  {
     // Ska dra ner användaren från databasen och kolla värdet på "type"
     // Skicka användaren till olika fragment / aktiviteter beroende på vilken typ
 
-    fun userTypeCheck() {
+    open fun userTypeCheck() {
 
         var type : String
         val currentUser = auth.currentUser
@@ -161,7 +160,7 @@ class LoginFragment : Fragment()  {
             }
     }
 
-    fun activateCorrectProfile(userType : String){
+    open fun activateCorrectProfile(userType : String){
 
         if (currentUserType == ""){
             return
