@@ -10,10 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.RestaurantInterfaceActivity
-import com.example.fooddeliveryproject.RestaurantPageActivity
+import com.example.fooddeliveryproject.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import fragment.user.ProfileFragment
 import fragment.user.SignupFragment
@@ -21,7 +23,10 @@ import fragment.user.SignupFragment
 
 class LoginFragment : Fragment()  {
 
-    private val auth = Firebase.auth
+    private lateinit var auth : FirebaseAuth
+    private lateinit var db : FirebaseFirestore
+
+
     private lateinit var userEmailEditText : EditText
     private lateinit var userPasswordEditText : EditText
     private lateinit var signInButton : Button
@@ -30,8 +35,8 @@ class LoginFragment : Fragment()  {
     private var userSignupFragment = SignupFragment()
 
     private val profileFragment = ProfileFragment()
-
-    private var restaurantPageActivity = RestaurantPageActivity()
+    private var restaurantPageActivity = RestaurantInterfaceActivity()
+    private var currentUserType = ""
 
     // Implementeras när aktiviteten finns
     // private var adminPageActivity = AdminPageActivity()
@@ -51,6 +56,9 @@ class LoginFragment : Fragment()  {
         restaurantTestButton = v.findViewById(R.id.restaurantTestButton)
         //TEST SLUT
 
+        db = Firebase.firestore
+        auth = Firebase.auth
+
         signInButton = v.findViewById(R.id.loginUserSignInButton)
         signUpButton = v.findViewById(R.id.loginUserSignUpButton)
         userEmailEditText = v.findViewById(R.id.loginUserNameEditText)
@@ -67,10 +75,6 @@ class LoginFragment : Fragment()  {
 
         //Onclick listener som försöker att logga in ifall inte edittext för anvnamn eller lösenord är empty
 
-        //Ska använda funktionen newActivity och skicka användaren till Admin eller Company-sidorna beroende på
-        //om användaren == isCompany eller == isAdmin
-
-
         signInButton.setOnClickListener{
 
             if (userEmailEditText.text.toString().isEmpty() || userPasswordEditText.text.toString().isEmpty()){
@@ -79,9 +83,6 @@ class LoginFragment : Fragment()  {
                 signIn()
             }
 
-
-            // if user == company
-            //startNewActivity(restaurantPageActivity)
         }
 
 
@@ -117,9 +118,8 @@ class LoginFragment : Fragment()  {
         transaction.commit()
     }
 
-    fun signIn() {
-
-        val user = fragment.user.auth.currentUser
+    private fun signIn() {
+        val user = auth.currentUser
         if (user == null) {
             auth.signInWithEmailAndPassword(userEmailEditText.text.toString(), userPasswordEditText.text.toString())
                 .addOnCompleteListener{ task ->
@@ -130,16 +130,55 @@ class LoginFragment : Fragment()  {
                         Log.d("!!!", "Sign in Fail")
                     }
                 }
+
         } else  {
-            Log.d("!!!", "redan inloggad")
-            //userTypeCheck
+        return
         }
     }
 
     // Ska dra ner användaren från databasen och kolla värdet på "type"
     // Skicka användaren till olika fragment / aktiviteter beroende på vilken typ
-    fun userTypeCheck() {
-        setCurrentFragment(profileFragment)
+
+    open fun userTypeCheck() {
+
+        var type : String
+        val currentUser = auth.currentUser
+
+        if (currentUser == null){
+            return
+        }
+
+        val docRef = db.collection("users").document(currentUser.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val user = document.toObject<User>()
+                if (user != null){
+                    type = user.type.toString()
+                    currentUserType = type
+                    activateCorrectProfile(type)
+                }
+            }
+    }
+
+    open fun activateCorrectProfile(userType : String){
+
+        if (currentUserType == ""){
+            return
+        } else {
+            when (currentUserType){
+                "user" -> {
+                    setCurrentFragment(profileFragment)
+                }
+                "admin" -> {
+
+                }
+                "restaurant" -> {
+                    startNewActivity(restaurantPageActivity)
+                }
+        }
+
+
+        }
     }
 
 }

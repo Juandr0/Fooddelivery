@@ -1,11 +1,13 @@
 package com.example.fooddeliveryproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import fragment.LoginFragment
 import fragment.user.*
@@ -21,6 +23,9 @@ class UserInterfaceActivity : AppCompatActivity() {
     private val searchFragment = SearchFragment()
     private val profileFragment = ProfileFragment()
     private val loginFragment = LoginFragment()
+    private val RestaurantInterfaceActivity = RestaurantInterfaceActivity()
+
+    private var currentUserType = ""
 
     private lateinit var navigationMenu : BottomNavigationView
 
@@ -42,24 +47,12 @@ class UserInterfaceActivity : AppCompatActivity() {
                     // if-sats som kollar ifall användaren är inloggad -> om false skicka anv till
                     // login-fragment
 
-                    /*
-                    val userLoggedIn = isLoggedInCheck()
-                    if (!userLoggedIn) {
+                    val isUserAlreadyLoggedIn = isLoggedInCheck()
+                    if (!isUserAlreadyLoggedIn) {
                         setCurrentFragment(loginFragment)
-                    } else if(){
-                        // if-sats eller when-sats som kollar ifall användaren är en admin eller ett företag ->
-                        // skicka användaren till admin/företag aktivitet med rätt funtkionalitet
-                        // annars skicka användaren till sin profil
-
                     } else {
-                        setCurrentFragment(profileFragment)
+                        userTypeCheck()
                     }
-                    */
-
-                    //Kommenterar ut för att arbeta med andra fragments, som login.
-                //setCurrentFragment(profileFragment)
-
-                    setCurrentFragment(loginFragment)
                 }
             }
             true
@@ -74,10 +67,9 @@ class UserInterfaceActivity : AppCompatActivity() {
 // Add a new document with a generated ID
 
 
-
     private fun isLoggedInCheck() : Boolean{
         val currentUser = auth.currentUser
-        return (currentUser != null)
+        return currentUser != null
         }
 
 
@@ -88,4 +80,52 @@ class UserInterfaceActivity : AppCompatActivity() {
             transaction.commit()
 
     }
+
+    open fun userTypeCheck() {
+
+        var type : String
+        val currentUser = auth.currentUser
+
+        if (currentUser == null){
+            return
+        }
+
+        val docRef = db.collection("users").document(currentUser.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val user = document.toObject<User>()
+                if (user != null){
+                    type = user.type.toString()
+                    currentUserType = type
+                    activateCorrectProfile(type)
+                }
+            }
+    }
+
+    open fun activateCorrectProfile(userType : String){
+
+        if (currentUserType == ""){
+            return
+        } else {
+            when (currentUserType){
+                "user" -> {
+                    setCurrentFragment(profileFragment)
+                }
+                "admin" -> {
+
+                }
+                "restaurant" -> {
+                    startNewActivity(RestaurantInterfaceActivity)
+                }
+            }
+
+
+        }
+    }
+
+    private fun startNewActivity(newActivity : AppCompatActivity) {
+        val intent = Intent(this, newActivity::class.java)
+        startActivity(intent)
+    }
+
 }
