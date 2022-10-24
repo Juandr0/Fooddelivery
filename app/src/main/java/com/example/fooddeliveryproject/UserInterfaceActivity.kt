@@ -24,6 +24,7 @@ class UserInterfaceActivity : AppCompatActivity() {
     private val profileFragment = ProfileFragment()
     private val loginFragment = LoginFragment()
     private val RestaurantInterfaceActivity = RestaurantInterfaceActivity()
+    private val adminPageActivity = AdminPageActivity()
 
     private var currentUserType = ""
 
@@ -112,7 +113,7 @@ class UserInterfaceActivity : AppCompatActivity() {
                     setCurrentFragment(profileFragment)
                 }
                 "admin" -> {
-
+                    startNewActivity(adminPageActivity)
                 }
                 "restaurant" -> {
                     startNewActivity(RestaurantInterfaceActivity)
