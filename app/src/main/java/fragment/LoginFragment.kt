@@ -2,12 +2,15 @@ package fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.fooddeliveryproject.*
@@ -32,8 +35,10 @@ class LoginFragment : Fragment()  {
     private lateinit var signInButton : Button
     private lateinit var signUpButton : Button
     private lateinit var signOutButton : Button
-    private var userSignupFragment = SignupFragment()
+    private lateinit var passwordHiderImg : ImageView
 
+    private var isPassShowing = false
+    private var userSignupFragment = SignupFragment()
     private val profileFragment = ProfileFragment()
     private val restaurantPageActivity = RestaurantInterfaceActivity()
     private val adminPageActivity = AdminPageActivity()
@@ -64,16 +69,24 @@ class LoginFragment : Fragment()  {
         userEmailEditText = v.findViewById(R.id.loginUserNameEditText)
         userPasswordEditText = v.findViewById(R.id.loginUserPasswordEditText)
         signOutButton = v.findViewById(R.id.signOut)
+        passwordHiderImg = v.findViewById(R.id.showHidePass)
+
 
 
         return v
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         //Onclick listener som försöker att logga in ifall inte edittext för anvnamn eller lösenord är empty
+
+        passwordHiderImg.setOnClickListener {
+            isPassShowing = !isPassShowing
+            togglePassword(isPassShowing)
+        }
 
         signInButton.setOnClickListener{
 
@@ -102,7 +115,17 @@ class LoginFragment : Fragment()  {
             val intent = Intent(context, RestaurantInterfaceActivity::class.java)
             startActivity(intent)
         }
+    }
 
+    private fun togglePassword(isShowing : Boolean) {
+        if (isShowing){
+            userPasswordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            passwordHiderImg.setImageResource(R.drawable.ic_hidepassword)
+
+        } else {
+            userPasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            passwordHiderImg.setImageResource(R.drawable.ic_showpassword)
+        }
     }
 
 
