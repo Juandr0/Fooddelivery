@@ -1,11 +1,13 @@
 package com.example.fooddeliveryproject
 
+import adapters.RestaurantRecyclerAdapter
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import classes.Restaurant
 
 
 class HamburgersActivity : AppCompatActivity() {

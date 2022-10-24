@@ -1,4 +1,4 @@
-package com.example.fooddeliveryproject
+package classes
 
 class FoodCategory(var image: Int) {
 

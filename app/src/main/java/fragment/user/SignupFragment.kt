@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.User
+import classes.User
 import com.example.fooddeliveryproject.db
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

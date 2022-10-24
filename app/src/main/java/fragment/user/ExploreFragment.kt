@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fooddeliveryproject.FoodCategory
-import com.example.fooddeliveryproject.FoodCategoryRecyclerAdapter
+import classes.FoodCategory
+import adapters.FoodCategoryRecyclerAdapter
 import com.example.fooddeliveryproject.HamburgersActivity
 import com.example.fooddeliveryproject.R
 
