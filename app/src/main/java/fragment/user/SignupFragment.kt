@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.User
 import com.example.fooddeliveryproject.db
@@ -56,14 +57,35 @@ class SignupFragment : Fragment() {
         return v
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
 
         newUserSignupButton.setOnClickListener {
             createNewUser()
         }
 
     }
+
+    private fun createNewUser(){
+
+        val email = newUserEmailEditText.text.toString()
+        val password = newUserPasswordEditText.text.toString()
+
+        if (auth.currentUser != null || email.isEmpty() || password.isEmpty()){
+            Log.d("!!!", "empty mail or pass")
+        } else {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener {
+                    Log.d("!!!", "user created to AUTHlogin")
+                    createUserToDBCatalougeFromSignupFieldHelperFunction()
+                }.addOnFailureListener {  e ->
+                    Toast.makeText(getActivity(),"$e",Toast.LENGTH_SHORT).show()
+                    Log.d("!!!", "No user created error: + $e" )
+                }
+        }
+    }
+
+
     private fun setCurrentFragment(fragment : Fragment){
 
         val fragmentManager = parentFragmentManager
@@ -74,7 +96,6 @@ class SignupFragment : Fragment() {
 
 
     private fun createUserToDBCatalougeFromSignupFieldHelperFunction() {
-
         val name = newUserNameEditText.text.toString()
         val email = newUserEmailEditText.text.toString()
         val address = newUserAddressEditText.text.toString()
@@ -82,8 +103,7 @@ class SignupFragment : Fragment() {
         val user = auth.currentUser
 
 
-
-        if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
+        if (name.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
             Log.d("!!!", "empty fields, no user created")
         } else {
 
@@ -104,6 +124,7 @@ class SignupFragment : Fragment() {
                     }
                     .addOnFailureListener {
                         Log.d("!!!", "No user created to DB")
+                        Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show()
                     }
             }
         }
@@ -111,19 +132,6 @@ class SignupFragment : Fragment() {
 
     }
 
-    private fun createNewUser(){
-        auth.createUserWithEmailAndPassword(
-            newUserEmailEditText.text.toString(),
-            newUserPasswordEditText.text.toString()
-        )
-            .addOnSuccessListener {
-                Log.d("!!!", "user created to AUTHlogin")
-                createUserToDBCatalougeFromSignupFieldHelperFunction()
-            }.addOnFailureListener {
-                Log.d("!!!", "No user created to AUTHlogin")
-            }
-
-    }
 
 }
 
