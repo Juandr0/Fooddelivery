@@ -1,9 +1,11 @@
 package com.example.fooddeliveryproject
 
-data class User (val name : String? = null,
-                 val email : String? = null,
-                 val address : String? = null,
-                 val phoneNumber : Int? = null,
-                 val type : String? = "user",
-                 val uID : String? = null
+data class User (var name : String? = null,
+                 var email : String? = null,
+                 var address : String? = null,
+                 var phoneNumber : Int? = null,
+                 var type : String? = "user",
+                 var uID : String? = null,
+                 var lastOrderRestaurant : String? = "Restaurant",
+                 var lastOrder : String? = "No recent orders"
                  )
