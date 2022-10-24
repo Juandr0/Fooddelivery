@@ -69,7 +69,7 @@ class LoginFragment : Fragment()  {
         userEmailEditText = v.findViewById(R.id.loginUserNameEditText)
         userPasswordEditText = v.findViewById(R.id.loginUserPasswordEditText)
         signOutButton = v.findViewById(R.id.signOut)
-        passwordHiderImg = v.findViewById(R.id.showHidePass)
+        passwordHiderImg = v.findViewById(R.id.signIn_showHidePass)
 
 
 
