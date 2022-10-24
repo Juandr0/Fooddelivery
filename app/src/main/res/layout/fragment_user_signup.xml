@@ -54,11 +54,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:digits="0123456789,a bcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"
             android:ems="10"
             android:hint="@string/name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:digits="0123456789,a bcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +117,18 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newUserPasswordEditText" />
+
+
+        <ImageView
+            android:id="@+id/signUp_showHidePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_showpassword"
+            app:layout_constraintEnd_toEndOf="@+id/newUserPasswordEditText"
+            app:layout_constraintTop_toTopOf="@+id/newUserPasswordEditText" />
 
         <TextView
             android:id="@+id/registerTextView"

@@ -1,6 +1,8 @@
 package fragment.user
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.fooddeliveryproject.R
@@ -30,7 +33,10 @@ class SignupFragment : Fragment() {
     private lateinit var newUserPhoneNumberEditText: EditText
     private lateinit var newUserPasswordEditText: EditText
     private lateinit var newUserSignupButton: Button
+    private lateinit var passwordHiderImg : ImageView
 
+
+    private var isShowing = false
     private var profileFragment = ProfileFragment()
 
 
@@ -53,6 +59,7 @@ class SignupFragment : Fragment() {
 
         newUserPasswordEditText = v.findViewById(R.id.newUserPasswordEditText)
         newUserSignupButton = v.findViewById(R.id.newUserSignupButton)
+        passwordHiderImg = v.findViewById(R.id.signUp_showHidePass)
 
         return v
     }
@@ -63,6 +70,10 @@ class SignupFragment : Fragment() {
             createNewUser()
         }
 
+        passwordHiderImg.setOnClickListener{
+            isShowing = !isShowing
+            togglePassword(isShowing)
+        }
     }
 
 
@@ -132,6 +143,17 @@ class SignupFragment : Fragment() {
         }
 
 
+    }
+
+    private fun togglePassword(isShowing : Boolean) {
+        if (isShowing){
+            newUserPasswordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            passwordHiderImg.setImageResource(R.drawable.ic_hidepassword)
+
+        } else {
+            newUserPasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            passwordHiderImg.setImageResource(R.drawable.ic_showpassword)
+        }
     }
 
 
