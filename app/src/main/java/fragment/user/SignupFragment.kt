@@ -59,12 +59,12 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
         newUserSignupButton.setOnClickListener {
             createNewUser()
         }
 
     }
+
 
     private fun createNewUser(){
 
@@ -73,6 +73,7 @@ class SignupFragment : Fragment() {
 
         if (auth.currentUser != null || email.isEmpty() || password.isEmpty()){
             Log.d("!!!", "empty mail or pass")
+            Toast.makeText(getActivity(),getString(R.string.error_reqinfo),Toast.LENGTH_SHORT).show()
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
@@ -100,11 +101,12 @@ class SignupFragment : Fragment() {
         val email = newUserEmailEditText.text.toString()
         val address = newUserAddressEditText.text.toString()
         val phoneNumber = newUserPhoneNumberEditText.text
+        val password = newUserPasswordEditText.text
         val user = auth.currentUser
 
 
-        if (name.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
-            Log.d("!!!", "empty fields, no user created")
+        if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty() || password.isEmpty()) {
+            Toast.makeText(getActivity(),getString(R.string.error_reqinfo),Toast.LENGTH_SHORT).show()
         } else {
 
             val newUser = User(
@@ -122,9 +124,9 @@ class SignupFragment : Fragment() {
                         Log.d("!!!", "user created to DB")
                         setCurrentFragment(profileFragment)
                     }
-                    .addOnFailureListener {
+                    .addOnFailureListener {e ->
                         Log.d("!!!", "No user created to DB")
-                        Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(getActivity(),"$e",Toast.LENGTH_SHORT).show()
                     }
             }
         }

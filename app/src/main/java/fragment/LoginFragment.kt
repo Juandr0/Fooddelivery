@@ -35,11 +35,11 @@ class LoginFragment : Fragment()  {
     private var userSignupFragment = SignupFragment()
 
     private val profileFragment = ProfileFragment()
-    private var restaurantPageActivity = RestaurantInterfaceActivity()
+    private val restaurantPageActivity = RestaurantInterfaceActivity()
+    private val adminPageActivity = AdminPageActivity()
+
     private var currentUserType = ""
 
-    // Implementeras när aktiviteten finns
-    // private var adminPageActivity = AdminPageActivity()
 
     private lateinit var restaurantTestButton: Button
 
@@ -170,7 +170,7 @@ class LoginFragment : Fragment()  {
                     setCurrentFragment(profileFragment)
                 }
                 "admin" -> {
-
+                    startNewActivity(adminPageActivity)
                 }
                 "restaurant" -> {
                     startNewActivity(restaurantPageActivity)
