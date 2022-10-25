@@ -9,39 +9,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Images fragment"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/uploadPreviewImageVIew2"
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:layout_marginStart="66dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="67dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/uploadNewImageButton"
+            android:id="@+id/uploadImageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="119dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="180dp"
-            android:text="upload"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="27dp"
+            android:backgroundTint="@color/woopwoop_green"
+            android:text="@string/upload_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/uploadPreviewImageVIew2" />
+
+        <Button
+            android:id="@+id/selectImageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="35dp"
+            android:backgroundTint="@color/woopwoop_green"
+            android:text="@string/select_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/uploadPreviewImageVIew2" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="381dp"
-            android:layout_height="476dp"
+            android:layout_width="334dp"
+            android:layout_height="376dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="56dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/restaurant_images_list_item" />
 
