@@ -1,19 +1,15 @@
 package fragment.user
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.User
-import com.example.fooddeliveryproject.UserSettings
-import com.example.fooddeliveryproject.db
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.fooddeliveryproject.*
 import com.google.firebase.firestore.ktx.toObject
 import fragment.LoginFragment
 
@@ -24,6 +20,7 @@ class ProfileFragment : Fragment() {
     lateinit var signOutButton : Button
     lateinit var lastOrderRestaurant : TextView
     lateinit var lastOrder : TextView
+    lateinit var recyclerView : RecyclerView
 
     private val settingsList = mutableListOf<UserSettings>()
 
@@ -44,23 +41,21 @@ class ProfileFragment : Fragment() {
         greetingsTextView = v.findViewById(R.id.greetingsTextView)
         lastOrderRestaurant = v.findViewById(R.id.lastOrderRestaurantNameTextView)
         lastOrder = v.findViewById(R.id.lastOrderTextView)
+
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
         val currentUser = auth.currentUser
         val user = User()
-
-
-
 
         signOutButton.setOnClickListener{
             auth.signOut()
             val loginFragment = LoginFragment()
             setCurrentFragment(loginFragment)
-
         }
-
 
         val docRef = db.collection("users").document(currentUser!!.uid)
         docRef.get()
@@ -74,11 +69,13 @@ class ProfileFragment : Fragment() {
                 settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
                 settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
                 settingsList.add(UserSettings(getString(R.string.phonenumer), "${user.phoneNumber}"))
+                settingsList.add(UserSettings("Log out"), )
 
-
+                recyclerView = view.findViewById(R.id.userSettingsRecyclerView)
+                recyclerView.layoutManager = LinearLayoutManager(activity)
+                val adapter = UserSettingsRecycleAdapter(ProfileFragment(), settingsList)
+                recyclerView.adapter = adapter
             }
-
-
     }
 
 
