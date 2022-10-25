@@ -1,21 +1,17 @@
 package fragment.user
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.User
+import classes.User
 import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.ktx.toObject
 import fragment.LoginFragment
-import org.w3c.dom.Text
 
 
 lateinit var greetingsTextView : TextView
