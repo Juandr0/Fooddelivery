@@ -16,6 +16,7 @@
     <string name="user_adress">Type your address</string>
     <string name="welcome">WELCOME</string>
     <string name="continue_button">Continue</string>
+    <string name="settings">Settings</string>
 
     <string name="name">Name</string>
     <string name="email">Email</string>
@@ -26,6 +27,7 @@
 
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
+    <string name="sign_out">Sign out</string>
 
     <string name="restaurant">Restaurant</string>
 

@@ -3,48 +3,44 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recyclerViewLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <View
-        android:id="@+id/userSettingsRecyclerView"
+        android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="3px"
-        android:layout_marginTop="4dp"
-        android:background="@color/black"
+        android:layout_height="1dp"
+        android:layout_marginTop="40dp"
+        android:background="#707070"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userSettingsTextview" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/settingsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:text="Name"
-        android:textColor="#000000"
+        android:textColor="#333333"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/userSettingsRecyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/userSettingsTextview"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/userSettingsTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
         android:text="Alexander"
         android:textColor="#333333"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/userSettingsRecyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/line"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toEndOf="@+id/settingsTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,11 +48,13 @@
         android:id="@+id/imageView"
         android:layout_width="24dp"
         android:layout_height="21dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/userSettingsRecyclerView"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/line"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.987"
+        app:layout_constraintStart_toEndOf="@+id/settingsTextView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_rightarrow" />
 

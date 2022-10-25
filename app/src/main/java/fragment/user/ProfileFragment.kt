@@ -69,9 +69,9 @@ class ProfileFragment : Fragment() {
                 settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
                 settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
                 settingsList.add(UserSettings(getString(R.string.phonenumer), "${user.phoneNumber}"))
-                settingsList.add(UserSettings("Log out"), )
+                settingsList.add(UserSettings(getString(R.string.sign_out)), )
 
-                recyclerView = view.findViewById(R.id.userSettingsRecyclerView)
+                recyclerView = view.findViewById(R.id.settingsRecyclerView)
                 recyclerView.layoutManager = LinearLayoutManager(activity)
                 val adapter = UserSettingsRecycleAdapter(ProfileFragment(), settingsList)
                 recyclerView.adapter = adapter
