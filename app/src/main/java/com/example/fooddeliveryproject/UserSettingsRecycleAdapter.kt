@@ -3,6 +3,7 @@ package com.example.fooddeliveryproject
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fragment.user.ProfileFragment
@@ -15,7 +16,7 @@ class UserSettingsRecycleAdapter
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val settingsView = itemView.findViewById<TextView>(R.id.settingsTextView)
-        val userSettingsView = itemView.findViewById<TextView>(R.id.userSettingsTextview)
+        var userSettingsView = itemView.findViewById<EditText>(R.id.userSettingsTextview)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,9 +28,8 @@ class UserSettingsRecycleAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listItem = settingsList[position]
 
-
         holder.settingsView.text = listItem.settings.toString()
-        holder.userSettingsView.text = listItem.userSetting.toString()
+        holder.userSettingsView.setText(listItem.userSetting.toString())
 
     }
 

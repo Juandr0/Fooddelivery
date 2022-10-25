@@ -30,7 +30,8 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/userSettingsTextview"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <EditText
+
         android:id="@+id/userSettingsTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
         android:text="Alexander"
         android:textColor="#333333"
         android:textSize="16sp"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/line"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.837"
