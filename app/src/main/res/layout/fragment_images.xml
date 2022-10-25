@@ -9,51 +9,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/uploadPreviewImageVIew2"
-            android:layout_width="260dp"
-            android:layout_height="260dp"
-            android:layout_marginStart="66dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="67dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="393dp"
+            android:layout_height="627dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/restaurant_images_list_item" />
+
+        <TextView
+            android:id="@+id/imageFragmentTitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="89dp"
+            android:text="@string/image_gallery"
+            android:textAlignment="center"
+            android:textColor="#040404"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/uploadImageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="27dp"
-            android:backgroundTint="@color/woopwoop_green"
-            android:text="@string/upload_image"
+        <ImageButton
+            android:id="@+id/uploadNewImageButton"
+            android:layout_width="58dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_baseline_add_circle_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/uploadPreviewImageVIew2" />
-
-        <Button
-            android:id="@+id/selectImageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="35dp"
-            android:backgroundTint="@color/woopwoop_green"
-            android:text="@string/select_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/uploadPreviewImageVIew2" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="334dp"
-            android:layout_height="376dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="56dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/restaurant_images_list_item" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

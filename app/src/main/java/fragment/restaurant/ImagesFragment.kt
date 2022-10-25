@@ -1,21 +1,14 @@
 package fragment.restaurant
 
-import android.app.ProgressDialog
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.fooddeliveryproject.R
-import com.google.firebase.storage.FirebaseStorage
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.fooddeliveryproject.RestaurantUploadImageActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,14 +25,9 @@ class ImagesFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-// ta bort denna när jkag är klar
-//    lateinit var uploadNewImageButton: Button
 
+   lateinit var uploadNewImageButton: ImageButton
 
-    lateinit var uploadImageButton: Button
-    lateinit var selectImageButton: Button
-    lateinit var uploadPreviewImageView: ImageView
-    lateinit var imageUri: Uri
 
 
 
@@ -62,75 +50,22 @@ class ImagesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // ta bort detta när jag är klar
-//        uploadNewImageButton = view.findViewById(R.id.uploadNewImageButton)
 
-//        uploadNewImageButton.setOnClickListener {
-//            val intent = Intent(context, UploadImageActivity::class.java)
-//            startActivity(intent)
-//        }
-        // sluta ta bort
+        uploadNewImageButton = view.findViewById(R.id.uploadNewImageButton)
 
-        uploadImageButton = view.findViewById(R.id.uploadImageButton2)
-        selectImageButton = view.findViewById(R.id.selectImageButton2)
-        uploadPreviewImageView = view.findViewById(R.id.uploadPreviewImageVIew2)
 
-        //gets image from phone and shows it in the ImageVIew
-        val getImage = registerForActivityResult(
-            ActivityResultContracts.GetContent(),
-            ActivityResultCallback {
+        uploadNewImageButton.setOnClickListener {
 
-                uploadPreviewImageView.setImageURI(it)
-
-                imageUri = it!!
+            val intent = Intent(context, RestaurantUploadImageActivity::class.java)
+                startActivity(intent)
 
             }
-        )
-
-
-
-        selectImageButton.setOnClickListener {
-
-            //the folder it searches images in
-            getImage.launch("image/*")
-        }
-
-        uploadImageButton.setOnClickListener {
-
-            uploadImage()
         }
 
 
-    }
-
-    private fun uploadImage() {
-
-        val progressDialog = ProgressDialog(context)
-        progressDialog.setMessage("Uploading File...")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
-
-        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
-        val now = Date()
-        val filename = formatter.format(now)
-        val storageRef = FirebaseStorage.getInstance().getReference("images/$filename")
-
-        storageRef.putFile(imageUri).
-        addOnSuccessListener {
-
-            uploadPreviewImageView.setImageURI(null)
-            Toast.makeText(context, "successfully uploaded", Toast.LENGTH_SHORT).show()
-            if (progressDialog.isShowing) progressDialog.dismiss()
-
-        }.addOnFailureListener{
-
-            if (progressDialog.isShowing) progressDialog.dismiss()
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-
-        }
 
 
-    }
+
 
     companion object {
         /**
