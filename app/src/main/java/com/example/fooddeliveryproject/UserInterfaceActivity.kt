@@ -1,8 +1,8 @@
 package com.example.fooddeliveryproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import classes.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,12 +10,17 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import fragment.LoginFragment
-import fragment.user.*
+import fragment.user.ExploreFragment
+import fragment.user.ProfileFragment
+import fragment.user.RestaurantsFragment
+import fragment.user.SearchFragment
 
 //Testat och kopplingen fungerar
 val db = Firebase.firestore
 val auth = Firebase.auth
+val storage = Firebase.storage
 
 class UserInterfaceActivity : AppCompatActivity() {
 

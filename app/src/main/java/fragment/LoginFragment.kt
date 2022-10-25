@@ -14,7 +14,9 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import classes.User
-import com.example.fooddeliveryproject.*
+import com.example.fooddeliveryproject.AdminPageActivity
+import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.RestaurantInterfaceActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -46,7 +48,7 @@ class LoginFragment : Fragment()  {
 
     private var currentUserType = ""
 
-
+    // TA BORT KNAPP SEN
     private lateinit var restaurantTestButton: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
