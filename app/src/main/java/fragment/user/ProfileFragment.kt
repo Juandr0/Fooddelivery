@@ -12,20 +12,21 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.User
+import com.example.fooddeliveryproject.UserSettings
 import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.ktx.toObject
 import fragment.LoginFragment
-import org.w3c.dom.Text
 
-
-lateinit var greetingsTextView : TextView
-lateinit var signOutButton : Button
-lateinit var lastOrderRestaurant : TextView
-lateinit var lastOrder : TextView
-
-private val loginFragment = LoginFragment()
 
 class ProfileFragment : Fragment() {
+
+    lateinit var greetingsTextView : TextView
+    lateinit var signOutButton : Button
+    lateinit var lastOrderRestaurant : TextView
+    lateinit var lastOrder : TextView
+
+    private val settingsList = mutableListOf<UserSettings>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +48,19 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val currentUser = auth.currentUser
+        val user = User()
+
+
+
+
         signOutButton.setOnClickListener{
             auth.signOut()
+            val loginFragment = LoginFragment()
             setCurrentFragment(loginFragment)
 
         }
-        val currentUser = auth.currentUser
-        val user = User()
+
 
         val docRef = db.collection("users").document(currentUser!!.uid)
         docRef.get()
@@ -62,6 +69,12 @@ class ProfileFragment : Fragment() {
                 greetingsTextView.text = getString(R.string.greetings) + ", ${user!!.name}"
                 lastOrderRestaurant.text = "${user!!.lastOrderRestaurant}"
                 lastOrder.text = "${user!!.lastOrder}"
+
+                settingsList.add(UserSettings(getString(R.string.name), "${user.name}"))
+                settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
+                settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
+                settingsList.add(UserSettings(getString(R.string.phonenumer), "${user.phoneNumber}"))
+
 
             }
 

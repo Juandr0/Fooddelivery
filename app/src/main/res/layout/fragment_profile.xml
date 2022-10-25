@@ -1,17 +1,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="fragment.user.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.user.ProfileFragment"
+    tools:layout_editor_absoluteX="7dp"
+    tools:layout_editor_absoluteY="-155dp">
 
-<!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-155dp">
 
 
         <TextView
@@ -19,14 +22,14 @@ tools:context="fragment.user.ProfileFragment">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="167dp"
-            android:layout_marginTop="196dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="153dp"
             android:text="@string/order_again"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/greetingsTextView" />
 
@@ -35,13 +38,13 @@ tools:context="fragment.user.ProfileFragment">
             android:layout_width="185dp"
             android:layout_height="20dp"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="@string/restaurant"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.185"
+            app:layout_constraintHorizontal_bias="0.23"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderAgainTextView" />
 
@@ -50,11 +53,11 @@ tools:context="fragment.user.ProfileFragment">
             android:layout_width="185dp"
             android:layout_height="50dp"
             android:layout_marginStart="72dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:text="Grand Chicken Sandwich-mål"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.175"
+            app:layout_constraintHorizontal_bias="0.22"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lastOrderRestaurantNameTextView" />
 
@@ -64,12 +67,13 @@ tools:context="fragment.user.ProfileFragment">
             android:layout_height="48dp"
             android:layout_marginStart="35dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginBottom="4dp"
             android:backgroundTint="@color/woopwoop_green"
             android:text="@string/order_again"
             android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="@+id/lastOrderRestaurantNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.355"
+            app:layout_constraintHorizontal_bias="0.288"
             app:layout_constraintStart_toEndOf="@+id/lastOrderTextView" />
 
         <Button
@@ -77,13 +81,14 @@ tools:context="fragment.user.ProfileFragment">
             android:layout_width="106dp"
             android:layout_height="48dp"
             android:layout_marginStart="146dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="147dp"
             android:background="#00FFFFFF"
             android:text="@string/order_history"
             android:textColor="#000000"
             android:textSize="8sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lastOrderTextView" />
 
@@ -91,11 +96,11 @@ tools:context="fragment.user.ProfileFragment">
             android:id="@+id/profileSignOutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="56dp"
             android:backgroundTint="@color/black"
             android:text="Sign Out"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button2" />
 
@@ -103,10 +108,23 @@ tools:context="fragment.user.ProfileFragment">
             android:id="@+id/greetingsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="36dp"
+            android:text="@string/greetings"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/userSettingsRecyclerView"
+            android:layout_width="413dp"
+            android:layout_height="268dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/usersettings_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
