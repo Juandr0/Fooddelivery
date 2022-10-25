@@ -69,6 +69,8 @@ class ProfileFragment : Fragment() {
                 settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
                 settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
                 settingsList.add(UserSettings(getString(R.string.phonenumer), "${user.phoneNumber}"))
+                settingsList.add(UserSettings(getString(R.string.order_history), ))
+                settingsList.add(UserSettings())
                 settingsList.add(UserSettings(getString(R.string.sign_out)), )
 
                 recyclerView = view.findViewById(R.id.settingsRecyclerView)
