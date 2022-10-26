@@ -62,12 +62,23 @@ class UserEditSettingsFragment : Fragment() {
     }
 
 
-    // Sends updated information from the edittext to the database.
-    private fun updateUserInDb(currentUser : String, settingToChange : String, userSetting : String){
+// Sends updated information from the edittext to the database after checking if the setting is a phone number.
+// If it's a phone number it sends number as int instead of string
+private fun updateUserInDb(currentUser : String, settingToChange : String, userSetting : String){
 
+    val docRef = db.collection("users").document(currentUser)
 
-        val docRef = db.collection("users").document(currentUser)
+    //Usersetting som int
+    if (settingToChange == "phoneNumber"){
+        val mapUpdateAsInt = mapOf(
+            settingToChange to userSetting.toInt()
+        )
+        docRef.update(mapUpdateAsInt)
+            .addOnSuccessListener {
+                Log.d("!!!", "Update success!")
+            }
 
+    } else {
         val mapUpdate = mapOf(
             settingToChange to userSetting
         )
@@ -75,8 +86,8 @@ class UserEditSettingsFragment : Fragment() {
             .addOnSuccessListener {
                 Log.d("!!!", "Update success!")
             }
-
     }
+}
 
     private fun sendNewAttributeBackToProfileFragment(){
         val profileFragment = ProfileFragment()
