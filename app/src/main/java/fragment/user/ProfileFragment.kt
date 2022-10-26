@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import classes.User
 import com.example.fooddeliveryproject.*
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
