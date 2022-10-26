@@ -68,6 +68,7 @@ class ProfileFragment : Fragment() {
                 lastOrderRestaurant.text = "${user.lastOrderRestaurant}"
                 lastOrder.text = "${user.lastOrder}"
 
+                //
                 //If-statement that fills the recyclerView with user settings, if it's not already filled
                 if (settingsList.size == 0){
                     settingsList.add(UserSettings(getString(R.string.name), "${user.name}"))

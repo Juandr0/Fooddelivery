@@ -1,6 +1,7 @@
 package fragment.user
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 
 class UserEditSettingsFragment : Fragment() {
     private lateinit var userAttributeToChangeTextView : TextView
@@ -28,20 +30,21 @@ class UserEditSettingsFragment : Fragment() {
         userAttributeToChangeTextView = view.findViewById(R.id.userAttributeToChangeTextView)
         userAttributeToChangeEditText = view.findViewById(R.id.userAttributeToChangeEditText)
         saveSettingButton = view.findViewById(R.id.saveSettingsButton)
-        initializeLayout()
-        saveSettingButton.setOnClickListener {
-            var currentUserId = auth.currentUser?.uid.toString()
 
-            updateUserInDb(currentUserId)
+        val settingToChange = initializeArgumentSettingToChange()
+        val userSetting = initializeArgumentUserSetting()
+        initializeLayout(settingToChange, userSetting)
+
+        //Onclick: Takes the text in edittext and sends it to fun updateUserInDb
+        saveSettingButton.setOnClickListener {
+            val currentUserId = auth.currentUser!!.uid
+            val newSetting = userAttributeToChangeEditText.text.toString()
+            updateUserInDb(currentUserId, settingToChange, newSetting)
         }
     }
 
     //Initialize the layout by filling the textview and edittext
-    private fun initializeLayout(){
-
-        val settingToChange = initializeArgumentSettingToChange()
-        val settingToChangeUserSetting = initializeArgumentUserSetting()
-
+    private fun initializeLayout(settingToChange: String, settingToChangeUserSetting : String){
         userAttributeToChangeTextView.text = settingToChange
         userAttributeToChangeEditText.setText(settingToChangeUserSetting)
     }
@@ -59,8 +62,17 @@ class UserEditSettingsFragment : Fragment() {
     }
 
     // Sends updated information from the edittext to the database.
-    private fun updateUserInDb(currentUser : String){
-        //db.collection("users").document(currentUser).update(, )
+    private fun updateUserInDb(currentUser : String, settingToChange : String, userSetting : String){
+        val docRef = db.collection("users").document(currentUser)
+
+        val mapUpdate = mapOf(
+            settingToChange to userSetting
+        )
+        docRef.update(mapUpdate)
+            .addOnSuccessListener {
+                Log.d("!!!", "Update success!")
+            }
+
     }
 
 }
