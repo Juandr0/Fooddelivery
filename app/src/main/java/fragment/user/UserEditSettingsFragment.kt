@@ -17,7 +17,6 @@ class UserEditSettingsFragment : Fragment() {
     private lateinit var userAttributeToChangeEditText : EditText
     private lateinit var saveSettingButton : Button
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,12 +39,13 @@ class UserEditSettingsFragment : Fragment() {
             val currentUserId = auth.currentUser!!.uid
             val newSetting = userAttributeToChangeEditText.text.toString()
             updateUserInDb(currentUserId, settingToChange, newSetting)
+            sendNewAttributeBackToProfileFragment()
         }
     }
 
     //Initialize the layout by filling the textview and edittext
     private fun initializeLayout(settingToChange: String, settingToChangeUserSetting : String){
-        userAttributeToChangeTextView.text = settingToChange
+        userAttributeToChangeTextView.text = settingToChange.toString()
         userAttributeToChangeEditText.setText(settingToChangeUserSetting)
     }
 
@@ -61,8 +61,11 @@ class UserEditSettingsFragment : Fragment() {
         return args?.get("editSetting").toString()
     }
 
+
     // Sends updated information from the edittext to the database.
     private fun updateUserInDb(currentUser : String, settingToChange : String, userSetting : String){
+
+
         val docRef = db.collection("users").document(currentUser)
 
         val mapUpdate = mapOf(
@@ -73,6 +76,15 @@ class UserEditSettingsFragment : Fragment() {
                 Log.d("!!!", "Update success!")
             }
 
+    }
+
+    private fun sendNewAttributeBackToProfileFragment(){
+        val profileFragment = ProfileFragment()
+
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, profileFragment)
+        transaction.commit()
     }
 
 }
