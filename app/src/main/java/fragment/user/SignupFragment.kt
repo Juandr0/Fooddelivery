@@ -124,7 +124,7 @@ class SignupFragment : Fragment() {
                 name = name,
                 email = email,
                 address = address,
-                phoneNumber = phoneNumber.toString(),
+                phoneNumber = phoneNumber.toString().ToInt(),
                 uID = user?.uid
             )
 
