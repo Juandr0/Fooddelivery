@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryproject.*
@@ -49,7 +50,6 @@ class ProfileFragment : Fragment() {
 
 
         val currentUser = auth.currentUser
-        val user = User()
 
         signOutButton.setOnClickListener{
             auth.signOut()
@@ -62,8 +62,8 @@ class ProfileFragment : Fragment() {
             .addOnSuccessListener { document ->
                 val user = document.toObject<User>()
                 greetingsTextView.text = getString(R.string.greetings) + ", ${user!!.name}"
-                lastOrderRestaurant.text = "${user!!.lastOrderRestaurant}"
-                lastOrder.text = "${user!!.lastOrder}"
+                lastOrderRestaurant.text = "${user.lastOrderRestaurant}"
+                lastOrder.text = "${user.lastOrder}"
 
                 settingsList.add(UserSettings(getString(R.string.name), "${user.name}"))
                 settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
@@ -77,6 +77,12 @@ class ProfileFragment : Fragment() {
                 recyclerView.layoutManager = LinearLayoutManager(activity)
                 val adapter = UserSettingsRecycleAdapter(ProfileFragment(), settingsList)
                 recyclerView.adapter = adapter
+
+                adapter.setOnItemClickListener(object : UserSettingsRecycleAdapter.onItemClickListener{
+                    override fun onItemClick(position: Int) {
+
+                    }
+                })
             }
     }
 
