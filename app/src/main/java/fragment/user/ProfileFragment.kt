@@ -1,5 +1,6 @@
 package fragment.user
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryproject.*
@@ -24,7 +25,7 @@ class ProfileFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
 
     private val settingsList = mutableListOf<UserSettings>()
-
+    private val userEditSettingsFragment = UserEditSettingsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +55,10 @@ class ProfileFragment : Fragment() {
         signOutButton.setOnClickListener{
             auth.signOut()
             val loginFragment = LoginFragment()
-            setCurrentFragment(loginFragment)
+            setCurrentFragment(loginFragment, null )
         }
+
+
 
         val docRef = db.collection("users").document(currentUser!!.uid)
         docRef.get()
@@ -65,34 +68,65 @@ class ProfileFragment : Fragment() {
                 lastOrderRestaurant.text = "${user.lastOrderRestaurant}"
                 lastOrder.text = "${user.lastOrder}"
 
-                settingsList.add(UserSettings(getString(R.string.name), "${user.name}"))
-                settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
-                settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
-                settingsList.add(UserSettings(getString(R.string.phonenumer), "${user.phoneNumber}"))
-                settingsList.add(UserSettings(getString(R.string.order_history), ))
-                settingsList.add(UserSettings())
-                settingsList.add(UserSettings(getString(R.string.sign_out)), )
-
-                recyclerView = view.findViewById(R.id.settingsRecyclerView)
-                recyclerView.layoutManager = LinearLayoutManager(activity)
-                val adapter = UserSettingsRecycleAdapter(ProfileFragment(), settingsList)
-                recyclerView.adapter = adapter
-
-                adapter.setOnItemClickListener(object : UserSettingsRecycleAdapter.onItemClickListener{
-                    override fun onItemClick(position: Int) {
-
-                    }
-                })
+                //If-statement that fills the recyclerView with user settings, if it's not already filled
+                if (settingsList.size == 0){
+                    settingsList.add(UserSettings(getString(R.string.name), "${user.name}"))
+                    settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
+                    settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
+                    settingsList.add(UserSettings(getString(R.string.phonenumer), "${user.phoneNumber}"))
+                    settingsList.add(UserSettings(getString(R.string.order_history), ))
+                    settingsList.add(UserSettings())
+                    settingsList.add(UserSettings(getString(R.string.sign_out)), )
+                }
+                initializeSettingsWithRecyclerView(view)
             }
+            .addOnFailureListener {
+                settingsList.add(UserSettings(getString(R.string.name)))
+                settingsList.add(UserSettings(getString(R.string.email)))
+                settingsList.add(UserSettings(getString(R.string.address)))
+                settingsList.add(UserSettings(getString(R.string.phonenumer)))
+                settingsList.add(UserSettings(getString(R.string.order_history)))
+            }
+
+    }
+
+    //Initializes the recyclerview so it displays the user settings
+    private fun initializeSettingsWithRecyclerView(view : View) {
+
+        recyclerView = view.findViewById(R.id.settingsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        val adapter = UserSettingsRecycleAdapter(ProfileFragment(), settingsList)
+        recyclerView.adapter = adapter
+
+
+        //Onclicklistener for the entire recyclerview. Will change fragment on click.
+        adapter.setOnItemClickListener(object : UserSettingsRecycleAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                val currentUser = auth.currentUser?.uid.toString()
+                val settingToChange = settingsList[position].settings
+                val userSetting = settingsList[position].userSetting.toString()
+
+                val bundle = Bundle()
+                bundle.putString("settingToChange", settingToChange)
+                bundle.putString("editSetting", userSetting)
+                bundle.putString("userId", currentUser)
+                arguments = bundle
+                setCurrentFragment(userEditSettingsFragment, bundle)
+            }
+        })
     }
 
 
-    private fun setCurrentFragment(fragment : Fragment){
+
+    private fun setCurrentFragment(fragment : Fragment, bundle: Bundle?){
 
         val fragmentManager = parentFragmentManager
+        fragment.arguments = bundle
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
+
 
 }
