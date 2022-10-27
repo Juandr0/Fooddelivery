@@ -11,7 +11,6 @@
 
     <string name="all_categories">All categories</string>
     <string name="hamburgers">Hamburgers</string>
-    <string name="delivery_fee">"Delivery fee   ${restaurant.deliveryFee} kr"</string>
     <string name="order_again">"Order again"</string>
     <string name="order_history">"Order history"</string>
     <string name="user_adress">Type your address</string>
