@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fooddeliveryproject.R
 import classes.Restaurant
+import com.bumptech.glide.Glide
+import com.example.fooddeliveryproject.R
 
 class RestaurantRecyclerAdapter(val context: Context, val restaurants: List<Restaurant>) :
     RecyclerView.Adapter<RestaurantRecyclerAdapter.ViewHolder>() {
@@ -38,10 +39,16 @@ class RestaurantRecyclerAdapter(val context: Context, val restaurants: List<Rest
         //Takes the right restaurant from the list
         val restaurant = restaurants[position]
         //Assigns the right information to the restaurant
-        holder.restaurantHeaderImageView.setImageResource(restaurant.image)
+//        holder.restaurantHeaderImageView.setImageResource(restaurant.image)
         holder.restaurantNameView.text = restaurant.name
         holder.restaurantRatingView.text = restaurant.rating.toString()
-        holder.restaurantDeliveryFeeView.text = "Delivery fee  ${restaurant.deliveryFee} kr"
+        holder.restaurantDeliveryFeeView.text = "${restaurant.deliveryFee} kr"
+
+        //Glide for image
+        Glide.with(context)
+            .load(restaurant.image)
+            .into(holder.restaurantHeaderImageView)
+
     }
 
     //counts how many restaurants there are in the list

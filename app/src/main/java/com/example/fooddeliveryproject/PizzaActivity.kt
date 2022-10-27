@@ -10,23 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import classes.Restaurant
 import com.google.firebase.firestore.FirebaseFirestore
 
-
-class HamburgersActivity : AppCompatActivity() {
+class PizzaActivity : AppCompatActivity() {
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hamburgers)
+        setContentView(R.layout.activity_pizza)
 
-
-        FirebaseFirestore.getInstance().collection("restaurants")
+        FirebaseFirestore.getInstance().collection("pizzaRestaurants")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
                     val restaurant = documents.toObjects(Restaurant::class.java)
                     //Code for recyclerView
-                    var recyclerView = findViewById<RecyclerView>(R.id.restaurantsRecyclerView)
+                    var recyclerView = findViewById<RecyclerView>(R.id.pizzaRestaurantsRecyclerView)
                     //What type of layout the list will have. This makes it a linear list
                     recyclerView.layoutManager = LinearLayoutManager(this)
                     // Created an adapter from our adapter-class and sent in the list of restaurants
@@ -40,7 +38,7 @@ class HamburgersActivity : AppCompatActivity() {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
                             Toast.makeText(
-                                this@HamburgersActivity,
+                                this@PizzaActivity,
                                 "you clicked on item no. $position",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -63,16 +61,11 @@ class HamburgersActivity : AppCompatActivity() {
 
             }
             .addOnFailureListener {
-                Toast.makeText(this,"failed",Toast.LENGTH_SHORT)
+                Toast.makeText(this,"failed", Toast.LENGTH_SHORT)
                     .show()
             }
 
-
-
     }
-
-
-
 
 
 
