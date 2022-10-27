@@ -1,17 +1,18 @@
 package fragment.user
 
+import adapters.FoodCategoryRecyclerAdapter
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.FoodCategory
-import adapters.FoodCategoryRecyclerAdapter
 import com.example.fooddeliveryproject.HamburgersActivity
+import com.example.fooddeliveryproject.PizzaActivity
 import com.example.fooddeliveryproject.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -95,16 +96,18 @@ class ExploreFragment : Fragment() {
         recyclerView.adapter = adapter
 
         // Handler for the clicks on the items in the list
-        val intent = Intent(context, HamburgersActivity::class.java)
         adapter.setOnItemClickListener(object: FoodCategoryRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
                 Toast.makeText(context, "you clicked on item no. $position", Toast.LENGTH_SHORT).show()
 
                 when(position){
                     0->{
+                        val intent = Intent(context, HamburgersActivity::class.java)
                         startActivity(intent)
                     }
                     1->{
+                        val intent = Intent(context, PizzaActivity::class.java)
+                        startActivity(intent)
                     }
                     2->{
                     }
