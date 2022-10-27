@@ -1,10 +1,12 @@
-package com.example.fooddeliveryproject
+package adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import classes.FoodCategory
+import com.example.fooddeliveryproject.R
 import fragment.user.ExploreFragment
 
 

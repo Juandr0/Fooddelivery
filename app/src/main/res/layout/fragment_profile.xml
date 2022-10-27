@@ -1,125 +1,114 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="fragment.user.ProfileFragment">
-
-<!-- TODO: Update blank fragment layout -->
-<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="fragment.user.ProfileFragment"
+    tools:layout_editor_absoluteX="7dp"
+    tools:layout_editor_absoluteY="-155dp">
 
-
-
-    <ImageView
-        android:id="@+id/userIconImageView"
-        android:layout_width="303dp"
-        android:layout_height="225dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="45dp"
-        android:background="#BFBEBE"
-        android:src="@drawable/ic_profile_black"
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="-155dp">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="167dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="153dp"
-        android:text="@string/order_again"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userIconImageView" />
 
-    <TextView
-        android:id="@+id/userNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="244dp"
-        android:text="David Svensson"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="92dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/woopwoop_green"
+            android:text="@string/order_again"
+            android:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@+id/lastOrderTextView"
+            app:layout_constraintTop_toTopOf="@+id/lastOrderRestaurantNameTextView" />
 
-    <TextView
-        android:id="@+id/lastOrderRestaurantNameTextView"
-        android:layout_width="185dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="25dp"
-        android:text="Max Liljeholmen"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <Button
+            android:id="@+id/profileSignOutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:text="Sign Out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/lastOrderItem1TextView"
-        android:layout_width="185dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="1dp"
-        android:text="Grand Chicken Sandwich-mål"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastOrderRestaurantNameTextView" />
+        <TextView
+            android:id="@+id/greetingsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/greetings"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/lastOrderItem2TextView"
-        android:layout_width="185dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="1dp"
-        android:text="Sötpotatis pommes"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastOrderItem1TextView" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="92dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="45dp"
-        android:text="@string/order_again"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toEndOf="@+id/lastOrderItem1TextView"
-        app:layout_constraintTop_toBottomOf="@+id/userIconImageView" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settingsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/usersettings_list" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="106dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="147dp"
-        android:background="#00FFFFFF"
-        android:backgroundTint="#00FFFFFF"
-        android:text="@string/order_history"
-        android:textColor="#000000"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastOrderItem2TextView" />
+        <TextView
+            android:id="@+id/settingsHeaderTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/settings"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/settingsRecyclerView"
+            app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/orderAgainHeaderTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="148dp"
+            android:text="@string/order_again"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/settingsHeaderTextView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/lastOrderTextView"
+            android:layout_width="185dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:text="Grand Chicken Sandwich-mål"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/button"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/lastOrderRestaurantNameTextView"
+            android:layout_width="185dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/restaurant"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderAgainHeaderTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

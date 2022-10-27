@@ -1,4 +1,4 @@
-package com.example.fooddeliveryproject
+package classes
 
 data class Restaurant(var image: Int, var name: String, var rating: Double, var deliveryFee: Int) {
 

@@ -35,16 +35,32 @@
 
         <EditText
 
-            android:id="@+id/newUsernameEditText"
+            android:id="@+id/newUserEmailEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="@string/username"
+            android:hint="@string/email"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newUserNameEditText" />
+
+        <EditText
+
+            android:id="@+id/newUserNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:digits="0123456789,a bcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"
+            android:ems="10"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/WoopTV1" />
 
@@ -55,7 +71,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textPassword"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
@@ -74,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newUsernameEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/newUserEmailEditText" />
 
         <EditText
             android:id="@+id/newUserPhoneNumberEditText"
@@ -82,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="@string/phonenumer"
+            android:hint="@string/phonenumber"
             android:inputType="number"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,13 +110,25 @@
             android:id="@+id/newUserSignupButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="52dp"
+            android:layout_marginTop="30dp"
             android:backgroundTint="@color/woopwoop_green"
             android:text="@string/sign_up"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newUserPasswordEditText" />
+
+
+        <ImageView
+            android:id="@+id/signUp_showHidePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_showpassword"
+            app:layout_constraintEnd_toEndOf="@+id/newUserPasswordEditText"
+            app:layout_constraintTop_toTopOf="@+id/newUserPasswordEditText" />
 
         <TextView
             android:id="@+id/registerTextView"
