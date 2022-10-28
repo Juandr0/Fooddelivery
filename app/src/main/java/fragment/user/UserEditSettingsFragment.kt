@@ -1,6 +1,8 @@
 package fragment.user
 
 import android.os.Bundle
+import android.text.InputType.TYPE_CLASS_NUMBER
+import android.text.InputType.TYPE_CLASS_TEXT
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,14 +41,22 @@ class UserEditSettingsFragment : Fragment() {
             val currentUserId = auth.currentUser!!.uid
             val newSetting = userAttributeToChangeEditText.text.toString()
             updateUserInDb(currentUserId, settingToChange, newSetting)
-            sendNewAttributeBackToProfileFragment()
+            setCurrentFragmentToProfile()
         }
     }
 
     //Initialize the layout by filling the textview and edittext
+    //If the setting to be changed is a phone number, only digits will be displayed -
+    //and vice versa if it's any other setting but with letters.
     private fun initializeLayout(settingToChange: String, settingToChangeUserSetting : String){
-        userAttributeToChangeTextView.text = settingToChange.toString()
+        userAttributeToChangeTextView.text = settingToChange
         userAttributeToChangeEditText.setText(settingToChangeUserSetting)
+
+        if (settingToChange == "phoneNumber"){
+            userAttributeToChangeEditText.inputType = TYPE_CLASS_NUMBER
+        } else {
+            userAttributeToChangeEditText.inputType = TYPE_CLASS_TEXT
+        }
     }
 
     //Initializes the argument setting to change from profile fragment
@@ -89,9 +99,8 @@ private fun updateUserInDb(currentUser : String, settingToChange : String, userS
     }
 }
 
-    private fun sendNewAttributeBackToProfileFragment(){
+    private fun setCurrentFragmentToProfile(){
         val profileFragment = ProfileFragment()
-
         val fragmentManager = parentFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, profileFragment)
