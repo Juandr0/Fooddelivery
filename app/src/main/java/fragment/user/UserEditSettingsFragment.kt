@@ -39,7 +39,7 @@ class UserEditSettingsFragment : Fragment() {
             val currentUserId = auth.currentUser!!.uid
             val newSetting = userAttributeToChangeEditText.text.toString()
             updateUserInDb(currentUserId, settingToChange, newSetting)
-            sendNewAttributeBackToProfileFragment()
+            setCurrentFragmentToProfile()
         }
     }
 
@@ -89,9 +89,8 @@ private fun updateUserInDb(currentUser : String, settingToChange : String, userS
     }
 }
 
-    private fun sendNewAttributeBackToProfileFragment(){
+    private fun setCurrentFragmentToProfile(){
         val profileFragment = ProfileFragment()
-
         val fragmentManager = parentFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, profileFragment)
