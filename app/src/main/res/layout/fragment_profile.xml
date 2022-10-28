@@ -29,17 +29,6 @@
             app:layout_constraintStart_toEndOf="@+id/lastOrderTextView"
             app:layout_constraintTop_toTopOf="@+id/lastOrderRestaurantNameTextView" />
 
-        <Button
-            android:id="@+id/profileSignOutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="Sign Out"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.96"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/greetingsTextView"
             android:layout_width="wrap_content"
