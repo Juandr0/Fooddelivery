@@ -20,7 +20,6 @@ import fragment.LoginFragment
 class ProfileFragment : Fragment() {
 
     lateinit var greetingsTextView : TextView
-    lateinit var signOutButton : Button
     lateinit var lastOrderRestaurant : TextView
     lateinit var lastOrder : TextView
     lateinit var recyclerView : RecyclerView
@@ -74,7 +73,6 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v =  inflater.inflate(R.layout.fragment_profile, container, false)
-        signOutButton = v.findViewById(R.id.profileSignOutButton)
         greetingsTextView = v.findViewById(R.id.greetingsTextView)
         lastOrderRestaurant = v.findViewById(R.id.lastOrderRestaurantNameTextView)
         lastOrder = v.findViewById(R.id.lastOrderTextView)
@@ -83,14 +81,6 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        signOutButton.setOnClickListener{
-            auth.signOut()
-            val loginFragment = LoginFragment()
-            setCurrentFragment(loginFragment, null )
-        }
-
-
     }
 
     //Initializes the recyclerview so it displays the user settings
