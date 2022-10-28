@@ -102,31 +102,54 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = adapter
 
 
+
         //Onclicklistener for the entire recyclerview. Will change fragment on click.
+        //When statement looks at what the user clicked on and matches it with a corresponding action.
+        //I.E Sign out signs out the user and sends them to the login page, and "name" sends the user to an edit-tab
+        //where they can change their name
         adapter.setOnItemClickListener(object : UserSettingsRecycleAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
 
-                val currentUser = auth.currentUser?.uid.toString()
                 val settingToChange = settingsList[position].settings
-                val userSetting = settingsList[position].userSetting.toString()
-                var setting = ""
 
-                when (settingToChange) {
-                    "Name" -> { setting = "name" }
-                    "Email" -> { setting = "email"}
-                    "Address" -> {setting = "address"}
-                    "Phone number" -> {setting = "phoneNumber"}
-                    "Order history" -> {setting = "orderHistory"
+                when (settingToChange){
+                    "Email" -> { return }
+                    "Sign out" -> {
+                        auth.signOut()
+                        setCurrentFragment(LoginFragment(), null)
+                    }
+                    "Order history" -> {
+                        //Fragment that loads full order history.
+                        //Leaving empty for now as we need full order history in DB before this is testable.
+                        //Probably need to check collection "orders" in DB, look for the current user ID, fetch info
+                        //save to list, & display in recyclerview.
+                    }
+                    else -> {
+                        val currentUser = auth.currentUser?.uid.toString()
+                        val userSetting = settingsList[position].userSetting.toString()
+                        var setting = ""
+
+                        when (settingToChange) {
+                            "Name" -> { setting = "name" }
+                            "Email" -> { setting = "email"}
+                            "Address" -> {setting = "address"}
+                            "Phone number" -> {setting = "phoneNumber"}
+                            "Order history" -> {setting = "orderHistory"
+                            }
+                        }
+                        val bundle = Bundle()
+
+                        bundle.putString("settingToChange", setting)
+                        bundle.putString("editSetting", userSetting)
+                        bundle.putString("userId", currentUser)
+                        arguments = bundle
+                        setCurrentFragment(userEditSettingsFragment, bundle)
+
+
                     }
                 }
-                val bundle = Bundle()
 
 
-                bundle.putString("settingToChange", setting)
-                bundle.putString("editSetting", userSetting)
-                bundle.putString("userId", currentUser)
-                arguments = bundle
-                setCurrentFragment(userEditSettingsFragment, bundle)
             }
         })
     }
