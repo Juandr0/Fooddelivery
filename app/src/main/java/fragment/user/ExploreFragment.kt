@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import classes.FoodCategory
 import classes.Restaurant
 import com.example.fooddeliveryproject.HamburgersActivity
-import com.example.fooddeliveryproject.PizzaActivity
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,6 +36,9 @@ class ExploreFragment : Fragment() {
 
     private lateinit var adapter: FoodCategoryRecyclerAdapter
     private lateinit var recyclerView: RecyclerView
+
+    private val CategoryHamburgersFragment = CategoryHamburgersFragment()
+    private val CategoryPizzaFragment = CategoryPizzaFragment()
 
     // List of categories
     var categories = mutableListOf<FoodCategory>(
@@ -111,8 +113,7 @@ class ExploreFragment : Fragment() {
                         startActivity(intent)
                     }
                     1->{
-                        val intent = Intent(context, PizzaActivity::class.java)
-                        startActivity(intent)
+                            setCurrentFragment(CategoryPizzaFragment)
                     }
                     2->{
                     }
@@ -124,7 +125,7 @@ class ExploreFragment : Fragment() {
 
         // Top Rated lista
         FirebaseFirestore.getInstance().collection("restaurants")
-            .orderBy("rating", Query.Direction.DESCENDING).limit(3)
+            .orderBy("rating", Query.Direction.DESCENDING).limit(5)
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
@@ -172,7 +173,13 @@ class ExploreFragment : Fragment() {
 
     }
 
+    private fun setCurrentFragment(fragment : Fragment){
 
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
 
 
 }

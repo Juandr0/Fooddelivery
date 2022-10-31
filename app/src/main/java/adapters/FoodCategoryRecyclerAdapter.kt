@@ -10,10 +10,7 @@ import com.example.fooddeliveryproject.R
 import fragment.user.ExploreFragment
 
 
-class FoodCategoryRecyclerAdapter(
-    val context: ExploreFragment,
-    val foodCategories: List<FoodCategory>
-) :
+class FoodCategoryRecyclerAdapter(val context: ExploreFragment, val foodCategories: List<FoodCategory>) :
     RecyclerView.Adapter<FoodCategoryRecyclerAdapter.ViewHolder>() {
 
     //onClickListener setup

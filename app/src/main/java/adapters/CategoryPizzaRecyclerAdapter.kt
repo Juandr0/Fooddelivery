@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import classes.Restaurant
 import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
-import fragment.user.ExploreFragment
+import fragment.user.CategoryPizzaFragment
 
-class TopRatedRecyclerAdapter(val context: ExploreFragment, val restaurants: List<Restaurant>) :
-    RecyclerView.Adapter<TopRatedRecyclerAdapter.ViewHolder>() {
+class CategoryPizzaRecyclerAdapter (val context: CategoryPizzaFragment, val restaurants: List<Restaurant>) :
+RecyclerView.Adapter<CategoryPizzaRecyclerAdapter.ViewHolder>() {
 
 
     //onClickListener setup
@@ -28,7 +28,6 @@ class TopRatedRecyclerAdapter(val context: ExploreFragment, val restaurants: Lis
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.category_restaurants_list_item, parent, false)
-
         return ViewHolder(itemView, mListener)
     }//End of clickListener
 
@@ -72,6 +71,7 @@ class TopRatedRecyclerAdapter(val context: ExploreFragment, val restaurants: Lis
         }
 
     }
+
 
 
 }
