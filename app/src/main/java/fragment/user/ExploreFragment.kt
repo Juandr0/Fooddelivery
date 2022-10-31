@@ -1,6 +1,7 @@
 package fragment.user
 
 import adapters.FoodCategoryRecyclerAdapter
+import adapters.TopRatedRecyclerAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.FoodCategory
+import classes.Restaurant
 import com.example.fooddeliveryproject.HamburgersActivity
-import com.example.fooddeliveryproject.PizzaActivity
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.UserInterfaceActivity
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +36,9 @@ class ExploreFragment : Fragment() {
 
     private lateinit var adapter: FoodCategoryRecyclerAdapter
     private lateinit var recyclerView: RecyclerView
+
+    private val CategoryHamburgersFragment = CategoryHamburgersFragment()
+    private val CategoryPizzaFragment = CategoryPizzaFragment()
 
     // List of categories
     var categories = mutableListOf<FoodCategory>(
@@ -86,6 +93,7 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //Setup of the layoutManager
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.foodCategoryRecyclerView)
@@ -106,8 +114,7 @@ class ExploreFragment : Fragment() {
                         startActivity(intent)
                     }
                     1->{
-                        val intent = Intent(context, PizzaActivity::class.java)
-                        startActivity(intent)
+                            setCurrentFragment(CategoryPizzaFragment)
                     }
                     2->{
                     }
@@ -115,9 +122,65 @@ class ExploreFragment : Fragment() {
             }
 
         })
+
+
+        // Top Rated lista
+        FirebaseFirestore.getInstance().collection("restaurants")
+            .orderBy("rating", Query.Direction.DESCENDING).limit(5)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val restaurant = documents.toObjects(Restaurant::class.java)
+                    //Code for recyclerView
+                    var recyclerView = view.findViewById<RecyclerView>(R.id.topRatedRecyclerView)
+                    //What type of layout the list will have. This makes it a linear list
+                    recyclerView.layoutManager = LinearLayoutManager(context)
+                    // Created an adapter from our adapter-class and sent in the list of restaurants
+                    val adapter = TopRatedRecyclerAdapter(this, restaurant)
+                    //Connect our adapter to our recyclerView
+                    recyclerView.adapter = adapter
+                    //End of recyclerView
+
+                    val intent = Intent(context, UserInterfaceActivity::class.java)
+                    adapter.setOnItemClickListener(object : TopRatedRecyclerAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            //toast to check if clicking works
+                            Toast.makeText(context,
+                                "you clicked on item no. $position",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            when (position) {
+                                0 -> {
+                                    startActivity(intent)
+                                }
+                                1 -> {
+                                }
+                                2 -> {
+
+                                }
+                            }
+                        }
+
+                    }) // End of click handler
+
+                }
+
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"failed",Toast.LENGTH_SHORT)
+                    .show()
+            }
+
     }
 
+    private fun setCurrentFragment(fragment : Fragment){
 
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
 
 
 }

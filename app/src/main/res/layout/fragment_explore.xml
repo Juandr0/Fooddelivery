@@ -25,15 +25,54 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/top_rated"
+            android:textColor="#090909"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/foodCategoryRecyclerView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/foodCategoryRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_width="361dp"
+            android:layout_height="162dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             tools:listitem="@layout/food_categories_list_item" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/topRatedRecyclerView"
+            android:layout_width="395dp"
+            android:layout_height="306dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.25"
+            tools:listitem="@layout/category_restaurants_list_item" />
+
+        <FrameLayout
+            android:id="@+id/categoryContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

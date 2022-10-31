@@ -24,7 +24,7 @@ class PizzaActivity : AppCompatActivity() {
                 for(document in documents){
                     val restaurant = documents.toObjects(Restaurant::class.java)
                     //Code for recyclerView
-                    var recyclerView = findViewById<RecyclerView>(R.id.pizzaRestaurantsRecyclerView)
+                    var recyclerView = findViewById<RecyclerView>(R.id.pizzaRestaurantsRecyclerView2)
                     //What type of layout the list will have. This makes it a linear list
                     recyclerView.layoutManager = LinearLayoutManager(this)
                     // Created an adapter from our adapter-class and sent in the list of restaurants

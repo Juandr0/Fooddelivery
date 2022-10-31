@@ -10,10 +10,7 @@ import com.example.fooddeliveryproject.R
 import fragment.user.ExploreFragment
 
 
-class FoodCategoryRecyclerAdapter(
-    val context: ExploreFragment,
-    val foodCategories: List<FoodCategory>
-) :
+class FoodCategoryRecyclerAdapter(val context: ExploreFragment, val foodCategories: List<FoodCategory>) :
     RecyclerView.Adapter<FoodCategoryRecyclerAdapter.ViewHolder>() {
 
     //onClickListener setup
@@ -28,8 +25,7 @@ class FoodCategoryRecyclerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.food_categories_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.food_categories_list_item, parent, false)
         return ViewHolder(itemView, mListener)
     }
 
