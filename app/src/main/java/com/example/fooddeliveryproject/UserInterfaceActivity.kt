@@ -2,7 +2,10 @@ package com.example.fooddeliveryproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import classes.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,10 +15,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import fragment.LoginFragment
-import fragment.user.ExploreFragment
-import fragment.user.ProfileFragment
-import fragment.user.RestaurantsFragment
-import fragment.user.SearchFragment
+import fragment.user.*
 
 //Testat och kopplingen fungerar
 val db = Firebase.firestore
@@ -31,10 +31,12 @@ class UserInterfaceActivity : AppCompatActivity() {
     private val loginFragment = LoginFragment()
     private val RestaurantInterfaceActivity = RestaurantInterfaceActivity()
     private val adminPageActivity = AdminPageActivity()
+    private val loadingScreenFragment = LoadingScreenFragment()
 
     private var currentUserType = ""
 
     private lateinit var navigationMenu : BottomNavigationView
+    private lateinit var loadingScreenFragmentContainer : FrameLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +44,23 @@ class UserInterfaceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_menu)
         navigationMenu = findViewById(R.id.navigationbar)
+        loadingScreenFragmentContainer = findViewById(R.id.loadingPageFragmentContainer)
+
 
         setCurrentFragment(exploreFragment)
+
+        //Loading screen
+        //Loading screen fragment container over the fragment that is loading in
+        //navigation menu invisible because it still shows through otherwise
+        activateLoadingFragment(loadingScreenFragment)
+        navigationMenu.isVisible = false
+
+        Handler().postDelayed({
+            disableLoadingFragment(loadingScreenFragment)
+            navigationMenu.isVisible = true
+        }, 1500)
+
+
 
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
@@ -71,6 +88,7 @@ class UserInterfaceActivity : AppCompatActivity() {
     }
 
 
+
 // Add a new document with a generated ID
 
 
@@ -78,6 +96,23 @@ class UserInterfaceActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         return currentUser != null
         }
+
+    private fun activateLoadingFragment(fragment : Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.loadingPageFragmentContainer, fragment)
+        transaction.commit()
+
+    }
+
+    private fun disableLoadingFragment(fragment : Fragment){
+        // clickable and focusable remove the ability to click buttons behind the fragment.
+        // Need to be disabled so that they are clickable again when the fragment is gone
+        loadingScreenFragmentContainer.isClickable = false
+        loadingScreenFragmentContainer.isFocusable = false
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.remove(loadingScreenFragment)
+        transaction.commit()
+    }
 
 
 

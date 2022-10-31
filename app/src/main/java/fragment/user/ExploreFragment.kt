@@ -93,6 +93,7 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //Setup of the layoutManager
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.foodCategoryRecyclerView)
