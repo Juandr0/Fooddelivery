@@ -1,6 +1,6 @@
 package fragment.user
 
-import adapters.CategoryIndianRecyclerAdapter
+import adapters.CategoryVegetarianRecyclerAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -50,23 +50,23 @@ class CategoryVegetarianFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         FirebaseFirestore.getInstance().collection("restaurants")
-            .whereArrayContains("category", "indian")
+            .whereArrayContains("category", "vegetarian")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
                     val restaurant = documents.toObjects(Restaurant::class.java)
                     //Code for recyclerView
-                    var recyclerView = view.findViewById<RecyclerView>(R.id.indianRecyclerView)
+                    var recyclerView = view.findViewById<RecyclerView>(R.id.vegetarianRecyclerView)
                     //What type of layout the list will have. This makes it a linear list
                     recyclerView.layoutManager = LinearLayoutManager(context)
                     // Created an adapter from our adapter-class and sent in the list of restaurants
-                    val adapter = CategoryIndianRecyclerAdapter(this, restaurant)
+                    val adapter = CategoryVegetarianRecyclerAdapter(this, restaurant)
                     //Connect our adapter to our recyclerView
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
                     val intent = Intent(context, UserInterfaceActivity::class.java)
-                    adapter.setOnItemClickListener(object : CategoryIndianRecyclerAdapter.onItemClickListener {
+                    adapter.setOnItemClickListener(object : CategoryVegetarianRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
                             Toast.makeText(context,

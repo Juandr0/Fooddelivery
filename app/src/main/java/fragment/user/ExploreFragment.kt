@@ -41,6 +41,7 @@ class ExploreFragment : Fragment() {
     private val CategoryKebabFragment = CategoryKebabFragment()
     private val CategorySushiFragment = CategorySushiFragment()
     private val CategoryIndianFragment = CategoryIndianFragment()
+    private val CategoryVegetarianFragment = CategoryVegetarianFragment()
 
 
     // List of categories
@@ -126,6 +127,9 @@ class ExploreFragment : Fragment() {
                     }
                     4->{
                         setCurrentFragment(CategoryIndianFragment)
+                    }
+                    5->{
+                        setCurrentFragment(CategoryVegetarianFragment)
                     }
 
 
