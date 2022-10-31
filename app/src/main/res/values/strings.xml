@@ -38,7 +38,9 @@
     <string name="sign_up">Sign up</string>
     <string name="sign_out">Sign out</string>
     <string name="go_back">Go back</string>
-
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_address">Enter delivery address</string>
+    <string name="enter_phonenr">Enter phone number</string>
     <string name="restaurant">Restaurant</string>
 
     <string name="error_reqinfo">Enter the required information to sign up.</string>
@@ -47,6 +49,7 @@
     <string name="select_image">Select Image</string>
     <string name="image_gallery">Image Gallery</string>
 
+    <string name="no_empty_fields">Please enter your %1s</string>
 
 
 

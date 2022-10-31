@@ -49,11 +49,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="12dp"
-                android:background="@color/white"
                 android:text="Alexander"
                 android:textColor="#333333"
+                android:background="@color/white"
                 android:textSize="16sp"
-
                 app:layout_constraintBottom_toTopOf="@+id/line"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintHorizontal_bias="0.837"
