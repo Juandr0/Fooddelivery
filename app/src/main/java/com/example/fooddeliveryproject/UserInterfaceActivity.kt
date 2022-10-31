@@ -50,14 +50,13 @@ class UserInterfaceActivity : AppCompatActivity() {
         setCurrentFragment(exploreFragment)
 
         //Loading screen
-        //Loading screen fragment container over the fragment that is loading in
-        //navigation menu invisible because it still shows through otherwise
+        //Navigation menu is invisible so it doesnt show
+        //Made visible after the timer runs out
         activateLoadingFragment(loadingScreenFragment)
         navigationMenu.isVisible = false
 
         Handler().postDelayed({
             disableLoadingFragment(loadingScreenFragment)
-            navigationMenu.isVisible = true
         }, 1500)
 
 
@@ -109,6 +108,7 @@ class UserInterfaceActivity : AppCompatActivity() {
         // Need to be disabled so that they are clickable again when the fragment is gone
         loadingScreenFragmentContainer.isClickable = false
         loadingScreenFragmentContainer.isFocusable = false
+        navigationMenu.isVisible = true
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(loadingScreenFragment)
         transaction.commit()

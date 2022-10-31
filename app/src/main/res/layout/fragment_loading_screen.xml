@@ -11,16 +11,17 @@
         android:background="@color/woopwoop_green">
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/loadingScreenImageView"
+            android:layout_width="594dp"
+            android:layout_height="902dp"
             android:layout_marginTop="152dp"
             android:layout_marginBottom="152dp"
-            android:src="@drawable/microsoftteams_image"
+            android:src="@drawable/microsoftteams_image__1_"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/microsoftteams_image__1_" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

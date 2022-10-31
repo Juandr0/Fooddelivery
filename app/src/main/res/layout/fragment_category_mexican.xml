@@ -1,22 +1,21 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pizzaRestaurantsRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragment.user.CategoryPizzaFragment">
+    tools:context="fragment.user.CategoryMexicanFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/pizzaCategoryView3"
+            android:id="@+id/mexicanCategoryView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="66dp"
-            android:text="@string/pizza"
+            android:text="@string/mexican"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -24,15 +23,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pizzaRecyclerView"
+            android:id="@+id/mexicanRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pizzaCategoryView3"
+            app:layout_constraintTop_toBottomOf="@+id/mexicanCategoryView"
             tools:listitem="@layout/category_restaurants_list_item" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

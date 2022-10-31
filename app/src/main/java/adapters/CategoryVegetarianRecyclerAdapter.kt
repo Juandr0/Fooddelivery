@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import classes.Restaurant
 import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
-import fragment.user.CategoryPizzaFragment
+import fragment.user.CategoryVegetarianFragment
 
-class CategoryPizzaRecyclerAdapter (val context: CategoryPizzaFragment, val restaurants: List<Restaurant>) :
-RecyclerView.Adapter<CategoryPizzaRecyclerAdapter.ViewHolder>() {
+class CategoryVegetarianRecyclerAdapter(val context: CategoryVegetarianFragment, val restaurants: List<Restaurant>) :
+    RecyclerView.Adapter<CategoryVegetarianRecyclerAdapter.ViewHolder>() {
 
 
     //onClickListener setup
@@ -70,7 +70,6 @@ RecyclerView.Adapter<CategoryPizzaRecyclerAdapter.ViewHolder>() {
         }
 
     }
-
 
 
 }
