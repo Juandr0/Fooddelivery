@@ -17,6 +17,16 @@
         tools:layout_editor_absoluteY="-155dp">
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="#707070"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
         <Button
             android:id="@+id/button"
             android:layout_width="92dp"
@@ -46,6 +56,8 @@
             android:id="@+id/settingsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="195dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,12 +115,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/order_history"
+            android:text="@string/complete_orderhistory"
             android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.54" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
