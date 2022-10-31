@@ -28,8 +28,7 @@ class FoodCategoryRecyclerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.food_categories_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.food_categories_list_item, parent, false)
         return ViewHolder(itemView, mListener)
     }
 

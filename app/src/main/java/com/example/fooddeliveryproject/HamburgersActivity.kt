@@ -21,6 +21,8 @@ class HamburgersActivity : AppCompatActivity() {
 
 
         FirebaseFirestore.getInstance().collection("restaurants")
+            .whereArrayContains("category", "hamburgers")
+//            .orderBy("rating").limit(3)
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
