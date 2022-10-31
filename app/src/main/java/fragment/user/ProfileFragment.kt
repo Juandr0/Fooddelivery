@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.User
@@ -22,7 +23,9 @@ class ProfileFragment : Fragment() {
     lateinit var greetingsTextView : TextView
     lateinit var lastOrderRestaurant : TextView
     lateinit var lastOrder : TextView
+    lateinit var completeOrderViewLayout : ConstraintLayout
     lateinit var recyclerView : RecyclerView
+
 
     private val settingsList = mutableListOf<UserSettings>()
     private val userEditSettingsFragment = UserEditSettingsFragment()
@@ -74,7 +77,7 @@ class ProfileFragment : Fragment() {
         greetingsTextView = v.findViewById(R.id.greetingsTextView)
         lastOrderRestaurant = v.findViewById(R.id.lastOrderRestaurantNameTextView)
         lastOrder = v.findViewById(R.id.lastOrderTextView)
-
+        completeOrderViewLayout = v.findViewById(R.id.completeOrderViewLayout)
         return v
     }
 
@@ -90,6 +93,9 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = adapter
 
 
+        completeOrderViewLayout.setOnClickListener{
+            setCurrentFragment(OrderHistoryFragment(), null)
+        }
 
         //Onclicklistener for the entire recyclerview. Will change fragment on click.
         //When statement looks at what the user clicked on and matches it with a corresponding action.
