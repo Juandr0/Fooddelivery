@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.FoodCategory
 import classes.Restaurant
-import com.example.fooddeliveryproject.HamburgersActivity
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,6 +38,8 @@ class ExploreFragment : Fragment() {
 
     private val CategoryHamburgersFragment = CategoryHamburgersFragment()
     private val CategoryPizzaFragment = CategoryPizzaFragment()
+    private val CategoryKebabFragment = CategoryKebabFragment()
+
 
     // List of categories
     var categories = mutableListOf<FoodCategory>(
@@ -110,13 +111,13 @@ class ExploreFragment : Fragment() {
 
                 when(position){
                     0->{
-                        val intent = Intent(context, HamburgersActivity::class.java)
-                        startActivity(intent)
+                        setCurrentFragment(CategoryHamburgersFragment)
                     }
                     1->{
-                            setCurrentFragment(CategoryPizzaFragment)
+                        setCurrentFragment(CategoryPizzaFragment)
                     }
                     2->{
+                        setCurrentFragment(CategoryKebabFragment)
                     }
                 }
             }
