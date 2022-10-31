@@ -37,7 +37,6 @@ class LoginFragment : Fragment()  {
     private lateinit var userPasswordEditText : EditText
     private lateinit var signInButton : Button
     private lateinit var signUpButton : Button
-    private lateinit var signOutButton : Button
     private lateinit var passwordHiderImg : ImageView
 
     private var isPassShowing = false
@@ -71,7 +70,6 @@ class LoginFragment : Fragment()  {
         signUpButton = v.findViewById(R.id.loginUserSignUpButton)
         userEmailEditText = v.findViewById(R.id.loginUserNameEditText)
         userPasswordEditText = v.findViewById(R.id.loginUserPasswordEditText)
-        signOutButton = v.findViewById(R.id.signOut)
         passwordHiderImg = v.findViewById(R.id.signIn_showHidePass)
 
 
@@ -101,13 +99,6 @@ class LoginFragment : Fragment()  {
 
         }
 
-
-        signOutButton.setOnClickListener{
-            if (auth.currentUser != null) {
-                auth.signOut()
-                Log.d("!!!","Logged out!")
-            }
-        }
 
         signUpButton.setOnClickListener{
             auth.signOut()
