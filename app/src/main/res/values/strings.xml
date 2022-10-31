@@ -50,7 +50,7 @@
     <string name="image_gallery">Image Gallery</string>
 
     <string name="no_empty_fields">Please enter your %1s</string>
-
+    <string name="incorrect_login">Incorrect username or password. Try again</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
