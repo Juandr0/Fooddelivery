@@ -1,6 +1,7 @@
 package fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import classes.User
@@ -89,15 +91,31 @@ class LoginFragment : Fragment()  {
             togglePassword(isPassShowing)
         }
 
-        signInButton.setOnClickListener{
+        signInButton.setOnClickListener {
+            val email = "email"
+            val password = "password"
 
-            if (userEmailEditText.text.toString().isEmpty() || userPasswordEditText.text.toString().isEmpty()){
-                Log.d("!!!", "Empty")
+
+            turnEmptyFieldRedOrWhite()
+
+            if (userEmailEditText.text.isEmpty() || userPasswordEditText.text.isEmpty()) {
+                if (userEmailEditText.text.toString().isEmpty()) {
+                    Toast.makeText(
+                        context, getString(R.string.no_empty_fields, email),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                if (userPasswordEditText.text.toString().isEmpty()) {
+                    Toast.makeText(
+                        context, getString(R.string.no_empty_fields, password),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
                 signIn()
             }
-
         }
+
 
 
         signUpButton.setOnClickListener{
@@ -122,6 +140,25 @@ class LoginFragment : Fragment()  {
         }
     }
 
+    private fun turnEmptyFieldRedOrWhite(){
+        var redColor = "#FFBCA5"
+        var whiteColor = "#FFFFFF"
+
+
+        if (userEmailEditText.text.isEmpty()){
+            userEmailEditText.setBackgroundColor(Color.parseColor(redColor))
+        } else {
+            userEmailEditText.setBackgroundColor(Color.parseColor(whiteColor))
+        }
+
+        if (userPasswordEditText.text.isEmpty()){
+            userPasswordEditText.setBackgroundColor(Color.parseColor(redColor))
+        } else {
+            userPasswordEditText.setBackgroundColor(Color.parseColor(whiteColor))
+        }
+
+
+    }
 
     private fun startNewActivity(newActivity : AppCompatActivity) {
     val intent = Intent(activity, newActivity::class.java)
@@ -141,10 +178,12 @@ class LoginFragment : Fragment()  {
             auth.signInWithEmailAndPassword(userEmailEditText.text.toString(), userPasswordEditText.text.toString())
                 .addOnCompleteListener{ task ->
                     if (task.isSuccessful){
-                        Log.d("!!!", "Logged in!")
                         userTypeCheck()
                     } else {
-                        Log.d("!!!", "Sign in Fail")
+                        Toast.makeText(
+                            context, getString(R.string.incorrect_login),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
