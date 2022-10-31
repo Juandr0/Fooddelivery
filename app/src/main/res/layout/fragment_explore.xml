@@ -39,9 +39,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/foodCategoryRecyclerView"
-            android:layout_width="361dp"
+            android:layout_width="0dp"
             android:layout_height="140dp"
-            android:layout_marginStart="11dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/topRatedRecyclerView"
-            android:layout_width="395dp"
+            android:layout_width="0dp"
             android:layout_height="400dp"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
