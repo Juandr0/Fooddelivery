@@ -40,8 +40,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/foodCategoryRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_width="361dp"
+            android:layout_height="162dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
