@@ -37,7 +37,6 @@ class CategoryIndianRecyclerAdapter(val context: CategoryIndianFragment, val res
         //Takes the right restaurant from the list
         val restaurant = restaurants[position]
         //Assigns the right information to the restaurant
-//        holder.restaurantHeaderImageView.setImageResource(restaurant.image)
         holder.restaurantNameView.text = restaurant.name
         holder.restaurantRatingView.text = restaurant.rating.toString()
         holder.restaurantDeliveryFeeView.text = "${restaurant.deliveryFee} kr"
