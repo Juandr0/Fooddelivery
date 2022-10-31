@@ -18,6 +18,7 @@ class UserEditSettingsFragment : Fragment() {
     private lateinit var userAttributeToChangeTextView : TextView
     private lateinit var userAttributeToChangeEditText : EditText
     private lateinit var saveSettingButton : Button
+    private lateinit var goBackButton : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +32,7 @@ class UserEditSettingsFragment : Fragment() {
         userAttributeToChangeTextView = view.findViewById(R.id.userAttributeToChangeTextView)
         userAttributeToChangeEditText = view.findViewById(R.id.userAttributeToChangeEditText)
         saveSettingButton = view.findViewById(R.id.saveSettingsButton)
+        goBackButton = view.findViewById(R.id.editSettingsGoBackButton)
 
         val settingToChange = initializeArgumentSettingToChange()
         val userSetting = initializeArgumentUserSetting()
@@ -43,6 +45,9 @@ class UserEditSettingsFragment : Fragment() {
             updateUserInDb(currentUserId, settingToChange, newSetting)
             setCurrentFragmentToProfile()
         }
+        goBackButton.setOnClickListener {
+            setCurrentFragmentToProfile()
+        }
     }
 
     //Initialize the layout by filling the textview and edittext
@@ -52,7 +57,7 @@ class UserEditSettingsFragment : Fragment() {
         userAttributeToChangeTextView.text = settingToChange
         userAttributeToChangeEditText.setText(settingToChangeUserSetting)
 
-        if (settingToChange == "phoneNumber"){
+        if (settingToChange == "Phone number"){
             userAttributeToChangeEditText.inputType = TYPE_CLASS_NUMBER
         } else {
             userAttributeToChangeEditText.inputType = TYPE_CLASS_TEXT
@@ -76,12 +81,21 @@ class UserEditSettingsFragment : Fragment() {
 // If it's a phone number it sends number as int instead of string
 private fun updateUserInDb(currentUser : String, settingToChange : String, userSetting : String){
 
+    var setting = ""
+    when (settingToChange) {
+        "Name" -> { setting = "name" }
+        "Email" -> { setting = "email"}
+        "Address" -> {setting = "address"}
+        "Phone number" -> {setting = "phoneNumber"}
+        "Order history" -> {setting = "orderHistory"
+        }
+    }
     val docRef = db.collection("users").document(currentUser)
 
     //Usersetting som int
-    if (settingToChange == "phoneNumber"){
+    if (setting == "phoneNumber"){
         val mapUpdateAsInt = mapOf(
-            settingToChange to userSetting.toInt()
+            setting to userSetting.toInt()
         )
         docRef.update(mapUpdateAsInt)
             .addOnSuccessListener {
@@ -90,7 +104,7 @@ private fun updateUserInDb(currentUser : String, settingToChange : String, userS
 
     } else {
         val mapUpdate = mapOf(
-            settingToChange to userSetting
+            setting to userSetting
         )
         docRef.update(mapUpdate)
             .addOnSuccessListener {

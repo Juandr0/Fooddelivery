@@ -52,8 +52,6 @@ class ProfileFragment : Fragment() {
                 settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
                 settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
                 settingsList.add(UserSettings(getString(R.string.phonenumber), "${user.phoneNumber}"))
-                settingsList.add(UserSettings(getString(R.string.order_history), ))
-                settingsList.add(UserSettings())
                 settingsList.add(UserSettings(getString(R.string.sign_out)), )
 
             }
@@ -117,19 +115,10 @@ class ProfileFragment : Fragment() {
                     else -> {
                         val currentUser = auth.currentUser?.uid.toString()
                         val userSetting = settingsList[position].userSetting.toString()
-                        var setting = ""
 
-                        when (settingToChange) {
-                            "Name" -> { setting = "name" }
-                            "Email" -> { setting = "email"}
-                            "Address" -> {setting = "address"}
-                            "Phone number" -> {setting = "phoneNumber"}
-                            "Order history" -> {setting = "orderHistory"
-                            }
-                        }
                         val bundle = Bundle()
 
-                        bundle.putString("settingToChange", setting)
+                        bundle.putString("settingToChange", settingToChange)
                         bundle.putString("editSetting", userSetting)
                         bundle.putString("userId", currentUser)
                         arguments = bundle
