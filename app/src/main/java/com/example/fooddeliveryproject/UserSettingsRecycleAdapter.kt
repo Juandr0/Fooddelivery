@@ -31,7 +31,7 @@ class UserSettingsRecycleAdapter
     inner class ViewHolder(itemView : View, listener: onItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
 
-        val settingsView: TextView = itemView.findViewById(R.id.userAttributeToChangeTextView)
+        val settingsView: TextView = itemView.findViewById(R.id.completeOrderHistoryTextView)
         var userSettingsView : TextView = itemView.findViewById(R.id.userAttributeToChangeEditText)
         val recyclerCard : ConstraintLayout = itemView.findViewById(R.id.usersettings_constraint)
 

@@ -15,7 +15,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
-import java.util.*
 
 class UserEditSettingsFragment : Fragment() {
     private lateinit var userAttributeToChangeTextView : TextView
@@ -32,7 +31,7 @@ class UserEditSettingsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        userAttributeToChangeTextView = view.findViewById(R.id.userAttributeToChangeTextView)
+        userAttributeToChangeTextView = view.findViewById(R.id.completeOrderHistoryTextView)
         userAttributeToChangeEditText = view.findViewById(R.id.userAttributeToChangeEditText)
         saveSettingButton = view.findViewById(R.id.saveSettingsButton)
         goBackButton = view.findViewById(R.id.editSettingsGoBackButton)

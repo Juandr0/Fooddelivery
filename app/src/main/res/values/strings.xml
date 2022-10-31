@@ -22,6 +22,7 @@
     <string name="italian">Italian</string>
     <string name="order_again">"Order again"</string>
     <string name="order_history">"Order history"</string>
+    <string name="complete_orderhistory">Complete order history</string>
     <string name="user_adress">Type your address</string>
     <string name="welcome">WELCOME</string>
     <string name="continue_button">Continue</string>
