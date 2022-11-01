@@ -4,15 +4,15 @@ package classes
 object ShoppingCart {
     var userItems = mutableListOf<OrderItem>()
         private set
-    fun addItem (orderItem: OrderItem){
+    fun addItemToCart (orderItem: OrderItem){
         userItems.add(orderItem)
     }
 
-    fun removeItem (orderItem: OrderItem){
+    fun removeItemFromCart (orderItem: OrderItem){
         userItems.remove(orderItem)
     }
 
-    fun clearItems() {
+    fun clearItemsFromCart() {
         userItems.clear()
     }
 }
