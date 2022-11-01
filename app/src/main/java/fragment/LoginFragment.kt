@@ -27,6 +27,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import fragment.user.ProfileFragment
 import fragment.user.SignupFragment
+import fragment.user.TEMPORARY_MENU_FRAGMENT
 
 
 class LoginFragment : Fragment()  {
@@ -51,6 +52,7 @@ class LoginFragment : Fragment()  {
 
     // TA BORT KNAPP SEN
     private lateinit var restaurantTestButton: Button
+    private lateinit var shoppingCartTestButton : Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -63,6 +65,7 @@ class LoginFragment : Fragment()  {
 
         //TEST
         restaurantTestButton = v.findViewById(R.id.restaurantTestButton)
+        shoppingCartTestButton = v.findViewById(R.id.shoppingCartTempFragment)
         //TEST SLUT
 
         db = Firebase.firestore
@@ -126,6 +129,10 @@ class LoginFragment : Fragment()  {
         restaurantTestButton.setOnClickListener {
             val intent = Intent(context, RestaurantInterfaceActivity::class.java)
             startActivity(intent)
+        }
+
+        shoppingCartTestButton.setOnClickListener {
+            setCurrentFragment(TEMPORARY_MENU_FRAGMENT())
         }
     }
 
