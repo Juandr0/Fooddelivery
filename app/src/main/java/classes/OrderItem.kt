@@ -1,5 +1,5 @@
 package classes
 
-class OrderItem {
+class OrderItem (restaurantName : String, orderFromMeny : String, userId : String ){
 
 }
