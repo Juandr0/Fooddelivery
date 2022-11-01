@@ -1,15 +1,22 @@
 package fragment.user
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import classes.OrderItem
+import classes.ShoppingCart
 import com.example.fooddeliveryproject.R
 
 
 class TEMPORARY_MENU_FRAGMENT : Fragment() {
-
+    lateinit var restaurant : TextView
+    lateinit var menuItem : TextView
+    lateinit var addButton : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +28,23 @@ class TEMPORARY_MENU_FRAGMENT : Fragment() {
             container,
             false
         )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        restaurant = view.findViewById(R.id.order_restaurantNameTextView)
+        menuItem = view.findViewById(R.id.order_menyItemTextView)
+        addButton = view.findViewById(R.id.order_addToOrderButton)
+
+        addButton.setOnClickListener {
+            val orderRestaurant = restaurant.text.toString()
+            val orderMenuItem = menuItem.text.toString()
+
+            val newOrder = OrderItem(orderRestaurant, orderMenuItem)
+            ShoppingCart.addItemToCart(newOrder)
+            Log.d("!!!", ShoppingCart.userItems.size.toString())
+        }
     }
 
 

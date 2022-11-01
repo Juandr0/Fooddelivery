@@ -99,6 +99,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginUserSignInButton" />
 
+        <Button
+            android:id="@+id/shoppingCartTempFragment"
+            android:layout_width="215dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="56dp"
+            android:text="Shopping cart test button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantTestButton" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
