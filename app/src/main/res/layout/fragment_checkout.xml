@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".checkoutFragment">
+    tools:context=".CheckoutFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,9 +12,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/checkout_recyclerView"
-            android:layout_width="439dp"
-            android:layout_height="436dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="76dp"
+            android:layout_marginBottom="130dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +38,7 @@
             android:id="@+id/checkout_totalPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:text="Total:"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,5 +51,26 @@
             android:text="0"
             app:layout_constraintBaseline_toBaselineOf="@+id/checkout_totalPriceTextView"
             app:layout_constraintStart_toEndOf="@+id/checkout_totalPriceTextView" />
+
+        <Button
+            android:id="@+id/checkout_orderMoreBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Order more"
+            android:backgroundTint="@color/woopwoop_green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkout_totalPriceTextView" />
+
+        <Button
+            android:id="@+id/checkout_placeOrderBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="108dp"
+            android:text="Place order"
+            android:backgroundTint="@color/woopwoop_green"
+            app:layout_constraintStart_toEndOf="@+id/checkout_orderMoreBtn"
+            app:layout_constraintTop_toTopOf="@+id/checkout_orderMoreBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

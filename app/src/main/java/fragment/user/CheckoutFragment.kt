@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +15,11 @@ import com.example.fooddeliveryproject.R
 
 class CheckoutFragment : Fragment() {
 
-    lateinit var checkout_restaurantHeaderTextView : TextView
-    lateinit var checkout_totalPriceTextView : TextView
-    lateinit var checkout_orderPriceTotal : TextView
+    lateinit var restaurantHeaderTextView : TextView
+    lateinit var totalPriceTextView : TextView
+    lateinit var orderPriceTotal : TextView
+    lateinit var orderMoreBtn : Button
+    lateinit var placeOrderBtn : Button
 
 
     override fun onCreateView(
@@ -30,32 +33,42 @@ class CheckoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkout_restaurantHeaderTextView = view.findViewById(R.id.checkout_restaurantHeaderTextView)
-        checkout_totalPriceTextView = view.findViewById(R.id.checkout_totalPriceTextView)
-        checkout_orderPriceTotal = view.findViewById(R.id.checkout_orderPriceTotal)
+        restaurantHeaderTextView = view.findViewById(R.id.checkout_restaurantHeaderTextView)
+        totalPriceTextView = view.findViewById(R.id.checkout_totalPriceTextView)
+        orderPriceTotal = view.findViewById(R.id.checkout_orderPriceTotal)
+        orderMoreBtn = view.findViewById(R.id.checkout_orderMoreBtn)
+        placeOrderBtn = view.findViewById(R.id.checkout_placeOrderBtn)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = OrderRecyclerAdapter(CheckoutFragment(), ShoppingCart.currentOrderList)
         recyclerView.adapter = adapter
 
-        var totalprice = calculateTotal()
-        checkout_orderPriceTotal.text = totalprice.toString() + ":-"
-    }
 
+        var totalprice = ShoppingCart.calculateTotalPrice()
+        orderPriceTotal.text = totalprice.toString() + ":-"
 
-
-    private fun calculateTotal() : Int{
-        var counter = 0
-
-        var totalPrice = 0
-        for (OrderItem in ShoppingCart.currentOrderList){
-            totalPrice += ShoppingCart.currentOrderList[counter].price
-            counter++
+        //sets the fragment to explore
+        orderMoreBtn.setOnClickListener {
+            setCurrentFragment(ExploreFragment(), null)
         }
 
-            return totalPrice
+        //Sends the user to the confirmation fragment after sending info to DB
+        placeOrderBtn.setOnClickListener {
+            //setCurrentFragment(orderConfirmationFragment(), null)
+        }
+
     }
 
+
+
+    open fun setCurrentFragment(fragment : Fragment, bundle: Bundle?){
+
+        val fragmentManager = parentFragmentManager
+        fragment.arguments = bundle
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
 }
 

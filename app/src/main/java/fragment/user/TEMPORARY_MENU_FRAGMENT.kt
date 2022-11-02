@@ -44,7 +44,7 @@ class TEMPORARY_MENU_FRAGMENT : Fragment() {
         addButton.setOnClickListener {
             val orderRestaurant = restaurant.text.toString()
             val orderMenuItem = menuItem.text.toString()
-            val orderPrice = pris.text.toString().toInt(9)
+            val orderPrice = pris.text.toString().toInt()
             val deliveryFee = 59
             val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
             ShoppingCart.addItemToCart(newOrder)

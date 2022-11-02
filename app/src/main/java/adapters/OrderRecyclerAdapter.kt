@@ -28,7 +28,7 @@ class OrderRecyclerAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val order = orderItemList[position]
         holder.order.text = order.orderFromMeny + ":"
-        holder.orderPrice.text = order.price.toString()
+        holder.orderPrice.text = order.price.toString() + ":-"
         holder.deliveryFeePrice.text = order.deliveryFee.toString()
 
     }

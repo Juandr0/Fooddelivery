@@ -16,6 +16,21 @@ object ShoppingCart {
         currentOrderList.clear()
     }
 
+    fun calculateTotalPrice() : Int{
+        var counter = 0
+
+        var totalPrice = 0
+        for (OrderItem in ShoppingCart.currentOrderList){
+            totalPrice += ShoppingCart.currentOrderList[counter].price
+            counter++
+        }
+
+        return totalPrice
+    }
+
+
 }
+
+
 
 
