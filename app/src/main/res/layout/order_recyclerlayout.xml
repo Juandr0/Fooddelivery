@@ -44,7 +44,8 @@
         android:id="@+id/checkout_order_deliveryFeePrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
         android:text="23123"
         app:layout_constraintBottom_toBottomOf="@+id/checkout_order_deliveryFeeIcon"
         app:layout_constraintStart_toEndOf="@+id/checkout_order_deliveryFeeIcon" />

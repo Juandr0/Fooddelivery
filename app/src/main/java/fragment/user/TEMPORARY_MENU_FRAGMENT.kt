@@ -49,9 +49,6 @@ class TEMPORARY_MENU_FRAGMENT : Fragment() {
             val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
             ShoppingCart.addItemToCart(newOrder)
 
-            for (item in ShoppingCart.userItems){
-                Log.d("!!!", ShoppingCart.userItems.toString())
-            }
 
         }
     }

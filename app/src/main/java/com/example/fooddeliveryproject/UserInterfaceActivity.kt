@@ -8,6 +8,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import classes.OrderItem
+import classes.ShoppingCart
 import classes.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -62,7 +64,11 @@ class UserInterfaceActivity : AppCompatActivity() {
             disableLoadingFragment(loadingScreenFragment)
         }, 1500)
 
-
+        //TESTkod: Ta bort!!!!!!!!!
+            initializeSampledata("test1", "Tripple cheese med pommes frites", 129.9)
+            initializeSampledata("test2", "Baconburgare med sötpotatis pommes", 140.0)
+            initializeSampledata("test3", "Max specialmål utan dricka", 89.0)
+        //TESTkod: Ta bort SLUT!!!!!!
 
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
@@ -95,6 +101,13 @@ class UserInterfaceActivity : AppCompatActivity() {
 
 // Add a new document with a generated ID
 
+    //maschdata för test
+    private fun initializeSampledata(orderRestaurant : String, orderMenuItem : String, orderPrice : Double){
+        val deliveryFee = 59.0
+        val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
+        ShoppingCart.addItemToCart(newOrder)
+    }
+    //maschdata för test SLUT
 
     private fun isLoggedInCheck() : Boolean{
         val currentUser = auth.currentUser
