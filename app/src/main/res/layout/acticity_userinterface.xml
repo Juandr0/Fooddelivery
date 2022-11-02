@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".UserInterfaceActivity">
 
+    <ImageView
+
+        android:id="@+id/itemCartImageView"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_container"
+        app:srcCompat="@drawable/ic_shoppingcart_woopwoopgreen" />
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -15,6 +26,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
+        <FrameLayout
+            android:id="@+id/loadingPageFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
+
+        </FrameLayout>
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,16 +51,6 @@
         app:menu="@menu/menu" >
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <FrameLayout
-        android:id="@+id/loadingPageFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        tools:layout_editor_absoluteY="795dp">
-
-    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

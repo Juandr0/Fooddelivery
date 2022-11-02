@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -33,10 +34,12 @@ class UserInterfaceActivity : AppCompatActivity() {
     private val adminPageActivity = AdminPageActivity()
     private val loadingScreenFragment = LoadingScreenFragment()
 
+
     private var currentUserType = ""
 
     private lateinit var navigationMenu : BottomNavigationView
     private lateinit var loadingScreenFragmentContainer : FrameLayout
+    private lateinit var itemCartImageView : ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,8 +84,10 @@ class UserInterfaceActivity : AppCompatActivity() {
             true
         }
 
-
-
+        itemCartImageView = findViewById(R.id.itemCartImageView)
+        itemCartImageView.setOnClickListener {
+            setCurrentFragment(checkoutFragment())
+        }
 
     }
 
