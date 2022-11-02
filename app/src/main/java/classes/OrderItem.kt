@@ -1,6 +1,7 @@
 package classes
 
 class OrderItem (restaurantName : String,
-                 orderFromMeny : String, ){
+                 orderFromMeny : String,
+                 price : Double){
 
 }

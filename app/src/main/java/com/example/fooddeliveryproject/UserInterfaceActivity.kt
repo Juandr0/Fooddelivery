@@ -86,7 +86,7 @@ class UserInterfaceActivity : AppCompatActivity() {
 
         itemCartImageView = findViewById(R.id.itemCartImageView)
         itemCartImageView.setOnClickListener {
-            setCurrentFragment(checkoutFragment())
+            setCurrentFragment(CheckoutFragment())
         }
 
     }
