@@ -1,4 +1,4 @@
-package com.example.fooddeliveryproject
+package adapters
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fooddeliveryproject.R
+import classes.UserSettings
 import fragment.user.ProfileFragment
 
 class UserSettingsRecycleAdapter
