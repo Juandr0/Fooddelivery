@@ -42,7 +42,7 @@ class UserInterfaceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fragment_menu)
+        setContentView(R.layout.acticity_userinterface)
         navigationMenu = findViewById(R.id.navigationbar)
         loadingScreenFragmentContainer = findViewById(R.id.loadingPageFragmentContainer)
 
