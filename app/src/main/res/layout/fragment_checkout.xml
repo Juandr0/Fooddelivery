@@ -67,10 +67,10 @@
             android:id="@+id/checkout_placeOrderBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="108dp"
-            android:text="Place order"
+            android:layout_marginEnd="16dp"
             android:backgroundTint="@color/woopwoop_green"
-            app:layout_constraintStart_toEndOf="@+id/checkout_orderMoreBtn"
+            android:text="Place order"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/checkout_orderMoreBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
