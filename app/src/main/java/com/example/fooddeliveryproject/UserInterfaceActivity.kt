@@ -65,9 +65,9 @@ class UserInterfaceActivity : AppCompatActivity() {
         }, 1500)
 
         //TESTkod: Ta bort!!!!!!!!!
-            initializeSampledata("test1", "Tripple cheese med pommes frites", 129.9)
-            initializeSampledata("test2", "Baconburgare med sötpotatis pommes", 140.0)
-            initializeSampledata("test3", "Max specialmål utan dricka", 89.0)
+            initializeSampledata("test1", "Tripple cheese med pommes frites", 129)
+            initializeSampledata("test2", "Baconburgare med sötpotatis pommes", 140)
+            initializeSampledata("test3", "Max specialmål utan dricka", 89)
         //TESTkod: Ta bort SLUT!!!!!!
 
         navigationMenu.setOnItemSelectedListener{
@@ -102,8 +102,8 @@ class UserInterfaceActivity : AppCompatActivity() {
 // Add a new document with a generated ID
 
     //maschdata för test
-    private fun initializeSampledata(orderRestaurant : String, orderMenuItem : String, orderPrice : Double){
-        val deliveryFee = 59.0
+    private fun initializeSampledata(orderRestaurant : String, orderMenuItem : String, orderPrice : Int){
+        val deliveryFee = 59
         val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
         ShoppingCart.addItemToCart(newOrder)
     }
