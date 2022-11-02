@@ -45,9 +45,14 @@ class TEMPORARY_MENU_FRAGMENT : Fragment() {
             val orderRestaurant = restaurant.text.toString()
             val orderMenuItem = menuItem.text.toString()
             val orderPrice = pris.text.toString().toDouble()
-            val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice)
+            val deliveryFee = 59.0
+            val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
             ShoppingCart.addItemToCart(newOrder)
-            Log.d("!!!", ShoppingCart.userItems.size.toString())
+
+            for (item in ShoppingCart.userItems){
+                Log.d("!!!", ShoppingCart.userItems.toString())
+            }
+
         }
     }
 

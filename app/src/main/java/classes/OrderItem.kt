@@ -1,6 +1,16 @@
 package classes
 
-class OrderItem (restaurantName : String,
-                 orderFromMeny : String,
-                 price : Double){
+class OrderItem (var restaurantName : String,
+                 var orderFromMeny : String,
+                 var price : Double,
+                 var deliveryFee : Double){
+
+
+
+
+
+
+
+
+
 }
