@@ -14,30 +14,53 @@
             android:id="@+id/order_restaurantNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="104dp"
             android:text="Brödernas Liljeholmen"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/order_priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="89"
+            app:layout_constraintBaseline_toBaselineOf="@+id/order_pris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintStart_toEndOf="@+id/order_pris" />
+
+        <TextView
             android:id="@+id/order_menyItemTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
             android:text="Tripple cheese med pommes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/order_restaurantNameTextView" />
 
-        <Button
-            android:id="@+id/order_addToOrderButton"
+        <TextView
+            android:id="@+id/order_pris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Add to order"
-            app:layout_constraintBaseline_toBaselineOf="@+id/order_menyItemTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="pris:"
+            app:layout_constraintBottom_toTopOf="@+id/order_menyItemTextView"
             app:layout_constraintStart_toEndOf="@+id/order_menyItemTextView" />
+
+        <Button
+            android:id="@+id/order_addToOrderButton"
+            android:layout_width="93dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:text="Add to order"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/order_priceTextView"
+            app:layout_constraintTop_toTopOf="@+id/order_pris" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

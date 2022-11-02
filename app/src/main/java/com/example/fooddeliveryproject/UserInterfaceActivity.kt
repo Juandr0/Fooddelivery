@@ -4,9 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import classes.OrderItem
+import classes.ShoppingCart
 import classes.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -33,16 +36,18 @@ class UserInterfaceActivity : AppCompatActivity() {
     private val adminPageActivity = AdminPageActivity()
     private val loadingScreenFragment = LoadingScreenFragment()
 
+
     private var currentUserType = ""
 
     private lateinit var navigationMenu : BottomNavigationView
     private lateinit var loadingScreenFragmentContainer : FrameLayout
+    private lateinit var itemCartImageView : ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fragment_menu)
+        setContentView(R.layout.acticity_userinterface)
         navigationMenu = findViewById(R.id.navigationbar)
         loadingScreenFragmentContainer = findViewById(R.id.loadingPageFragmentContainer)
 
@@ -59,7 +64,11 @@ class UserInterfaceActivity : AppCompatActivity() {
             disableLoadingFragment(loadingScreenFragment)
         }, 1500)
 
-
+        //TESTkod: Ta bort!!!!!!!!!
+            initializeSampledata("test1", "Tripple cheese med pommes frites", 129)
+            initializeSampledata("test2", "Baconburgare med sötpotatis pommes", 140)
+            initializeSampledata("test3", "Max specialmål utan dricka", 89)
+        //TESTkod: Ta bort SLUT!!!!!!
 
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
@@ -81,8 +90,10 @@ class UserInterfaceActivity : AppCompatActivity() {
             true
         }
 
-
-
+        itemCartImageView = findViewById(R.id.itemCartImageView)
+        itemCartImageView.setOnClickListener {
+            setCurrentFragment(CheckoutFragment())
+        }
 
     }
 
@@ -90,6 +101,13 @@ class UserInterfaceActivity : AppCompatActivity() {
 
 // Add a new document with a generated ID
 
+    //maschdata för test
+    private fun initializeSampledata(orderRestaurant : String, orderMenuItem : String, orderPrice : Int){
+        val deliveryFee = 59
+        val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
+        ShoppingCart.addItemToCart(newOrder)
+    }
+    //maschdata för test SLUT
 
     private fun isLoggedInCheck() : Boolean{
         val currentUser = auth.currentUser

@@ -17,6 +17,8 @@ class TEMPORARY_MENU_FRAGMENT : Fragment() {
     lateinit var restaurant : TextView
     lateinit var menuItem : TextView
     lateinit var addButton : Button
+    lateinit var prisText : TextView
+    lateinit var pris : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +38,18 @@ class TEMPORARY_MENU_FRAGMENT : Fragment() {
         restaurant = view.findViewById(R.id.order_restaurantNameTextView)
         menuItem = view.findViewById(R.id.order_menyItemTextView)
         addButton = view.findViewById(R.id.order_addToOrderButton)
+        prisText = view.findViewById(R.id.order_pris)
+        pris = view.findViewById(R.id.order_priceTextView)
 
         addButton.setOnClickListener {
             val orderRestaurant = restaurant.text.toString()
             val orderMenuItem = menuItem.text.toString()
-
-            val newOrder = OrderItem(orderRestaurant, orderMenuItem)
+            val orderPrice = pris.text.toString().toInt()
+            val deliveryFee = 59
+            val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
             ShoppingCart.addItemToCart(newOrder)
-            Log.d("!!!", ShoppingCart.userItems.size.toString())
+
+
         }
     }
 
