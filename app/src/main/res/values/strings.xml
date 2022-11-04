@@ -36,6 +36,7 @@
     <string name="phonenumber">Phone number</string>
     <string name="register">Register</string>
 
+    <string name="sign_in_to_order">You have to sign in to order!</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_out">Sign out</string>
