@@ -35,10 +35,10 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserInterfaceActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UserInterfaceActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
