@@ -18,13 +18,15 @@ object ShoppingCart {
 
     fun calculateTotalPrice() : Int{
         var counter = 0
-
+        var deliveryfee = 0
         var totalPrice = 0
         for (OrderItem in currentOrderList){
             totalPrice += currentOrderList[counter].price
+            deliveryfee = currentOrderList[counter].deliveryFee
             counter++
         }
 
+        totalPrice += deliveryfee
         return totalPrice
     }
 

@@ -19,10 +19,9 @@
         android:id="@+id/checkout_order_priceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:text="Price"
-        app:layout_constraintStart_toEndOf="@+id/checkout_menu_itemTextView"
+        app:layout_constraintStart_toStartOf="@+id/checkout_menu_itemTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -39,26 +38,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/checkout_order_deliveryFeePrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="3dp"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/checkout_order_deliveryFeeIcon"
-        app:layout_constraintStart_toEndOf="@+id/checkout_order_deliveryFeeIcon" />
-
-    <ImageView
-        android:id="@+id/checkout_order_deliveryFeeIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkout_menu_itemTextView"
-        app:srcCompat="@drawable/ic_delivery_woopwoopgreen" />
 
     <ImageView
         android:id="@+id/checkout_trashCanImageView"

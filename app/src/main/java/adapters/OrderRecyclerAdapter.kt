@@ -38,9 +38,8 @@ class OrderRecyclerAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val order = orderItemList[position]
 
-        holder.order.text = order.orderFromMeny + ":"
+        holder.order.text = order.orderFromMeny
         holder.orderPrice.text = order.price.toString() + ":-"
-        holder.deliveryFeePrice.text = order.deliveryFee.toString()
     }
 
     override fun getItemCount() = orderItemList.size
@@ -49,8 +48,7 @@ class OrderRecyclerAdapter
     inner class ViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         val order: TextView = itemView.findViewById(R.id.checkout_menu_itemTextView)
         val orderPrice : TextView = itemView.findViewById(R.id.checkout_order_priceTextView)
-        val deliveryFee : ImageView = itemView.findViewById(R.id.checkout_order_deliveryFeeIcon)
-        val deliveryFeePrice : TextView =  itemView.findViewById(R.id.checkout_order_deliveryFeePrice)
+
         val trashCan : ImageView = itemView.findViewById(R.id.checkout_trashCanImageView)
 
 
