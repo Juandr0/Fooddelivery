@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ class CheckoutFragment : Fragment() {
     lateinit var orderPriceTotal : TextView
     lateinit var orderMoreBtn : Button
     lateinit var placeOrderBtn : Button
+    lateinit var trashCan : ImageView
 
 
     override fun onCreateView(
@@ -39,14 +41,15 @@ class CheckoutFragment : Fragment() {
         orderMoreBtn = view.findViewById(R.id.checkout_orderMoreBtn)
         placeOrderBtn = view.findViewById(R.id.checkout_placeOrderBtn)
 
+
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = OrderRecyclerAdapter(CheckoutFragment(), ShoppingCart.currentOrderList)
         recyclerView.adapter = adapter
 
 
-        var totalprice = ShoppingCart.calculateTotalPrice()
-        orderPriceTotal.text = totalprice.toString() + ":-"
+        orderPriceTotal()
 
         //sets the fragment to explore
         orderMoreBtn.setOnClickListener {
@@ -61,14 +64,18 @@ class CheckoutFragment : Fragment() {
     }
 
 
-
-    open fun setCurrentFragment(fragment : Fragment, bundle: Bundle?){
+    fun setCurrentFragment(fragment : Fragment, bundle: Bundle?){
 
         val fragmentManager = parentFragmentManager
         fragment.arguments = bundle
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
+    }
+
+    fun orderPriceTotal(){
+        var totalprice = ShoppingCart.calculateTotalPrice()
+        orderPriceTotal.text = totalprice.toString() + ":-"
     }
 }
 

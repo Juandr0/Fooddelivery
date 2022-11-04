@@ -1,6 +1,5 @@
 package adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.ShoppingCart
 import com.example.fooddeliveryproject.R
 import fragment.user.CheckoutFragment
 
@@ -30,6 +30,9 @@ class OrderRecyclerAdapter
         holder.order.text = order.orderFromMeny + ":"
         holder.orderPrice.text = order.price.toString() + ":-"
         holder.deliveryFeePrice.text = order.deliveryFee.toString()
+        holder.trashCan.setOnClickListener {
+            removeItemFromReyclerView(position)
+        }
 
     }
 
@@ -41,6 +44,19 @@ class OrderRecyclerAdapter
         val orderPrice : TextView = itemView.findViewById(R.id.checkout_order_priceTextView)
         val deliveryFee : ImageView = itemView.findViewById(R.id.checkout_order_deliveryFeeIcon)
         val deliveryFeePrice : TextView =  itemView.findViewById(R.id.checkout_order_deliveryFeePrice)
+        val trashCan : ImageView = itemView.findViewById(R.id.checkout_trashCanImageView)
 
     }
+
+    //Removes item from reyclerview list and updates the recyclerview
+    fun removeItemFromReyclerView(positon : Int){
+        ShoppingCart.removeItemFromCart(positon)
+        updateRecyclerList()
+    }
+
+    fun updateRecyclerList(){
+        notifyDataSetChanged()
+    }
+
+
 }
