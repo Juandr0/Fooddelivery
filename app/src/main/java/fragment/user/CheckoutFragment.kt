@@ -2,6 +2,7 @@ package fragment.user
 
 import adapters.OrderRecyclerAdapter
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,8 @@ class CheckoutFragment : Fragment() {
     lateinit var orderPriceTotal : TextView
     lateinit var orderMoreBtn : Button
     lateinit var placeOrderBtn : Button
+    lateinit var deliveryFeePrice : TextView
+    lateinit var vespaIcon : ImageView
 
 
     override fun onCreateView(
@@ -39,7 +42,9 @@ class CheckoutFragment : Fragment() {
         orderPriceTotal = view.findViewById(R.id.checkout_orderPriceTotal)
         orderMoreBtn = view.findViewById(R.id.checkout_orderMoreBtn)
         placeOrderBtn = view.findViewById(R.id.checkout_placeOrderBtn)
-
+        deliveryFeePrice = view.findViewById(R.id.checkout_deliveryFeePrice)
+        vespaIcon = view.findViewById(R.id.checkout_icon_delivery)
+        //Lägg till fraktkostnad image + textview som visar pris
 
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
@@ -47,12 +52,14 @@ class CheckoutFragment : Fragment() {
         val adapter = OrderRecyclerAdapter(CheckoutFragment(), ShoppingCart.currentOrderList)
         recyclerView.adapter = adapter
 
-
+        //initializes the total price
         orderPriceTotal()
+
 
         //sets the fragment to explore
         orderMoreBtn.setOnClickListener {
             setCurrentFragment(ExploreFragment(), null)
+            hideShowDeliveryFee()
         }
 
         //Sends the user to the confirmation fragment after sending info to DB
@@ -66,11 +73,19 @@ class CheckoutFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 adapter.removeItemFromReyclerView(position)
                 orderPriceTotal()
+                hideShowDeliveryFee()
             }
         })
     }
 
-
+    fun hideShowDeliveryFee(){
+        if (ShoppingCart.calculateTotalPrice() == 0){
+            this.deliveryFeePrice.visibility=(View.INVISIBLE)
+            Log.d("!!!", "0")
+        } else {
+            this.deliveryFeePrice.visibility=(View.VISIBLE)
+        }
+    }
 
     fun setCurrentFragment(fragment : Fragment, bundle: Bundle?){
 
