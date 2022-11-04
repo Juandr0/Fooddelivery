@@ -8,8 +8,8 @@ object ShoppingCart {
         currentOrderList.add(orderItem)
     }
 
-    fun removeItemFromCart (orderItem: OrderItem){
-        currentOrderList.remove(orderItem)
+    fun removeItemFromCart (position : Int){
+        currentOrderList.removeAt(position)
     }
 
     fun clearItemsFromCart() {
@@ -20,8 +20,8 @@ object ShoppingCart {
         var counter = 0
 
         var totalPrice = 0
-        for (OrderItem in ShoppingCart.currentOrderList){
-            totalPrice += ShoppingCart.currentOrderList[counter].price
+        for (OrderItem in currentOrderList){
+            totalPrice += currentOrderList[counter].price
             counter++
         }
 
