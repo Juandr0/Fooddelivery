@@ -44,6 +44,7 @@
     <string name="enter_address">Enter delivery address</string>
     <string name="enter_phonenr">Enter phone number</string>
     <string name="restaurant">Restaurant</string>
+    <string name="empty_orderlist">Add items by clicking on \"Explore\"</string>
 
     <string name="error_reqinfo">Enter the required information to sign up.</string>
 

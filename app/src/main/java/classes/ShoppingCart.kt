@@ -1,5 +1,8 @@
 package classes
 
+import android.content.res.Resources
+import com.example.fooddeliveryproject.R
+
 // The list is set to private so that only the singleton object can modify it directly.
 object ShoppingCart {
     var currentOrderList = mutableListOf<OrderItem>()
@@ -30,6 +33,13 @@ object ShoppingCart {
         return totalPrice
     }
 
+    fun getRestaurantName() : String{
+        var currentRestaurantName = ""
+        if (currentOrderList.size != 0){
+            currentRestaurantName= currentOrderList[0].restaurantName
+        }
+        return currentRestaurantName
+    }
 
 }
 

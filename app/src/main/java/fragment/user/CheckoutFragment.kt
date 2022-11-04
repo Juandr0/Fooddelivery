@@ -45,7 +45,7 @@ class CheckoutFragment : Fragment() {
         deliveryFeePrice = view.findViewById(R.id.checkout_deliveryFeePrice)
         vespaIcon = view.findViewById(R.id.checkout_icon_delivery)
         //Lägg till fraktkostnad image + textview som visar pris
-
+        hideShowDeliveryFee()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -76,6 +76,18 @@ class CheckoutFragment : Fragment() {
                 hideShowDeliveryFee()
             }
         })
+
+        //Gets the restaurant name for the header
+        setTextHeader()
+    }
+
+    fun setTextHeader(){
+
+        if (ShoppingCart.getRestaurantName() == ""){
+            restaurantHeaderTextView.text = getString(R.string.empty_orderlist)
+            } else {
+            restaurantHeaderTextView.text = ShoppingCart.getRestaurantName()
+        }
     }
 
     fun hideShowDeliveryFee(){

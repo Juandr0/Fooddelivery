@@ -65,9 +65,9 @@ class UserInterfaceActivity : AppCompatActivity() {
         }, 1500)
 
         //TESTkod: Ta bort!!!!!!!!!
-            initializeSampledata("test1", "Tripple cheese med pommes frites", 129)
-            initializeSampledata("test2", "Baconburgare med sötpotatis pommes", 140)
-            initializeSampledata("test3", "Max specialmål utan dricka", 89)
+            initializeSampledata("Bosses grill", "Tripple cheese med pommes frites", 129)
+            initializeSampledata("Bosses grill", "Baconburgare med sötpotatis pommes", 140)
+            initializeSampledata("Bosses grill", "Max specialmål utan dricka", 89)
         //TESTkod: Ta bort SLUT!!!!!!
 
         navigationMenu.setOnItemSelectedListener{
