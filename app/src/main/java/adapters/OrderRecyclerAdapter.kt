@@ -17,44 +17,55 @@ class OrderRecyclerAdapter
      ) :
     RecyclerView.Adapter<OrderRecyclerAdapter.ViewHolder>(){
 
+    private lateinit var mListener : onItemClickListener
+
+    interface onItemClickListener{
+        fun onItemClick(position : Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener=listener
+    }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.order_recyclerlayout, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val order = orderItemList[position]
+
         holder.order.text = order.orderFromMeny + ":"
         holder.orderPrice.text = order.price.toString() + ":-"
         holder.deliveryFeePrice.text = order.deliveryFee.toString()
-        holder.trashCan.setOnClickListener {
-            removeItemFromReyclerView(position)
-        }
-
     }
 
     override fun getItemCount() = orderItemList.size
 
 
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         val order: TextView = itemView.findViewById(R.id.checkout_menu_itemTextView)
         val orderPrice : TextView = itemView.findViewById(R.id.checkout_order_priceTextView)
         val deliveryFee : ImageView = itemView.findViewById(R.id.checkout_order_deliveryFeeIcon)
         val deliveryFeePrice : TextView =  itemView.findViewById(R.id.checkout_order_deliveryFeePrice)
         val trashCan : ImageView = itemView.findViewById(R.id.checkout_trashCanImageView)
 
+
+        init {
+            trashCan.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+
+
     }
 
     //Removes item from reyclerview list and updates the recyclerview
     fun removeItemFromReyclerView(positon : Int){
         ShoppingCart.removeItemFromCart(positon)
-        updateRecyclerList()
-    }
-
-    fun updateRecyclerList(){
         notifyDataSetChanged()
     }
 

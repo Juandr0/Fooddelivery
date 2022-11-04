@@ -21,7 +21,6 @@ class CheckoutFragment : Fragment() {
     lateinit var orderPriceTotal : TextView
     lateinit var orderMoreBtn : Button
     lateinit var placeOrderBtn : Button
-    lateinit var trashCan : ImageView
 
 
     override fun onCreateView(
@@ -61,7 +60,16 @@ class CheckoutFragment : Fragment() {
             //setCurrentFragment(orderConfirmationFragment(), null)
         }
 
+        // Calls on adapter function that removes the item from the recycler list
+        // Then it updates the price-total by calling on orderPriceTotal function
+        adapter.setOnItemClickListener(object : OrderRecyclerAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                adapter.removeItemFromReyclerView(position)
+                orderPriceTotal()
+            }
+        })
     }
+
 
 
     fun setCurrentFragment(fragment : Fragment, bundle: Bundle?){
