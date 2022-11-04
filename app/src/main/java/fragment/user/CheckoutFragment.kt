@@ -13,7 +13,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.ShoppingCart
+import classes.User
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
+import com.google.firebase.firestore.ktx.toObject
 
 class CheckoutFragment : Fragment() {
 
@@ -64,7 +67,14 @@ class CheckoutFragment : Fragment() {
 
         //Sends the user to the confirmation fragment after sending info to DB
         placeOrderBtn.setOnClickListener {
-            //setCurrentFragment(orderConfirmationFragment(), null)
+            val currentUser = auth.currentUser
+            if (currentUser != null){
+                sendOrderToDb()
+                //setCurrentFragment(orderConfirmationFragment(), null)
+            } else {
+                Log.d("!!!","Not logged in")
+            }
+
         }
 
         // Calls on adapter function that removes the item from the recycler list
@@ -81,6 +91,58 @@ class CheckoutFragment : Fragment() {
         setTextHeader()
     }
 
+    //fetches order from ShoppingCart and adds it into separate list which will be sent to DB
+    fun sendOrderToDb(){
+
+
+
+        //Create order number here
+        var orderNr = 1337
+
+
+        val newOrderItemList = mutableListOf<String>()
+
+        val restaurant = ShoppingCart.currentOrderList[0].restaurantName
+        val totalPrice = ShoppingCart.calculateTotalPrice()
+        var index = 0
+        for (item in ShoppingCart.currentOrderList){
+            val item = ShoppingCart.currentOrderList[index].orderFromMeny
+            newOrderItemList.add(item)
+            index ++
+        }
+
+        var user = User()
+        val mapList = newOrderItemList.associate { it to it.length }
+        val currentUser = db.collection("users").document(auth.currentUser!!.uid)
+        currentUser.get()
+            .addOnSuccessListener { document ->
+                user = document.toObject<User>()!!
+                val dataToBeSent = hashMapOf(
+                    "restaurant" to  restaurant ,
+                    "totalPrice" to totalPrice,
+                    "orderItems" to mapList,
+                    "orderNumber" to orderNr,
+                    "user" to user
+                )
+
+
+                val docref = db.collection("orders").document(auth.currentUser!!.uid)
+                    .set(dataToBeSent)
+                    .addOnSuccessListener {
+                        Log.d("!!!","Order sent")
+                    }
+                    .addOnFailureListener{
+                        Log.d("!!!","Failed to send")
+                    }
+
+            }
+
+    }
+
+
+
+
+
     fun setTextHeader(){
 
         if (ShoppingCart.getRestaurantName() == ""){
@@ -93,7 +155,6 @@ class CheckoutFragment : Fragment() {
     fun hideShowDeliveryFee(){
         if (ShoppingCart.calculateTotalPrice() == 0){
             this.deliveryFeePrice.visibility=(View.INVISIBLE)
-            Log.d("!!!", "0")
         } else {
             this.deliveryFeePrice.visibility=(View.VISIBLE)
         }
