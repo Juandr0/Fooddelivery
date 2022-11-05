@@ -1,34 +1,25 @@
 package fragment.user
 
+import adapters.OrderHistoryRecyclerAdapter
+import adapters.UserSettingsRecycleAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import classes.OrderHistory
+import classes.User
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
+import com.google.firestore.v1.StructuredQuery.Order
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [OrderHistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class OrderHistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    val userOrderList = mutableListOf<OrderHistory>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +29,47 @@ class OrderHistoryFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_order_history, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment OrderHistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            OrderHistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        getOrderHistory(view)
+
     }
-}
+
+
+    private fun initializeRecyclerView(view : View) {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.orderhistory_RecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        val adapter = OrderHistoryRecyclerAdapter(OrderHistoryFragment(), userOrderList)
+        recyclerView.adapter = adapter
+    }
+
+    private fun getOrderHistory(view : View) {
+
+        var order = OrderHistory()
+        val currentUser = auth.currentUser
+        val docRef = db.collection("orders").document(currentUser!!.uid).collection("order")
+        docRef.get()
+            .addOnSuccessListener { result ->
+                for (document in result){
+                    val dbOrder = document.toObject<OrderHistory>()
+                    if (dbOrder != null){
+                        //Fixa till klassen så den kan ta in alla värden som finns i databasen
+                        order.restaurantName = dbOrder.restaurantName
+                        order.order = "test"
+                        order.dateOfPurchase = dbOrder.dateOfPurchase
+                        userOrderList.add(order)
+                    }
+                }
+                initializeRecyclerView(view)
+                }
+
+
+
+
+            }
+
+
+    }

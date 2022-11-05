@@ -7,5 +7,4 @@ data class User (var name : String? = null,
                  var type : String? = "user",
                  var uID : String? = null,
                  var lastOrderRestaurant : String? = "Restaurant",
-                 var lastOrder : String? = "No recent orders"
                  )
