@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
@@ -38,10 +39,10 @@ class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderH
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val restaurantView = itemView.findViewById<TextView>(R.id.orderHistory_restaurant)
-        val orderView = itemView.findViewById<TextView>(R.id.orderHistory_order)
-        val dateView = itemView.findViewById<TextView>(R.id.orderHistory_date)
-        val priceView = itemView.findViewById<TextView>(R.id.orderHistory_price)
+        val restaurantView : TextView = itemView.findViewById(R.id.orderHistory_restaurant)
+        val orderView  : TextView = itemView.findViewById(R.id.orderHistory_order)
+        val dateView : TextView = itemView.findViewById(R.id.orderHistory_date)
+        val priceView : TextView = itemView.findViewById(R.id.orderHistory_price)
     }
 
 
