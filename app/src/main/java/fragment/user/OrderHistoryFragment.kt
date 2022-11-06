@@ -56,7 +56,7 @@ class OrderHistoryFragment : Fragment() {
                     var price = document.getLong("totalPrice")
 
                     //Själva beställningarna ska läggas in i separat lista som sen ska visas i textview på något sätt
-                    //var order = document.getString("orderItems")
+                    //var order = document.getField<List<String>>("orderItems")
 
                     newOrder.restaurantName = restaurant
                     newOrder.dateOfPurchase = date
