@@ -52,7 +52,7 @@ class OrderHistoryFragment : Fragment() {
 
 
                     var restaurant = document.getString("restaurant")
-                    var date = document.getDate("purchaseDate").toString()
+                    var date = document.getDate("purchaseDate")
                     var price = document.getLong("totalPrice")
 
                     //Själva beställningarna ska läggas in i separat lista som sen ska visas i textview på något sätt

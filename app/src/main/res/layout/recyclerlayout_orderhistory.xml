@@ -12,6 +12,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/restaurant"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,6 +21,7 @@
         android:id="@+id/orderHistory_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Order"
         app:layout_constraintStart_toStartOf="@+id/orderHistory_restaurant"
@@ -28,19 +31,19 @@
         android:id="@+id/orderHistory_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:text="Date and time"
-        app:layout_constraintStart_toStartOf="@+id/orderHistory_order"
-        app:layout_constraintTop_toBottomOf="@+id/orderHistory_order" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/orderHistory_restaurant"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/orderHistory_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="5dp"
         android:text="price"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/orderHistory_date"
-        app:layout_constraintTop_toBottomOf="@+id/orderHistory_date" />
+        app:layout_constraintStart_toStartOf="@+id/orderHistory_order"
+        app:layout_constraintTop_toBottomOf="@+id/orderHistory_order"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

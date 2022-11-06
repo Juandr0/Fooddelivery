@@ -27,7 +27,7 @@ class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderH
         // Kan behöva ändra pga att order är en lista
         holder.orderView.text = orderHistoryList[position].order
         holder.dateView.text = orderHistoryList[position].dateOfPurchase.toString()
-        holder.priceView.text = orderHistoryList[position].price.toString()
+        holder.priceView.text = orderHistoryList[position].price.toString() + ":-"
 
     }
 
