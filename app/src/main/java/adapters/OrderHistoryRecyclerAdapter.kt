@@ -23,8 +23,6 @@ class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderH
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val order = orderHistoryList[position]
-
         holder.restaurantView.text = orderHistoryList[position].restaurantName
         // Kan behöva ändra pga att order är en lista
         holder.orderView.text = orderHistoryList[position].order
@@ -44,9 +42,7 @@ class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderH
         val orderView = itemView.findViewById<TextView>(R.id.orderHistory_order)
         val dateView = itemView.findViewById<TextView>(R.id.orderHistory_date)
         val priceView = itemView.findViewById<TextView>(R.id.orderHistory_price)
-
     }
-
 
 
 }

@@ -17,7 +17,7 @@ import com.google.firebase.firestore.ktx.getField
 class OrderHistoryFragment : Fragment() {
 
     val userOrderList = mutableListOf<OrderHistory>()
-    val orderItems = mutableListOf<String>()
+   // val orderItems = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +30,7 @@ class OrderHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         getOrderHistory(view)
-
     }
 
 
@@ -69,14 +66,10 @@ class OrderHistoryFragment : Fragment() {
                     userOrderList.add(newOrder)
                     }
 
-
                 initializeRecyclerView(view)
     }
-    private fun sortOrderHistory(){
 
-    }
-
-
+}
 }
 
 
