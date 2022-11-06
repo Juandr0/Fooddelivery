@@ -1,25 +1,23 @@
 package fragment.user
 
 import adapters.OrderHistoryRecyclerAdapter
-import adapters.UserSettingsRecycleAdapter
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderHistory
-import classes.User
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
-import com.google.firestore.v1.StructuredQuery.Order
+import com.google.firebase.firestore.ktx.getField
 
 class OrderHistoryFragment : Fragment() {
+
     val userOrderList = mutableListOf<OrderHistory>()
+    val orderItems = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,29 +45,39 @@ class OrderHistoryFragment : Fragment() {
     }
 
     private fun getOrderHistory(view : View) {
-
-        var order = OrderHistory()
+        userOrderList.clear()
         val currentUser = auth.currentUser
         val docRef = db.collection("orders").document(currentUser!!.uid).collection("order")
         docRef.get()
-            .addOnSuccessListener { result ->
-                for (document in result){
-                    val dbOrder = document.toObject<OrderHistory>()
-                    if (dbOrder != null){
-                        //Fixa till klassen så den kan ta in alla värden som finns i databasen
-                        order.restaurantName = dbOrder.restaurantName
-                        order.order = "test"
-                        order.dateOfPurchase = dbOrder.dateOfPurchase
-                        userOrderList.add(order)
+            .addOnSuccessListener { documentSnapshot ->
+                for (document in documentSnapshot.documents){
+                    var newOrder = OrderHistory()
+
+
+                    var restaurant = document.getString("restaurant")
+                    var date = document.getDate("purchaseDate").toString()
+                    var price = document.getLong("totalPrice")
+
+                    //Själva beställningarna ska läggas in i separat lista som sen ska visas i textview på något sätt
+                    //var order = document.getString("orderItems")
+
+                    newOrder.restaurantName = restaurant
+                    newOrder.dateOfPurchase = date
+                    newOrder.price = price!!.toInt()
+                    newOrder.order = "test"
+
+                    userOrderList.add(newOrder)
                     }
-                }
+
+
                 initializeRecyclerView(view)
-                }
-
-
-
-
-            }
-
+    }
+    private fun sortOrderHistory(){
 
     }
+
+
+}
+
+
+

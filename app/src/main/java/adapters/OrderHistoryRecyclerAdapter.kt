@@ -28,7 +28,9 @@ class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderH
         holder.restaurantView.text = orderHistoryList[position].restaurantName
         // Kan behöva ändra pga att order är en lista
         holder.orderView.text = orderHistoryList[position].order
-        holder.dateView.text = orderHistoryList[position].dateOfPurchase
+        holder.dateView.text = orderHistoryList[position].dateOfPurchase.toString()
+        holder.priceView.text = orderHistoryList[position].price.toString()
+
     }
 
     override fun getItemCount(): Int {
@@ -37,14 +39,11 @@ class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderH
 
 
 
-
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val restaurantView = itemView.findViewById<TextView>(R.id.orderHistory_restaurant)
         val orderView = itemView.findViewById<TextView>(R.id.orderHistory_order)
         val dateView = itemView.findViewById<TextView>(R.id.orderHistory_date)
-
-
+        val priceView = itemView.findViewById<TextView>(R.id.orderHistory_price)
 
     }
 
