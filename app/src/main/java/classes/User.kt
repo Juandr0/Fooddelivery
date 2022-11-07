@@ -10,6 +10,9 @@ data class User (var name : String? = null,
                  var phoneNumber : Int? = null,
                  var type : String? = "user",
                  var uID : String? = null,
-                 var lastOrderRestaurant : String = "Restaurant",
-                 var lastOrder : List<String>? = listOf("No recent order")
+                 var lastOrderRestaurant : String? = null,
+                 var lastOrder : List<String>? = null
                  )
+{
+
+}
