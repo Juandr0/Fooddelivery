@@ -57,7 +57,8 @@ class ImagesFragment : Fragment() {
         uploadNewImageButton.setOnClickListener {
 
             val intent = Intent(context, RestaurantUploadImageActivity::class.java)
-                startActivity(intent)
+
+            startActivity(intent)
 
             }
         }
