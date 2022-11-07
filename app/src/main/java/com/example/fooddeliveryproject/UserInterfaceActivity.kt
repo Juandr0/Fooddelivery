@@ -2,8 +2,14 @@ package com.example.fooddeliveryproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import classes.OrderItem
+import classes.ShoppingCart
 import classes.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -12,10 +18,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import fragment.LoginFragment
-import fragment.user.ExploreFragment
-import fragment.user.ProfileFragment
-import fragment.user.RestaurantsFragment
-import fragment.user.SearchFragment
+import fragment.user.*
 
 //Testat och kopplingen fungerar
 val db = Firebase.firestore
@@ -31,19 +34,41 @@ class UserInterfaceActivity : AppCompatActivity() {
     private val loginFragment = LoginFragment()
     private val RestaurantInterfaceActivity = RestaurantInterfaceActivity()
     private val adminPageActivity = AdminPageActivity()
+    private val loadingScreenFragment = LoadingScreenFragment()
+
 
     private var currentUserType = ""
 
     private lateinit var navigationMenu : BottomNavigationView
+    private lateinit var loadingScreenFragmentContainer : FrameLayout
+    private lateinit var itemCartImageView : ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fragment_menu)
+        setContentView(R.layout.acticity_userinterface)
         navigationMenu = findViewById(R.id.navigationbar)
+        loadingScreenFragmentContainer = findViewById(R.id.loadingPageFragmentContainer)
+
 
         setCurrentFragment(exploreFragment)
+
+        //Loading screen
+        //Navigation menu is invisible so it doesnt show
+        //Made visible after the timer runs out
+        activateLoadingFragment(loadingScreenFragment)
+        navigationMenu.isVisible = false
+
+        Handler().postDelayed({
+            disableLoadingFragment(loadingScreenFragment)
+        }, 1500)
+
+        //TESTkod: Ta bort!!!!!!!!!
+            initializeSampledata("test1", "Tripple cheese med pommes frites", 129)
+            initializeSampledata("test2", "Baconburgare med sötpotatis pommes", 140)
+            initializeSampledata("test3", "Max specialmål utan dricka", 89)
+        //TESTkod: Ta bort SLUT!!!!!!
 
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
@@ -65,19 +90,47 @@ class UserInterfaceActivity : AppCompatActivity() {
             true
         }
 
-
-
+        itemCartImageView = findViewById(R.id.itemCartImageView)
+        itemCartImageView.setOnClickListener {
+            setCurrentFragment(CheckoutFragment())
+        }
 
     }
 
 
+
 // Add a new document with a generated ID
 
+    //maschdata för test
+    private fun initializeSampledata(orderRestaurant : String, orderMenuItem : String, orderPrice : Int){
+        val deliveryFee = 59
+        val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
+        ShoppingCart.addItemToCart(newOrder)
+    }
+    //maschdata för test SLUT
 
     private fun isLoggedInCheck() : Boolean{
         val currentUser = auth.currentUser
         return currentUser != null
         }
+
+    private fun activateLoadingFragment(fragment : Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.loadingPageFragmentContainer, fragment)
+        transaction.commit()
+
+    }
+
+    private fun disableLoadingFragment(fragment : Fragment){
+        // clickable and focusable remove the ability to click buttons behind the fragment.
+        // Need to be disabled so that they are clickable again when the fragment is gone
+        loadingScreenFragmentContainer.isClickable = false
+        loadingScreenFragmentContainer.isFocusable = false
+        navigationMenu.isVisible = true
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.remove(loadingScreenFragment)
+        transaction.commit()
+    }
 
 
 

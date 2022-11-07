@@ -1,6 +1,8 @@
 package fragment.user
 
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Email
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -79,17 +81,29 @@ class SignupFragment : Fragment() {
 
     private fun createNewUser(){
 
-        val email = newUserEmailEditText.text.toString()
-        val password = newUserPasswordEditText.text.toString()
+        changeBackgroundColorIfEmpty()
 
-        if (auth.currentUser != null || email.isEmpty() || password.isEmpty()){
-            Log.d("!!!", "empty mail or pass")
+        val name = newUserNameEditText.text.toString()
+        val email = newUserEmailEditText.text.toString()
+        val address = newUserAddressEditText.text.toString()
+        val phoneNumber = newUserPhoneNumberEditText.text
+        val password = newUserPasswordEditText.text.toString()
+        val user = auth.currentUser
+
+
+
+        if (user != null ||
+            name.isEmpty() ||
+            email.isEmpty() ||
+            address.isEmpty() ||
+            phoneNumber.isEmpty() ||
+            password.isEmpty()) {
             Toast.makeText(getActivity(),getString(R.string.error_reqinfo),Toast.LENGTH_SHORT).show()
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    Log.d("!!!", "user created to AUTHlogin")
-                    createUserToDBCatalougeFromSignupFieldHelperFunction()
+                    createUserToDBCatalougeFromSignupFieldHelperFunction(
+                        name, email, address, phoneNumber.toString().toInt())
                 }.addOnFailureListener {  e ->
                     Toast.makeText(getActivity(),"$e",Toast.LENGTH_SHORT).show()
                     Log.d("!!!", "No user created error: + $e" )
@@ -107,19 +121,14 @@ class SignupFragment : Fragment() {
     }
 
 
-    private fun createUserToDBCatalougeFromSignupFieldHelperFunction() {
-        val name = newUserNameEditText.text.toString()
-        val email = newUserEmailEditText.text.toString()
-        val address = newUserAddressEditText.text.toString()
-        val phoneNumber = newUserPhoneNumberEditText.text
-        val password = newUserPasswordEditText.text
-        val user = auth.currentUser
+    private fun createUserToDBCatalougeFromSignupFieldHelperFunction(
+        name : String,
+        email : String,
+        address : String,
+        phoneNumber : Int,
+    ) {
 
-
-        if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty() || password.isEmpty()) {
-            Toast.makeText(getActivity(),getString(R.string.error_reqinfo),Toast.LENGTH_SHORT).show()
-        } else {
-
+            val user = auth.currentUser
             val newUser = User(
                 name = name,
                 email = email,
@@ -128,21 +137,55 @@ class SignupFragment : Fragment() {
                 uID = user?.uid
             )
 
-
-            if (user != null) {
-                db.collection("users").document(user.uid).set(newUser)
+                db.collection("users").document(user!!.uid).set(newUser)
                     .addOnCompleteListener {
-                        Log.d("!!!", "user created to DB")
                         setCurrentFragment(profileFragment)
                     }
                     .addOnFailureListener {e ->
-                        Log.d("!!!", "No user created to DB")
-                        Toast.makeText(getActivity(),"$e",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(getActivity(),"$e",Toast.LENGTH_LONG).show()
                     }
             }
-        }
 
 
+    private fun changeBackgroundColorIfEmpty(){
+        val redColor = "#FFBCA5"
+        var whiteColor = "#FFFFFF"
+
+        val nameField = newUserNameEditText
+        val emailField = newUserEmailEditText
+        val addressField = newUserAddressEditText
+        val phoneNumberField = newUserPhoneNumberEditText
+        val passwordField = newUserPasswordEditText
+
+
+        if (nameField.text.isEmpty()) {
+            nameField.setBackgroundColor(Color.parseColor(redColor))
+            } else {
+                nameField.setBackgroundColor(Color.parseColor(whiteColor))
+            }
+
+         if (emailField.text.isEmpty()) {
+             emailField.setBackgroundColor(Color.parseColor(redColor))
+         } else {
+             emailField.setBackgroundColor(Color.parseColor(whiteColor))
+         }
+
+         if   (addressField.text.isEmpty()) {
+             addressField.setBackgroundColor(Color.parseColor(redColor))
+         } else {
+             addressField.setBackgroundColor(Color.parseColor(whiteColor))
+         }
+
+         if    (phoneNumberField.text.isEmpty()) {
+             phoneNumberField.setBackgroundColor(Color.parseColor(redColor))
+         } else {
+             phoneNumberField.setBackgroundColor(Color.parseColor(whiteColor))
+         }
+         if (passwordField.text.isEmpty()){
+             passwordField.setBackgroundColor(Color.parseColor(redColor))
+         } else {
+             passwordField.setBackgroundColor(Color.parseColor(whiteColor))
+            }
     }
 
     private fun togglePassword(isShowing : Boolean) {

@@ -14,13 +14,6 @@
         android:theme="@style/Theme.Fooddeliveryproject"
         tools:targetApi="31">
         <activity
-            android:name=".PizzaActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".RestaurantUploadImageActivity"
             android:exported="false">
             <meta-data
@@ -42,20 +35,10 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RestaurantPageActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".HamburgersActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".UserInterfaceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

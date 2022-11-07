@@ -22,13 +22,11 @@
             android:layout_width="92dp"
             android:layout_height="48dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
             android:backgroundTint="@color/woopwoop_green"
             android:text="@string/order_again"
             android:textSize="8sp"
-            app:layout_constraintStart_toEndOf="@+id/lastOrderTextView"
-            app:layout_constraintTop_toTopOf="@+id/lastOrderRestaurantNameTextView" />
-
+            app:layout_constraintBaseline_toBaselineOf="@+id/lastOrderRestaurantNameTextView"
+            app:layout_constraintStart_toEndOf="@+id/lastOrderTextView" />
 
         <TextView
             android:id="@+id/greetingsTextView"
@@ -36,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textColor="@color/black"
             android:text="@string/greetings"
+            android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,10 +43,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/settingsRecyclerView"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="195dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/usersettings_list" />
 
@@ -69,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginBottom="148dp"
+            android:layout_marginBottom="216dp"
             android:text="@string/order_again"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -83,8 +82,8 @@
             android:layout_marginStart="12dp"
             android:text="Grand Chicken Sandwich-mål"
             android:textSize="14sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/button"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastOrderRestaurantNameTextView" />
 
         <TextView
             android:id="@+id/lastOrderRestaurantNameTextView"
@@ -98,6 +97,53 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderAgainHeaderTextView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/completeOrderViewLayout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastOrderTextView">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="24dp"
+                android:layout_height="21dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_rightarrow" />
+
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="#707070"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/completeOrderHistoryTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/complete_orderhistory"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

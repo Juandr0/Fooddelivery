@@ -10,6 +10,7 @@
     <string name="images">Images</string>
 
     <string name="all_categories">All categories</string>
+    <string name="top_rated">Top rated</string>
     <string name="hamburgers">Hamburgers</string>
     <string name="pizza">Pizza</string>
     <string name="sushi">Sushi</string>
@@ -21,10 +22,12 @@
     <string name="italian">Italian</string>
     <string name="order_again">"Order again"</string>
     <string name="order_history">"Order history"</string>
+    <string name="complete_orderhistory">Complete order history</string>
     <string name="user_adress">Type your address</string>
     <string name="welcome">WELCOME</string>
     <string name="continue_button">Continue</string>
     <string name="settings">Settings</string>
+    <string name="save_setting">Save setting</string>
 
     <string name="name">Name</string>
     <string name="email">Email</string>
@@ -36,7 +39,10 @@
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_out">Sign out</string>
-
+    <string name="go_back">Go back</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_address">Enter delivery address</string>
+    <string name="enter_phonenr">Enter phone number</string>
     <string name="restaurant">Restaurant</string>
 
     <string name="error_reqinfo">Enter the required information to sign up.</string>
@@ -44,6 +50,9 @@
     <string name="upload_image">Upload Image</string>
     <string name="select_image">Select Image</string>
     <string name="image_gallery">Image Gallery</string>
+
+    <string name="no_empty_fields">Please enter your %1s</string>
+    <string name="incorrect_login">Incorrect username or password. Try again</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

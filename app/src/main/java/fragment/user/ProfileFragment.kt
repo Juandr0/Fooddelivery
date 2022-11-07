@@ -1,16 +1,17 @@
 package fragment.user
 
+import adapters.UserSettingsRecycleAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.User
-import com.example.fooddeliveryproject.*
+import classes.UserSettings
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.ktx.toObject
@@ -22,7 +23,9 @@ class ProfileFragment : Fragment() {
     lateinit var greetingsTextView : TextView
     lateinit var lastOrderRestaurant : TextView
     lateinit var lastOrder : TextView
+    lateinit var completeOrderViewLayout : ConstraintLayout
     lateinit var recyclerView : RecyclerView
+
 
     private val settingsList = mutableListOf<UserSettings>()
     private val userEditSettingsFragment = UserEditSettingsFragment()
@@ -52,8 +55,6 @@ class ProfileFragment : Fragment() {
                 settingsList.add(UserSettings(getString(R.string.email), "${user.email}"))
                 settingsList.add(UserSettings(getString(R.string.address), "${user.address}"))
                 settingsList.add(UserSettings(getString(R.string.phonenumber), "${user.phoneNumber}"))
-                settingsList.add(UserSettings(getString(R.string.order_history), ))
-                settingsList.add(UserSettings())
                 settingsList.add(UserSettings(getString(R.string.sign_out)), )
 
             }
@@ -76,7 +77,7 @@ class ProfileFragment : Fragment() {
         greetingsTextView = v.findViewById(R.id.greetingsTextView)
         lastOrderRestaurant = v.findViewById(R.id.lastOrderRestaurantNameTextView)
         lastOrder = v.findViewById(R.id.lastOrderTextView)
-
+        completeOrderViewLayout = v.findViewById(R.id.completeOrderViewLayout)
         return v
     }
 
@@ -92,6 +93,9 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = adapter
 
 
+        completeOrderViewLayout.setOnClickListener{
+            setCurrentFragment(OrderHistoryFragment(), null)
+        }
 
         //Onclicklistener for the entire recyclerview. Will change fragment on click.
         //When statement looks at what the user clicked on and matches it with a corresponding action.
@@ -117,19 +121,10 @@ class ProfileFragment : Fragment() {
                     else -> {
                         val currentUser = auth.currentUser?.uid.toString()
                         val userSetting = settingsList[position].userSetting.toString()
-                        var setting = ""
 
-                        when (settingToChange) {
-                            "Name" -> { setting = "name" }
-                            "Email" -> { setting = "email"}
-                            "Address" -> {setting = "address"}
-                            "Phone number" -> {setting = "phoneNumber"}
-                            "Order history" -> {setting = "orderHistory"
-                            }
-                        }
                         val bundle = Bundle()
 
-                        bundle.putString("settingToChange", setting)
+                        bundle.putString("settingToChange", settingToChange)
                         bundle.putString("editSetting", userSetting)
                         bundle.putString("userId", currentUser)
                         arguments = bundle
