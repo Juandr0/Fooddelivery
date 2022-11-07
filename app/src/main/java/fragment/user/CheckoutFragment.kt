@@ -160,8 +160,8 @@ class CheckoutFragment : Fragment() {
         val docRef = db.collection("users").document(currentUser)
 
         val updateMap = mapOf(
-           "lastOrderRestaurant" to  restaurantHeaderTextView.text.toString(),
-           //"lastOrderRestaurant" to newOrderItemList
+            "lastOrderRestaurant" to  restaurantHeaderTextView.text.toString(),
+            "lastOrder" to newOrderItemList
         )
 
 

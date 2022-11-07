@@ -91,7 +91,6 @@ class SignupFragment : Fragment() {
         val user = auth.currentUser
 
 
-
         if (user != null ||
             name.isEmpty() ||
             email.isEmpty() ||
@@ -126,6 +125,7 @@ class SignupFragment : Fragment() {
         email : String,
         address : String,
         phoneNumber : Int,
+
     ) {
 
             val user = auth.currentUser
@@ -134,7 +134,11 @@ class SignupFragment : Fragment() {
                 email = email,
                 address = address,
                 phoneNumber = phoneNumber.toString().toInt(),
-                uID = user?.uid
+                uID = user?.uid,
+                lastOrderRestaurant = getString(R.string.restaurant),
+                lastOrder = listOf(getString(R.string.no_recent_order))
+
+
             )
 
                 db.collection("users").document(user!!.uid).set(newUser)
