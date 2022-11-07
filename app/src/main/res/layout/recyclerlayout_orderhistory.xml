@@ -20,10 +20,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderHistory_orderItemRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="88dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/orderHistory_date"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/orderHistory_restaurant"
         app:layout_constraintTop_toBottomOf="@+id/orderHistory_restaurant"
         tools:listitem="@layout/order_childrecycler_layout" />
@@ -44,9 +45,23 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:text="price"
+        android:textStyle="bold"
+        android:textColor="@color/woopwoop_green"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/orderHistory_orderItemRecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/orderHistory_restaurant"
         app:layout_constraintTop_toBottomOf="@+id/orderHistory_orderItemRecyclerView"
         app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderHistory_price" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
