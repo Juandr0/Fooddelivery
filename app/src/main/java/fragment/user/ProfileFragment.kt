@@ -22,7 +22,7 @@ class ProfileFragment : Fragment() {
 
     lateinit var greetingsTextView : TextView
     lateinit var lastOrderRestaurant : TextView
-    lateinit var lastOrder : TextView
+   // lateinit var lastOrder : TextView
     lateinit var completeOrderViewLayout : ConstraintLayout
     lateinit var recyclerView : RecyclerView
 
@@ -47,7 +47,9 @@ class ProfileFragment : Fragment() {
                 val user = document.toObject<User>()
                 greetingsTextView.text = getString(R.string.greetings) + ", ${user!!.name}"
                 lastOrderRestaurant.text = "${user.lastOrderRestaurant}"
-                lastOrder.text = "${user.lastOrder}"
+                // lastOrder.text = "${user.lastOrder}"
+
+
                 //If-statement that fills the recyclerView with user settings, if it's not already filled
 
                 initializeSettingsWithRecyclerView(requireView())
@@ -76,7 +78,7 @@ class ProfileFragment : Fragment() {
         val v =  inflater.inflate(R.layout.fragment_profile, container, false)
         greetingsTextView = v.findViewById(R.id.greetingsTextView)
         lastOrderRestaurant = v.findViewById(R.id.lastOrderRestaurantNameTextView)
-        lastOrder = v.findViewById(R.id.lastOrderTextView)
+       // lastOrder = v.findViewById(R.id.lastOrderTextView)
         completeOrderViewLayout = v.findViewById(R.id.completeOrderViewLayout)
         return v
     }
