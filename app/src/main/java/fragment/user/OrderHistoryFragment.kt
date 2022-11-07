@@ -2,7 +2,6 @@ package fragment.user
 
 import adapters.OrderHistoryRecyclerAdapter
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import classes.OrderHistory
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
-import com.google.firebase.firestore.ktx.getField
 
 class OrderHistoryFragment : Fragment() {
 
@@ -36,7 +34,7 @@ class OrderHistoryFragment : Fragment() {
 
 
     private fun initializeRecyclerView(view : View) {
-        val recyclerView = view.findViewById<RecyclerView>(R.id.orderhistory_RecyclerView)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.orderhistory_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = OrderHistoryRecyclerAdapter(OrderHistoryFragment(), userOrderList, /*orderItemList*/)
         recyclerView.adapter = adapter

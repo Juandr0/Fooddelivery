@@ -28,7 +28,7 @@ class OrderHistoryChildRecyclerAdapter (val context : OrderHistoryFragment, val 
 
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val orderItem = itemView.findViewById<TextView>(R.id.childRecycler_OrderItem)
+        val orderItem = itemView.findViewById<TextView>(R.id.orderChildTextView)
 
     }
 

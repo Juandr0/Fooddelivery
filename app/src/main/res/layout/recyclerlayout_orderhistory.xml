@@ -17,15 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/orderHistory_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orderHistory_orderItemRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="88dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Order"
+        app:layout_constraintEnd_toStartOf="@+id/orderHistory_date"
         app:layout_constraintStart_toStartOf="@+id/orderHistory_restaurant"
-        app:layout_constraintTop_toBottomOf="@+id/orderHistory_restaurant" />
+        app:layout_constraintTop_toBottomOf="@+id/orderHistory_restaurant"
+        tools:listitem="@layout/order_childrecycler_layout" />
 
     <TextView
         android:id="@+id/orderHistory_date"
@@ -44,8 +45,8 @@
         android:layout_marginBottom="5dp"
         android:text="price"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/orderHistory_order"
-        app:layout_constraintTop_toBottomOf="@+id/orderHistory_order"
+        app:layout_constraintStart_toStartOf="@+id/orderHistory_orderItemRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/orderHistory_orderItemRecyclerView"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
