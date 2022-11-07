@@ -96,6 +96,7 @@ class ProfileFragment : Fragment() {
             .get()
             .addOnSuccessListener { document ->
                 if (document != null){
+                    userOrdersList.clear()
                     var tempItemList = document.get("lastOrder") as List<String>
                     for (item in tempItemList){
                         userOrdersList.add(item)
