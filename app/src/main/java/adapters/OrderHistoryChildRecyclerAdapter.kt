@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryproject.R
 import fragment.user.OrderHistoryFragment
 
-class OrderHistoryChildRecyclerAdapter (val context : OrderHistoryFragment, val orderList : List<String>) :
+class OrderHistoryChildRecyclerAdapter (val context : OrderHistoryFragment, val orderItemList : List<String>) :
     RecyclerView.Adapter<OrderHistoryChildRecyclerAdapter.ViewHolder>()
 {
 
@@ -20,12 +20,11 @@ class OrderHistoryChildRecyclerAdapter (val context : OrderHistoryFragment, val 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = orderList[position]
+        val item = orderItemList[position]
         holder.orderItem.text = item
-
     }
 
-    override fun getItemCount() = orderList.size
+    override fun getItemCount() = orderItemList.size
 
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

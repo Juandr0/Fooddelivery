@@ -12,7 +12,9 @@ import classes.OrderHistory
 import com.example.fooddeliveryproject.R
 import fragment.user.OrderHistoryFragment
 
-class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderHistoryList : List<OrderHistory>)
+class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment,
+                                  val orderHistoryList : List<OrderHistory>,
+                                  /* val orderItemList : List<List<String>>*/ )
     : RecyclerView.Adapter<OrderHistoryRecyclerAdapter.ViewHolder>(){
 
 

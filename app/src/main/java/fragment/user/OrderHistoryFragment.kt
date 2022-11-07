@@ -17,7 +17,8 @@ import com.google.firebase.firestore.ktx.getField
 class OrderHistoryFragment : Fragment() {
 
     val userOrderList = mutableListOf<OrderHistory>()
-   // val orderItems = mutableListOf<String>()
+    //var orderItemList = mutableListOf<List<String>>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +38,7 @@ class OrderHistoryFragment : Fragment() {
     private fun initializeRecyclerView(view : View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.orderhistory_RecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = OrderHistoryRecyclerAdapter(OrderHistoryFragment(), userOrderList)
+        val adapter = OrderHistoryRecyclerAdapter(OrderHistoryFragment(), userOrderList, /*orderItemList*/)
         recyclerView.adapter = adapter
     }
 
@@ -54,10 +55,10 @@ class OrderHistoryFragment : Fragment() {
                     var restaurant = document.getString("restaurant")
                     var date = document.getDate("purchaseDate")
                     var price = document.getLong("totalPrice")
+                    var tempItemList = document.get("orderItems") as List<String>
 
-                    //Själva beställningarna ska läggas in i separat lista som sen ska visas i textview på något sätt
-                    //var order = document.getField<List<String>>("orderItems")
 
+                    newOrder.orderItem = tempItemList
                     newOrder.restaurantName = restaurant
                     newOrder.dateOfPurchase = date
                     newOrder.price = price!!.toInt()
@@ -65,6 +66,8 @@ class OrderHistoryFragment : Fragment() {
 
                     userOrderList.add(newOrder)
                     }
+
+                //Sorts list by date, then reverses the list to have the last order on the top of the list
                 userOrderList.sortBy{it.dateOfPurchase}
                 userOrderList.reverse()
                 initializeRecyclerView(view)
