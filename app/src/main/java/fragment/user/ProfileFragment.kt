@@ -1,5 +1,6 @@
 package fragment.user
 
+import adapters.LastOrderRecyclerAdapter
 import adapters.UserSettingsRecycleAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import classes.OrderHistory
 import classes.User
 import classes.UserSettings
 import com.example.fooddeliveryproject.R
@@ -25,10 +27,12 @@ class ProfileFragment : Fragment() {
    // lateinit var lastOrder : TextView
     lateinit var completeOrderViewLayout : ConstraintLayout
     lateinit var recyclerView : RecyclerView
-
+    lateinit var lastOrderRecyclerView : RecyclerView
 
     private val settingsList = mutableListOf<UserSettings>()
     private val userEditSettingsFragment = UserEditSettingsFragment()
+    val userOrdersList = mutableListOf<String>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +90,31 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
+    private fun getLastOrder(view : View){
+
+        db.collection("users").document(auth.currentUser!!.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null){
+                    var tempItemList = document.get("lastOrder") as List<String>
+                    for (item in tempItemList){
+                        userOrdersList.add(item)
+                    }
+                }
+
+
+
+                lastOrderRecyclerView = view.findViewById(R.id.profile_lastOrderRecyclerView)
+                lastOrderRecyclerView.layoutManager = LinearLayoutManager(activity)
+                val lastOrderAdapter = LastOrderRecyclerAdapter(ProfileFragment(), userOrdersList)
+                lastOrderRecyclerView.adapter = lastOrderAdapter
+
+            }
+
+
+    }
+
+
     //Initializes the recyclerview so it displays the user settings
     private fun initializeSettingsWithRecyclerView(view : View) {
 
@@ -94,7 +123,7 @@ class ProfileFragment : Fragment() {
         val adapter = UserSettingsRecycleAdapter(ProfileFragment(), settingsList)
         recyclerView.adapter = adapter
 
-
+        getLastOrder(view)
         completeOrderViewLayout.setOnClickListener{
             setCurrentFragment(OrderHistoryFragment(), null)
         }

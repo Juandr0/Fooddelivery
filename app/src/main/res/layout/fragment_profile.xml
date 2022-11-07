@@ -12,22 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="-155dp">
+        tools:layout_editor_absoluteY="41dp">
 
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="92dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="4dp"
-            android:backgroundTint="@color/woopwoop_green"
-            android:text="@string/order_again"
-            android:textSize="8sp"
-            app:layout_constraintStart_toEndOf="@+id/lastOrderRestaurantNameTextView"
-            app:layout_constraintTop_toBottomOf="@+id/orderAgainHeaderTextView" />
 
         <TextView
             android:id="@+id/greetingsTextView"
@@ -62,59 +50,59 @@
             app:layout_constraintBottom_toTopOf="@+id/settingsRecyclerView"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_lastOrderRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="12dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/completeOrderViewLayout"
+            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastOrderRestaurantNameTextView"
+            app:layout_constraintVertical_bias="0.203" />
+
         <TextView
             android:id="@+id/orderAgainHeaderTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="188dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="108dp"
             android:text="@string/order_again"
             android:textColor="@color/black"
             android:textSize="25sp"
-            app:layout_constraintBottom_toTopOf="@+id/settingsHeaderTextView"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profile_lastOrderRecyclerView"
-            android:layout_width="193dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lastOrderRestaurantNameTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/greetingsTextView" />
 
-        <TextView
-            android:id="@+id/lastOrderRestaurantNameTextView"
-            android:layout_width="185dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="12dp"
+        <Button
+            android:id="@+id/button"
+            android:layout_width="92dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="4dp"
-            android:text="@string/restaurant"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/woopwoop_green"
+            android:text="@string/order_again"
+            android:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@+id/lastOrderRestaurantNameTextView"
             app:layout_constraintTop_toBottomOf="@+id/orderAgainHeaderTextView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/completeOrderViewLayout"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginBottom="36dp"
+            app:layout_constraintBottom_toTopOf="@+id/settingsHeaderTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_lastOrderRecyclerView">
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="24dp"
                 android:layout_height="21dp"
                 android:layout_marginEnd="14dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_rightarrow" />
@@ -124,12 +112,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginBottom="8dp"
                 android:text="@string/complete_orderhistory"
                 android:textColor="#333333"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,8 +129,22 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/lastOrderRestaurantNameTextView"
+            android:layout_width="185dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/restaurant"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderAgainHeaderTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
