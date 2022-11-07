@@ -61,7 +61,7 @@ class OrderHistoryFragment : Fragment() {
                     newOrder.restaurantName = restaurant
                     newOrder.dateOfPurchase = date
                     newOrder.price = price!!.toInt()
-                    newOrder.order = "test"
+
 
                     userOrderList.add(newOrder)
                     }

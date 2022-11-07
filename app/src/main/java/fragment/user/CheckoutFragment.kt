@@ -111,23 +111,27 @@ class CheckoutFragment : Fragment() {
         //-> Sends all info to the db
         var index = 0
         for (item in ShoppingCart.currentOrderList){
-            val item = ShoppingCart.currentOrderList[index].orderFromMeny
-            newOrderItemList.add(item)
+            val orderItem = ShoppingCart.currentOrderList[index].orderFromMeny
+            newOrderItemList.add(orderItem)
             index ++
         }
 
         var user = User()
-        val mapList = newOrderItemList.associate { it to it.length }
+        //Gör om till ny lista
+
+
+
         val currentUser = db.collection("users").document(auth.currentUser!!.uid)
         currentUser.get()
             .addOnSuccessListener { document ->
                 user = document.toObject<User>()!!
                 var date = Calendar.getInstance().time
 
+
                 val dataToBeSent = hashMapOf(
                     "restaurant" to  restaurant ,
                     "totalPrice" to totalPrice,
-                    "orderItems" to mapList,
+                    "orderItems" to newOrderItemList,
                     "user" to user,
                     "purchaseDate" to date
                 )
