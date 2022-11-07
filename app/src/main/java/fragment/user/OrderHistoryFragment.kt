@@ -65,7 +65,8 @@ class OrderHistoryFragment : Fragment() {
 
                     userOrderList.add(newOrder)
                     }
-
+                userOrderList.sortBy{it.dateOfPurchase}
+                userOrderList.reverse()
                 initializeRecyclerView(view)
     }
 
