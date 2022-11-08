@@ -14,7 +14,7 @@
     <string name="time_of_delivery"></string>
     <string name="delivery_information">Order will be delivered to: </string>
     <string name="order_success">Your order has successfully been sent!</string>
-    <string name="ordernumber">Ordernumber: </string>
+    <string name="ordernumber">Order number:</string>
     <string name="receipt_sent">A receipt has been sent to your email-address.</string>
     <string name="all_categories">All categories</string>
     <string name="top_rated">Top rated</string>

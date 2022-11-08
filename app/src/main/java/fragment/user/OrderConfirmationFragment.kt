@@ -40,15 +40,17 @@ class OrderConfirmationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         orderNumber = view.findViewById(R.id.confirmation_OrderNumber)
         orderPrice = view.findViewById(R.id.confirmation_totalPriceTextView)
         orderAddress = view.findViewById(R.id.confirmation_deliveryAddressTextview)
         salesTax = view.findViewById(R.id.confirmation_salesTaxTextView)
 
-
         initiateBundleToViews()
-        initalizeRecyclerView(view)
         setTextViews()
+        initalizeRecyclerView(view)
+
+
 
         ShoppingCart.clearItemsFromCart()
     }
@@ -87,13 +89,15 @@ class OrderConfirmationFragment : Fragment() {
     //Gets bundle info of order items and adds it to the itemlist
     private fun initiateBundleToViews(){
         val args = this.arguments
+        val orderNumberBundle = args?.getInt("orderNumber")
         val lastOrder = args?.getStringArrayList("bundleList")
+
         if (lastOrder != null) {
             for (item in lastOrder){
                 itemsList.add(item)
             }
         }
-
+        orderNumber.text = getString(R.string.ordernumber) + " " + orderNumberBundle.toString()
 
     }
 
