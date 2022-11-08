@@ -16,7 +16,7 @@
         <View
             android:id="@+id/divider7"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="#000000"
             android:backgroundTint="@color/black"
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="@+id/confirmation_OrderSuccessTextView"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
-            app:layout_constraintTop_toBottomOf="@+id/confirmation_totalPriceTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_salesTaxTextView" />
 
         <View
             android:id="@+id/divider6"
@@ -88,6 +88,7 @@
             android:layout_marginTop="16dp"
             android:background="#FFFFFF"
             app:layout_constraintEnd_toEndOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
             app:layout_constraintTop_toBottomOf="@+id/divider6"
             tools:listitem="@layout/recyclerview_orderitems" />
@@ -123,5 +124,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/confirmation_salesTaxTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/sales_tax"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_totalPriceTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

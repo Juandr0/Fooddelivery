@@ -1,7 +1,6 @@
 package fragment.user
 
 import adapters.OrderConfirmationRecyclerAdapter
-import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,10 +14,7 @@ import classes.User
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.ktx.toObject
-import com.google.type.Date
-import java.lang.String.format
 import java.time.Duration
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -30,6 +26,7 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var orderNumber : TextView
     lateinit var orderPrice : TextView
     lateinit var orderAddress : TextView
+    lateinit var salesTax : TextView
 
 
     override fun onCreateView(
@@ -46,6 +43,8 @@ class OrderConfirmationFragment : Fragment() {
         orderNumber = view.findViewById(R.id.confirmation_OrderNumber)
         orderPrice = view.findViewById(R.id.confirmation_totalPriceTextView)
         orderAddress = view.findViewById(R.id.confirmation_deliveryAddressTextview)
+        salesTax = view.findViewById(R.id.confirmation_salesTaxTextView)
+
 
         initiateBundleToViews()
         initalizeRecyclerView(view)
@@ -64,7 +63,10 @@ class OrderConfirmationFragment : Fragment() {
 
     private fun setTextViews(){
         val price = ShoppingCart.calculateTotalPrice()
-        orderPrice.text = price.toString() + ":-"
+        orderPrice.text =getString(R.string.order_total) + " " + price.toString() + ":-"
+
+        var taxPercentile = 0.12
+        salesTax.text = getString(R.string.sales_tax) + " " +  price * taxPercentile + ":-"
 
 
         //Gets the current time and the user address and displays it in textview
