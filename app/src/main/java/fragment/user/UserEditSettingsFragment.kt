@@ -20,6 +20,7 @@ class UserEditSettingsFragment : Fragment() {
     private lateinit var userAttributeToChangeTextView : TextView
     private lateinit var userAttributeToChangeEditText : EditText
     private lateinit var saveSettingButton : Button
+
     private lateinit var goBackButton : Button
 
     override fun onCreateView(

@@ -19,6 +19,7 @@ import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -35,7 +36,7 @@ class CheckoutFragment : Fragment() {
 
 
     val newOrderItemList = mutableListOf<String>()
-
+    var userAddress : String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -109,8 +110,9 @@ class CheckoutFragment : Fragment() {
         for (item in newOrderItemList){
             bundleList.add(item)
         }
-
         bundle.putStringArrayList("bundleList", bundleList)
+        bundle.putInt("price", ShoppingCart.calculateTotalPrice())
+
         return bundle
     }
     //fetches order from ShoppingCart and adds it into separate list which will be sent to DB
@@ -141,7 +143,8 @@ class CheckoutFragment : Fragment() {
             .addOnSuccessListener { document ->
                 user = document.toObject<User>()!!
                 var date = Calendar.getInstance().time
-
+                //Adress skickas med bundle som går till orderconfirmation
+                userAddress = user.address.toString()
 
                 val dataToBeSent = hashMapOf(
                     "restaurant" to  restaurant ,
@@ -166,8 +169,6 @@ class CheckoutFragment : Fragment() {
     }
 
 
-
-
     fun updateUserLastOrder() {
 
         val currentUser = auth.currentUser!!.uid
@@ -177,13 +178,7 @@ class CheckoutFragment : Fragment() {
             "lastOrderRestaurant" to  restaurantHeaderTextView.text.toString(),
             "lastOrder" to newOrderItemList
         )
-
-
         docRef.update(updateMap)
-            .addOnSuccessListener {
-                ShoppingCart.clearItemsFromCart()
-            }
-
 
     }
     fun setTextHeader(){

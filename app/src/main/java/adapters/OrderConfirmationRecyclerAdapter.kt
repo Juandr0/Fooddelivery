@@ -21,7 +21,7 @@ class OrderConfirmationRecyclerAdapter (val context : OrderConfirmationFragment,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = itemsList[position]
+        val item = "-" +itemsList[position]
         holder.orderitem.text = item
 
     }

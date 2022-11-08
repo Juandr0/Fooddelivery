@@ -16,7 +16,7 @@
         <View
             android:id="@+id/divider7"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginTop="24dp"
             android:background="#000000"
             android:backgroundTint="@color/black"
@@ -82,10 +82,9 @@
         <androidx.recyclerview.widget.RecyclerView
 
 
-
             android:id="@+id/confirmation_orderRecyclerView"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/confirmation_OrderSuccessTextView"
             app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
@@ -110,7 +109,7 @@
             android:layout_marginTop="5dp"
             android:text="Price"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_OrderSuccessTextView"
             app:layout_constraintTop_toBottomOf="@+id/confirmation_orderRecyclerView" />
 
         <TextView
