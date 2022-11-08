@@ -5,7 +5,7 @@
     android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="#E8E8E8"
+    android:background="#5991AE6C"
 
     >
 
@@ -27,8 +27,7 @@
         android:layout_height="23dp"
         android:layout_marginTop="3dp"
         android:width="200dp"
-        android:background="#E8E8E8"
-        android:backgroundTint="#E8E8E8"
+        android:backgroundTint="#FFFFFF"
         android:text="Köttbullar med potatismos"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
