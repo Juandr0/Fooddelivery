@@ -1,13 +1,130 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context="fragment.user.OrderConfirmationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/confirmationPageConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF">
 
+        <TextView
+            android:id="@+id/confirmation_OrderSuccessTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:text="@string/order_success"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/divider3"
+            app:layout_constraintStart_toStartOf="@+id/divider3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/confirmation_OrderNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ordernumber"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_OrderSuccessTextView" />
+
+        <TextView
+            android:id="@+id/confirmation_receitToMailTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/receipt_sent"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderNumber"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_OrderNumber" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="#000000"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_receitToMailTextView" />
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="#000000"
+
+            android:backgroundTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_totalPriceTextView" />
+
+        <View
+            android:id="@+id/divider6"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="#000000"
+            android:backgroundTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_deliveryAddressTextview" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/confirmation_orderRecyclerView"
+            android:layout_width="295dp"
+            android:layout_height="147dp"
+            android:layout_marginStart="-5dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_receitToMailTextView"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintTop_toBottomOf="@+id/divider3"
+            tools:listitem="@layout/recyclerview_orderitems" />
+
+        <TextView
+            android:id="@+id/confirmation_deliveryAddressTextview"
+            android:layout_width="279dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/delivery_information"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_receitToMailTextView"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+        <TextView
+            android:id="@+id/confirmation_totalPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Price"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_orderRecyclerView" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/thank_you"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -21,6 +21,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.toObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CheckoutFragment : Fragment() {
 
@@ -76,8 +77,8 @@ class CheckoutFragment : Fragment() {
             val currentUser = auth.currentUser
             if (currentUser != null){
                 sendOrderToDb()
-                setCurrentFragment(OrderConfirmationFragment(), null)
-                //updateUserLastOrder()
+                var bundle = initiateBundle()
+                setCurrentFragment(OrderConfirmationFragment(), bundle)
             } else {
                 Toast.makeText(activity, getString(R.string.sign_in_to_order), Toast.LENGTH_SHORT).show()
             }
@@ -98,6 +99,20 @@ class CheckoutFragment : Fragment() {
         setTextHeader()
     }
 
+    //Sends info to checkout page
+    fun initiateBundle() : Bundle{
+
+        val bundle = Bundle()
+        var bundleList = ArrayList<String>()
+
+
+        for (item in newOrderItemList){
+            bundleList.add(item)
+        }
+
+        bundle.putStringArrayList("bundleList", bundleList)
+        return bundle
+    }
     //fetches order from ShoppingCart and adds it into separate list which will be sent to DB
     fun sendOrderToDb() {
 
@@ -140,11 +155,10 @@ class CheckoutFragment : Fragment() {
                 val docRef = db.collection("orders").document(auth.currentUser!!.uid).collection("order")
                     docRef.add(dataToBeSent)
                     .addOnSuccessListener {
-                        Log.d("!!!","Order sent")
                         updateUserLastOrder()
                     }
                     .addOnFailureListener{ e ->
-                        Log.d("!!!","Failed to send" + e)
+                        Log.d("!!!","Failed to send order" + e)
                     }
 
             }
