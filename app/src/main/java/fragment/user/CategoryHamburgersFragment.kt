@@ -14,10 +14,7 @@ import classes.Restaurant
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import fragment.restaurantMenu.BrodernasMenuFragment
-import fragment.restaurantMenu.LiljeholmensGrillMenuFragment
-import fragment.restaurantMenu.MaxLiljeholmenMenuFragment
-import fragment.restaurantMenu.McDonaldsLiljeholmenMenuFragment
+import fragment.restaurantMenu.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +35,7 @@ class CategoryHamburgersFragment : Fragment() {
     private val LiljeholmensGrillMenuFragment = LiljeholmensGrillMenuFragment()
     private val McDonaldsLiljeholmenMenuFragment = McDonaldsLiljeholmenMenuFragment()
     private val BrodernasMenuFragment = BrodernasMenuFragment()
+    private val OlearysMenuFragment = OlearysMenuFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +89,7 @@ class CategoryHamburgersFragment : Fragment() {
                                     setCurrentFragment(McDonaldsLiljeholmenMenuFragment)
                                 }
                                 2 -> {
-
+                                    setCurrentFragment(OlearysMenuFragment)
                                 }
                                 3 -> {
                                     setCurrentFragment(MaxLiljeholmenMenuFragment)

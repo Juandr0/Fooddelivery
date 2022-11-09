@@ -1,11 +1,17 @@
 package fragment.restaurantMenu
 
+import adapters.restaurantMenuAdapters.OlearysMenuRecyclerAdapter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import classes.OrderItem
 import com.example.fooddeliveryproject.R
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +42,57 @@ class OlearysMenuFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_olearys_menu, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        FirebaseFirestore.getInstance().collection("restaurants").document("QpWMx7nDGyzD6Zz4AlKt").collection("menu")
+            .whereArrayContains("category", "hamburger")
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val orderItem = documents.toObjects(OrderItem::class.java)
+                    //Code for recyclerView
+                    var recyclerView = view.findViewById<RecyclerView>(R.id.olearysMenuItemsRecyclerView)
+                    //What type of layout the list will have. This makes it a linear list
+                    recyclerView.layoutManager = LinearLayoutManager(context)
+                    // Created an adapter from our adapter-class and sent in the list of restaurants
+                    val adapter = OlearysMenuRecyclerAdapter(this, orderItem)
+                    //Connect our adapter to our recyclerView
+                    recyclerView.adapter = adapter
+                    //End of recyclerView
+
+                    adapter.setOnItemClickListener(object : OlearysMenuRecyclerAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            //toast to check if clicking works
+                            Toast.makeText(context,
+                                "you clicked on item no. $position",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            when (position) {
+                                0 -> {
+
+
+                                }
+                                1 -> {
+                                }
+                                2 -> {
+
+                                }
+                            }
+                        }
+
+                    }) // End of click handler
+
+                }
+
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"failed", Toast.LENGTH_SHORT)
+                    .show()
+            }
     }
 
     companion object {
