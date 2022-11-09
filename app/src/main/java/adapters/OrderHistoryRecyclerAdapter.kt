@@ -56,11 +56,5 @@ class OrderHistoryRecyclerAdapter(val context : OrderHistoryFragment, val orderH
         recyclerView.layoutManager = LinearLayoutManager(thisContext)
         recyclerView.adapter = recyclerAdapter
     }
-    /*
-            val recyclerView = view.findViewById<RecyclerView>(R.id.orderhistory_recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = OrderHistoryRecyclerAdapter(OrderHistoryFragment(), userOrderList, /*orderItemList*/)
-        recyclerView.adapter = adapter
-     */
 
 }
