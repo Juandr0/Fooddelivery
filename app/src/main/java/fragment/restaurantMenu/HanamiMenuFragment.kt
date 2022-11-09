@@ -79,7 +79,7 @@ class HanamiMenuFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+
 
                                 }
                                 1 -> {

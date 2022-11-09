@@ -77,7 +77,7 @@ class MaxadPizzaMenuFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+
 
                                 }
                                 1 -> {

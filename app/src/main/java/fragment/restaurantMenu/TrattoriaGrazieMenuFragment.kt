@@ -77,7 +77,7 @@ class TrattoriaGrazieMenuFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+
 
                                 }
                                 1 -> {

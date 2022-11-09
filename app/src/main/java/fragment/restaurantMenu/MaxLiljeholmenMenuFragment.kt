@@ -77,7 +77,7 @@ class MaxLiljeholmenMenuFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+
 
                                 }
                                 1 -> {

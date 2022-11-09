@@ -1,11 +1,19 @@
 package fragment.restaurantMenu
 
+import adapters.restaurantMenuAdapters.LiljeholmensPizzeriaMenuRecyclerAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import classes.OrderItem
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.UserInterfaceActivity
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +45,59 @@ class LiljeholmesnPizzeriaMenuFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_liljeholmesn_pizzeria_menu, container, false)
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        FirebaseFirestore.getInstance().collection("restaurants").document("0obYh2kHAF5bYPL4GANW").collection("menu")
+            .whereArrayContains("category", "pizza")
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val orderItem = documents.toObjects(OrderItem::class.java)
+                    //Code for recyclerView
+                    var recyclerView = view.findViewById<RecyclerView>(R.id.liljeholmesnPizzeriaMenuItemsRecyclerView)
+                    //What type of layout the list will have. This makes it a linear list
+                    recyclerView.layoutManager = LinearLayoutManager(context)
+                    // Created an adapter from our adapter-class and sent in the list of restaurants
+                    val adapter = LiljeholmensPizzeriaMenuRecyclerAdapter(this, orderItem)
+                    //Connect our adapter to our recyclerView
+                    recyclerView.adapter = adapter
+                    //End of recyclerView
+
+                    val intent = Intent(context, UserInterfaceActivity::class.java)
+                    adapter.setOnItemClickListener(object : LiljeholmensPizzeriaMenuRecyclerAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            //toast to check if clicking works
+                            Toast.makeText(context,
+                                "you clicked on item no. $position",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            when (position) {
+                                0 -> {
+
+                                }
+                                1 -> {
+                                }
+                                2 -> {
+
+                                }
+                            }
+                        }
+
+                    }) // End of click handler
+
+                }
+
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"failed", Toast.LENGTH_SHORT)
+                    .show()
+            }
+    }
+
 
     companion object {
         /**

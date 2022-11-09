@@ -14,7 +14,6 @@ import classes.OrderItem
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,7 +52,6 @@ class IndianGardenMenuFragment : Fragment() {
 
         FirebaseFirestore.getInstance().collection("restaurants").document("RF1GfTjrS8DQYcVzVjZ7").collection("menu")
             .whereArrayContains("category", "curry")
-            .orderBy("listOrder", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
@@ -79,7 +77,6 @@ class IndianGardenMenuFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
 
                                 }
                                 1 -> {
