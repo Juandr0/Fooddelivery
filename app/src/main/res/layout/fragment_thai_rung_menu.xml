@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     tools:context="fragment.restaurantMenu.ThaiRungMenuFragment">
 
+    <ImageButton
+        android:id="@+id/thaiRungPreviousFragmentImageButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_outline_arrow_circle_left_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

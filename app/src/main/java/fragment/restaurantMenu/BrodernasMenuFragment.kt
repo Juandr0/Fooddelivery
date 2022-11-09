@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,8 @@ class BrodernasMenuFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var brodernasPreviousFragmentImageButton: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -47,6 +50,11 @@ class BrodernasMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        brodernasPreviousFragmentImageButton = view.findViewById(R.id.brodernasPreviousFragmentImageButton)
+        brodernasPreviousFragmentImageButton.setOnClickListener {
+            returnToPreviousFragment()
+        }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("wGNxzHJszl1DLjs1Sp61").collection("menu")
             .whereArrayContains("category", "hamburger")
@@ -115,4 +123,11 @@ class BrodernasMenuFragment : Fragment() {
                 }
             }
     }
+
+    private fun returnToPreviousFragment(){
+       if(parentFragmentManager.backStackEntryCount > 0){
+           parentFragmentManager.popBackStack()
+       }
+    }
+
 }

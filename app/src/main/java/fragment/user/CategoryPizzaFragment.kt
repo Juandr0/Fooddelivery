@@ -137,7 +137,7 @@ class CategoryPizzaFragment : Fragment() {
     private fun setCurrentFragment(fragment : Fragment){
 
         val fragmentManager = parentFragmentManager
-        val transaction = fragmentManager.beginTransaction()
+        val transaction = fragmentManager.beginTransaction().addToBackStack("CategoryPizzaFragment")
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
