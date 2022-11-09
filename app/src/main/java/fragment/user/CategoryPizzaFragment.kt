@@ -14,6 +14,7 @@ import classes.Restaurant
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import fragment.restaurantMenu.LiljeholmensGrillMenuFragment
 import fragment.restaurantMenu.LiljeholmesnPizzeriaMenuFragment
 import fragment.restaurantMenu.MaxadPizzaMenuFragment
 import fragment.restaurantMenu.TrattoriaGrazieMenuFragment
@@ -36,6 +37,7 @@ class CategoryPizzaFragment : Fragment() {
     private val LiljeholmensPizzeriaMenuFragment = LiljeholmesnPizzeriaMenuFragment()
     private val TrattoriaGrazieMenuFragment = TrattoriaGrazieMenuFragment()
     private val MaxadPizzaMenuFragment = MaxadPizzaMenuFragment()
+    private val LiljeholmensGrillMenuFragment = LiljeholmensGrillMenuFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +93,7 @@ class CategoryPizzaFragment : Fragment() {
                                     setCurrentFragment(LiljeholmensPizzeriaMenuFragment)
                                 }
                                 1 -> {
+                                    setCurrentFragment(LiljeholmensGrillMenuFragment)
                                 }
                                 2 -> {
                                     setCurrentFragment(TrattoriaGrazieMenuFragment)

@@ -1,7 +1,6 @@
 package fragment.restaurantMenu
 
 import adapters.restaurantMenuAdapters.MaxadPizzaMenuRecyclerAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -66,7 +64,6 @@ class MaxadPizzaMenuFragment : Fragment() {
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
-                    val intent = Intent(context, UserInterfaceActivity::class.java)
                     adapter.setOnItemClickListener(object : MaxadPizzaMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
