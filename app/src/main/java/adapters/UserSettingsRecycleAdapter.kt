@@ -68,7 +68,6 @@ class UserSettingsRecycleAdapter
         }
 
     }
-
     fun backgroundColorChanger() : String{
         val colorLighterGrey = "#FFFFFF"
         val colorDarkerGrey = "#F3F3F3"
@@ -76,7 +75,6 @@ class UserSettingsRecycleAdapter
 
         if (backgroundColorPicker) return colorLighterGrey
         else return colorDarkerGrey
-
     }
 
 
