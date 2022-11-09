@@ -50,8 +50,8 @@ class BrodernasMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        FirebaseFirestore.getInstance().collection("restaurants").document("wGNxzHJszl1DLjs1Sp61").collection("hamburgers")
-//            .whereArrayContains("category", "hamburgers")
+        FirebaseFirestore.getInstance().collection("restaurants").document("wGNxzHJszl1DLjs1Sp61").collection("menu")
+            .whereArrayContains("category", "hamburger")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
