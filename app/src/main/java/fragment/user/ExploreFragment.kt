@@ -2,7 +2,6 @@ package fragment.user
 
 import adapters.FoodCategoryRecyclerAdapter
 import adapters.TopRatedRecyclerAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import classes.FoodCategory
 import classes.Restaurant
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import fragment.restaurantMenu.BrodernasMenuFragment
 import fragment.restaurantMenu.HanamiMenuFragment
+import fragment.restaurantMenu.MaxadPizzaMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,6 +49,7 @@ class ExploreFragment : Fragment() {
 
     private val BrodernasMenuFragment = BrodernasMenuFragment()
     private val HanamiMenuFragment = HanamiMenuFragment()
+    private val MaxadPizzaMenuFragment = MaxadPizzaMenuFragment()
 
 
     // List of categories
@@ -185,8 +185,7 @@ class ExploreFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    val intent = Intent(context, UserInterfaceActivity::class.java)
-                                    startActivity(intent)
+                                    setCurrentFragment(MaxadPizzaMenuFragment)
                                     
                                 }
                                 1 -> {

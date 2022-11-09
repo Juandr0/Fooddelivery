@@ -1,6 +1,6 @@
 package fragment.restaurantMenu
 
-import adapters.restaurantMenuAdapters.HanamiMenuRecyclerAdapter
+import adapters.restaurantMenuAdapters.MaxadPizzaMenuRecyclerAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,6 @@ import classes.OrderItem
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,10 +22,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HanamiMenuFragment.newInstance] factory method to
+ * Use the [MaxadPizzaMenuFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HanamiMenuFragment : Fragment() {
+class MaxadPizzaMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -44,32 +43,31 @@ class HanamiMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hanami_menu, container, false)
+        return inflater.inflate(R.layout.fragment_maxad_pizza_menu, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        FirebaseFirestore.getInstance().collection("restaurants").document("q7gBWJ5YXq5F5kiUWAwD").collection("menu")
-            .whereArrayContains("category", "sushi")
-            .orderBy("listOrder", Query.Direction.ASCENDING)
+        FirebaseFirestore.getInstance().collection("restaurants").document("vcR8iEMgkEsmftTeKdyH").collection("menu")
+            .whereArrayContains("category", "pizza")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
                     val orderItem = documents.toObjects(OrderItem::class.java)
                     //Code for recyclerView
-                    var recyclerView = view.findViewById<RecyclerView>(R.id.hanamiMenuItemsRecyclerView)
+                    var recyclerView = view.findViewById<RecyclerView>(R.id.maxadPizzeriaMenuItemsRecyclerView)
                     //What type of layout the list will have. This makes it a linear list
                     recyclerView.layoutManager = LinearLayoutManager(context)
                     // Created an adapter from our adapter-class and sent in the list of restaurants
-                    val adapter = HanamiMenuRecyclerAdapter(this, orderItem)
+                    val adapter = MaxadPizzaMenuRecyclerAdapter(this, orderItem)
                     //Connect our adapter to our recyclerView
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
                     val intent = Intent(context, UserInterfaceActivity::class.java)
-                    adapter.setOnItemClickListener(object : HanamiMenuRecyclerAdapter.onItemClickListener {
+                    adapter.setOnItemClickListener(object : MaxadPizzaMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
                             Toast.makeText(context,
@@ -108,12 +106,12 @@ class HanamiMenuFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HanamiMenuFragment.
+         * @return A new instance of fragment MaxadPizzaMenuFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HanamiMenuFragment().apply {
+            MaxadPizzaMenuFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
