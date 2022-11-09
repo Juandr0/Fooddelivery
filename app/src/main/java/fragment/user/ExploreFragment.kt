@@ -15,10 +15,7 @@ import classes.Restaurant
 import com.example.fooddeliveryproject.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import fragment.restaurantMenu.BrodernasMenuFragment
-import fragment.restaurantMenu.HanamiMenuFragment
-import fragment.restaurantMenu.MaxLiljeholmenMenuFragment
-import fragment.restaurantMenu.MaxadPizzaMenuFragment
+import fragment.restaurantMenu.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,6 +49,7 @@ class ExploreFragment : Fragment() {
     private val HanamiMenuFragment = HanamiMenuFragment()
     private val MaxadPizzaMenuFragment = MaxadPizzaMenuFragment()
     private val MaxLiljeholmenMenuFragment = MaxLiljeholmenMenuFragment()
+    private val TrattoriaGrazieMenuFragment = TrattoriaGrazieMenuFragment()
 
 
     // List of categories
@@ -197,7 +195,7 @@ class ExploreFragment : Fragment() {
                                     setCurrentFragment(BrodernasMenuFragment)
                                 }
                                  3-> {
-
+                                     setCurrentFragment(TrattoriaGrazieMenuFragment)
                                 }
                                 4 -> {
                                     setCurrentFragment(HanamiMenuFragment)
