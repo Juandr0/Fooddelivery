@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,9 +32,12 @@ class CategoryVegetarianFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var categoryVegetarianPreviousFragmentImageButton: ImageButton
+
     private val IndianGardenMenuFragment = IndianGardenMenuFragment()
     private val ThaiRungMenuFragment = ThaiRungMenuFragment()
     private val HanamiMenuFragment = HanamiMenuFragment()
+//    private val ExploreFragment = ExploreFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +57,11 @@ class CategoryVegetarianFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        categoryVegetarianPreviousFragmentImageButton = view.findViewById(R.id.categoryVegetarianPreviousFragmentImageButton)
+        categoryVegetarianPreviousFragmentImageButton.setOnClickListener {
+            returnToPreviousFragment()
+        }
 
         FirebaseFirestore.getInstance().collection("restaurants")
             .whereArrayContains("category", "vegetarian")
@@ -129,6 +138,15 @@ class CategoryVegetarianFragment : Fragment() {
         val fragmentManager = parentFragmentManager
         val transaction = fragmentManager.beginTransaction().addToBackStack("CategoryVegetarianFragment")
         transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
+
+    private fun returnToPreviousFragment(){
+        if(parentFragmentManager.backStackEntryCount > 0){
+            parentFragmentManager.popBackStack()
+        }
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction().addToBackStack("ExplorerFragment")
         transaction.commit()
     }
 }

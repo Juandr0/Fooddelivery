@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,10 @@ class CategoryThaiFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var categoryThaiPreviousFragmentImageButton: ImageButton
+
     private val ThaiRungMenuFragment = ThaiRungMenuFragment()
+//    private val ExploreFragment = ExploreFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,11 @@ class CategoryThaiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        categoryThaiPreviousFragmentImageButton = view.findViewById(R.id.categoryThaiPreviousFragmentImageButton)
+        categoryThaiPreviousFragmentImageButton.setOnClickListener {
+            returnToPreviousFragment()
+        }
 
         FirebaseFirestore.getInstance().collection("restaurants")
             .whereArrayContains("category", "thai")
@@ -124,5 +133,11 @@ class CategoryThaiFragment : Fragment() {
         val transaction = fragmentManager.beginTransaction().addToBackStack("CategoryThaiFragment")
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
+    }
+
+    private fun returnToPreviousFragment(){
+        if(parentFragmentManager.backStackEntryCount > 0){
+            parentFragmentManager.popBackStack()
+        }
     }
 }

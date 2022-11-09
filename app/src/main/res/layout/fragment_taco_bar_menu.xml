@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="268dp"
-            android:text="@string/menues"
+            android:text="@string/tacos"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold"

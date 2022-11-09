@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,12 @@ class CategoryKebabFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var categoryKebabPreviousFragmentImageButton: ImageButton
+
     private val LiljeholmensGrillMenuFragment = LiljeholmensGrillMenuFragment()
+//    private val ExploreFragment = ExploreFragment()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +55,11 @@ class CategoryKebabFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        categoryKebabPreviousFragmentImageButton = view.findViewById(R.id.categoryKebabPreviousFragmentImageButton)
+        categoryKebabPreviousFragmentImageButton.setOnClickListener {
+            returnToPreviousFragment()
+        }
 
         FirebaseFirestore.getInstance().collection("restaurants")
             .whereArrayContains("category", "kebab")
@@ -126,4 +137,9 @@ class CategoryKebabFragment : Fragment() {
         transaction.commit()
     }
 
+    private fun returnToPreviousFragment(){
+        if(parentFragmentManager.backStackEntryCount > 0){
+            parentFragmentManager.popBackStack()
+        }
+    }
 }
