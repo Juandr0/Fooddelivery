@@ -43,25 +43,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="36dp"
             android:layout_marginBottom="12dp"
             android:text="@string/settings"
             android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@+id/settingsRecyclerView"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/completeOrderViewLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profile_lastOrderRecyclerView"
             android:layout_width="0dp"
             android:layout_height="150dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/completeOrderViewLayout"
             app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lastOrderRestaurantNameTextView"
-            app:layout_constraintVertical_bias="0.203" />
+            app:layout_constraintTop_toBottomOf="@+id/lastOrderRestaurantNameTextView" />
 
         <TextView
             android:id="@+id/orderAgainHeaderTextView"
@@ -91,11 +92,11 @@
             android:id="@+id/completeOrderViewLayout"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginBottom="36dp"
-            app:layout_constraintBottom_toTopOf="@+id/settingsHeaderTextView"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_lastOrderRecyclerView">
 
             <ImageView
                 android:id="@+id/imageView6"

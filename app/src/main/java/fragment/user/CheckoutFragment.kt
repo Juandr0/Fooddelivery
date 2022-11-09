@@ -63,7 +63,7 @@ class CheckoutFragment : Fragment() {
 
         //initializes the orderlist, gets ordernr & calculate total price
         initiateOrderList()
-        orderPriceTotal()
+        setDeliveryFee()
         setOrderNr()
 
         //sets the fragment to explore
@@ -92,6 +92,7 @@ class CheckoutFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 adapter.removeItemFromReyclerView(position)
                 orderPriceTotal()
+
                 hideShowDeliveryFee()
             }
         })
@@ -100,6 +101,11 @@ class CheckoutFragment : Fragment() {
         setTextHeader()
     }
 
+    fun setDeliveryFee() {
+        var deliveryFee = ShoppingCart.getDeliveryFee()
+        deliveryFeePrice.text = deliveryFee.toString()
+
+    }
     fun setOrderNr() {
 
         db.collection("orders").document("orderNumber").get()
