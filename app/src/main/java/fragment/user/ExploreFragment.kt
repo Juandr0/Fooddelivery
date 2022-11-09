@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import fragment.restaurantMenu.BrodernasMenuFragment
 import fragment.restaurantMenu.HanamiMenuFragment
+import fragment.restaurantMenu.MaxLiljeholmenMenuFragment
 import fragment.restaurantMenu.MaxadPizzaMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,6 +51,7 @@ class ExploreFragment : Fragment() {
     private val BrodernasMenuFragment = BrodernasMenuFragment()
     private val HanamiMenuFragment = HanamiMenuFragment()
     private val MaxadPizzaMenuFragment = MaxadPizzaMenuFragment()
+    private val MaxLiljeholmenMenuFragment = MaxLiljeholmenMenuFragment()
 
 
     // List of categories
@@ -189,7 +191,7 @@ class ExploreFragment : Fragment() {
                                     
                                 }
                                 1 -> {
-
+                                    setCurrentFragment(MaxLiljeholmenMenuFragment)
                                 }
                                 2 -> {
                                     setCurrentFragment(BrodernasMenuFragment)
