@@ -1,6 +1,6 @@
-package fragment.user
+package fragment.restaurantMenu
 
-import adapters.CategorySushiRecyclerAdapter
+import adapters.restaurantMenuAdapters.ThaiRungMenuRecyclerAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import classes.Restaurant
+import classes.OrderItem
 import com.example.fooddeliveryproject.R
 import com.google.firebase.firestore.FirebaseFirestore
-import fragment.restaurantMenu.HanamiMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,15 +20,13 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CategorySushiFragment.newInstance] factory method to
+ * Use the [ThaiRungMenuFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CategorySushiFragment : Fragment() {
+class ThaiRungMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
-    private val HanamiMenuFragment = HanamiMenuFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,31 +41,29 @@ class CategorySushiFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category_sushi, container, false)
+        return inflater.inflate(R.layout.fragment_thai_rung_menu, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        FirebaseFirestore.getInstance().collection("restaurants")
-            .whereArrayContains("category", "sushi")
+        FirebaseFirestore.getInstance().collection("restaurants").document("PZBhflO4krmbj8GRNz5q").collection("menu")
+            .whereArrayContains("category", "main dish")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
-                    val restaurant = documents.toObjects(Restaurant::class.java)
+                    val orderItem = documents.toObjects(OrderItem::class.java)
                     //Code for recyclerView
-                    var recyclerView = view.findViewById<RecyclerView>(R.id.sushiRecyclerView)
+                    var recyclerView = view.findViewById<RecyclerView>(R.id.thaiRungMenuItemsRecyclerView)
                     //What type of layout the list will have. This makes it a linear list
                     recyclerView.layoutManager = LinearLayoutManager(context)
                     // Created an adapter from our adapter-class and sent in the list of restaurants
-                    val adapter = CategorySushiRecyclerAdapter(this, restaurant)
+                    val adapter = ThaiRungMenuRecyclerAdapter(this, orderItem)
                     //Connect our adapter to our recyclerView
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
-
-                    adapter.setOnItemClickListener(object : CategorySushiRecyclerAdapter.onItemClickListener {
+                    adapter.setOnItemClickListener(object : ThaiRungMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
                             Toast.makeText(context,
@@ -78,7 +73,8 @@ class CategorySushiFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    setCurrentFragment(HanamiMenuFragment)
+
+
                                 }
                                 1 -> {
                                 }
@@ -106,24 +102,16 @@ class CategorySushiFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment CategorySushiFragment.
+         * @return A new instance of fragment ThaiRungMenuFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            CategorySushiFragment().apply {
+            ThaiRungMenuFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-    private fun setCurrentFragment(fragment : Fragment){
-
-        val fragmentManager = parentFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.commit()
     }
 }

@@ -1,7 +1,6 @@
 package fragment.user
 
 import adapters.CategoryVegetarianRecyclerAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.Restaurant
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import fragment.restaurantMenu.HanamiMenuFragment
+import fragment.restaurantMenu.IndianGardenMenuFragment
+import fragment.restaurantMenu.ThaiRungMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +30,10 @@ class CategoryVegetarianFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val IndianGardenMenuFragment = IndianGardenMenuFragment()
+    private val ThaiRungMenuFragment = ThaiRungMenuFragment()
+    private val HanamiMenuFragment = HanamiMenuFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +70,7 @@ class CategoryVegetarianFragment : Fragment() {
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
-                    val intent = Intent(context, UserInterfaceActivity::class.java)
+
                     adapter.setOnItemClickListener(object : CategoryVegetarianRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
@@ -76,12 +81,13 @@ class CategoryVegetarianFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+                                    setCurrentFragment(ThaiRungMenuFragment)
                                 }
                                 1 -> {
+                                    setCurrentFragment(IndianGardenMenuFragment)
                                 }
                                 2 -> {
-
+                                    setCurrentFragment(HanamiMenuFragment)
                                 }
                             }
                         }
@@ -116,5 +122,13 @@ class CategoryVegetarianFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun setCurrentFragment(fragment : Fragment){
+
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 }
