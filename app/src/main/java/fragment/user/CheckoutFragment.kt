@@ -17,10 +17,9 @@ import classes.ShoppingCart
 import classes.User
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.toObject
-import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CheckoutFragment : Fragment() {
 
@@ -34,7 +33,8 @@ class CheckoutFragment : Fragment() {
 
 
     val newOrderItemList = mutableListOf<String>()
-
+    var userAddress : String = ""
+    var orderNumber = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +53,7 @@ class CheckoutFragment : Fragment() {
         placeOrderBtn = view.findViewById(R.id.checkout_placeOrderBtn)
         deliveryFeePrice = view.findViewById(R.id.checkout_deliveryFeePrice)
         vespaIcon = view.findViewById(R.id.checkout_icon_delivery)
-        //Lägg till fraktkostnad image + textview som visar pris
+
         hideShowDeliveryFee()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
@@ -61,9 +61,10 @@ class CheckoutFragment : Fragment() {
         val adapter = OrderRecyclerAdapter(CheckoutFragment(), ShoppingCart.currentOrderList)
         recyclerView.adapter = adapter
 
-        //initializes the total price
+        //initializes the orderlist, gets ordernr & calculate total price
+        initiateOrderList()
         orderPriceTotal()
-
+        setOrderNr()
 
         //sets the fragment to explore
         orderMoreBtn.setOnClickListener {
@@ -73,11 +74,12 @@ class CheckoutFragment : Fragment() {
 
         //Sends the user to the confirmation fragment after sending info to DB
         placeOrderBtn.setOnClickListener {
+
             val currentUser = auth.currentUser
             if (currentUser != null){
+                var bundle = initiateBundle()
                 sendOrderToDb()
-                setCurrentFragment(OrderConfirmationFragment(), null)
-                //updateUserLastOrder()
+                setCurrentFragment(OrderConfirmationFragment(), bundle)
             } else {
                 Toast.makeText(activity, getString(R.string.sign_in_to_order), Toast.LENGTH_SHORT).show()
             }
@@ -98,6 +100,54 @@ class CheckoutFragment : Fragment() {
         setTextHeader()
     }
 
+    fun setOrderNr() {
+
+        db.collection("orders").document("orderNumber").get()
+            .addOnSuccessListener { document ->
+                if (document != null){
+                    orderNumber = document.get("orderNumber").toString().toInt()
+                }
+                orderNumber++
+                val nr = mapOf(
+                    "orderNumber" to orderNumber
+                )
+                db.collection("orders").document("orderNumber").set(nr)
+            }
+
+
+
+            .addOnSuccessListener { Log.d("!!!","added") }
+
+    }
+    //Sends info to checkout page
+    fun initiateBundle() : Bundle{
+
+        val bundle = Bundle()
+        var bundleList = ArrayList<String>()
+
+        for (item in newOrderItemList){
+            bundleList.add(item)
+            Log.d("!!!", "bundle item")
+        }
+
+        bundle.putStringArrayList("bundleList", bundleList)
+
+        bundle.putInt("price", ShoppingCart.calculateTotalPrice())
+        bundle.putInt("orderNumber", orderNumber)
+
+        return bundle
+    }
+
+    fun initiateOrderList(){
+        //For loop that saves the order items to currentORderList, then makes a map of it
+        //-> Sends all info to the db
+        var index = 0
+        for (item in ShoppingCart.currentOrderList){
+            val orderItem = ShoppingCart.currentOrderList[index].orderFromMeny
+            newOrderItemList.add(orderItem)
+            index ++
+        }
+    }
     //fetches order from ShoppingCart and adds it into separate list which will be sent to DB
     fun sendOrderToDb() {
 
@@ -107,14 +157,6 @@ class CheckoutFragment : Fragment() {
         val restaurant = ShoppingCart.currentOrderList[0].restaurantName
         val totalPrice = ShoppingCart.calculateTotalPrice()
 
-        //For loop that saves the order items to currentORderList, then makes a map of it
-        //-> Sends all info to the db
-        var index = 0
-        for (item in ShoppingCart.currentOrderList){
-            val orderItem = ShoppingCart.currentOrderList[index].orderFromMeny
-            newOrderItemList.add(orderItem)
-            index ++
-        }
 
         var user = User()
         //Gör om till ny lista
@@ -126,32 +168,31 @@ class CheckoutFragment : Fragment() {
             .addOnSuccessListener { document ->
                 user = document.toObject<User>()!!
                 var date = Calendar.getInstance().time
-
+                //Adress skickas med bundle som går till orderconfirmation
+                userAddress = user.address.toString()
 
                 val dataToBeSent = hashMapOf(
                     "restaurant" to  restaurant ,
                     "totalPrice" to totalPrice,
                     "orderItems" to newOrderItemList,
                     "user" to user,
-                    "purchaseDate" to date
+                    "purchaseDate" to date,
+                    "orderNumber" to orderNumber
                 )
 
 
                 val docRef = db.collection("orders").document(auth.currentUser!!.uid).collection("order")
                     docRef.add(dataToBeSent)
                     .addOnSuccessListener {
-                        Log.d("!!!","Order sent")
                         updateUserLastOrder()
                     }
                     .addOnFailureListener{ e ->
-                        Log.d("!!!","Failed to send" + e)
+                        Log.d("!!!","Failed to send order" + e)
                     }
 
             }
 
     }
-
-
 
 
     fun updateUserLastOrder() {
@@ -163,13 +204,7 @@ class CheckoutFragment : Fragment() {
             "lastOrderRestaurant" to  restaurantHeaderTextView.text.toString(),
             "lastOrder" to newOrderItemList
         )
-
-
         docRef.update(updateMap)
-            .addOnSuccessListener {
-                ShoppingCart.clearItemsFromCart()
-            }
-
 
     }
     fun setTextHeader(){
