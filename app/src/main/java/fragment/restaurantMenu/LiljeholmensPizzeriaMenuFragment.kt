@@ -43,7 +43,7 @@ class LiljeholmesnPizzeriaMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_liljeholmesn_pizzeria_menu, container, false)
+        return inflater.inflate(R.layout.fragment_liljeholmens_pizzeria_menu, container, false)
     }
 
 
@@ -57,7 +57,7 @@ class LiljeholmesnPizzeriaMenuFragment : Fragment() {
                 for(document in documents){
                     val orderItem = documents.toObjects(OrderItem::class.java)
                     //Code for recyclerView
-                    var recyclerView = view.findViewById<RecyclerView>(R.id.liljeholmesnPizzeriaMenuItemsRecyclerView)
+                    var recyclerView = view.findViewById<RecyclerView>(R.id.liljeholmensPizzeriaMenuItemsRecyclerView)
                     //What type of layout the list will have. This makes it a linear list
                     recyclerView.layoutManager = LinearLayoutManager(context)
                     // Created an adapter from our adapter-class and sent in the list of restaurants

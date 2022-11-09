@@ -14,6 +14,9 @@ import classes.Restaurant
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import fragment.restaurantMenu.LiljeholmesnPizzeriaMenuFragment
+import fragment.restaurantMenu.MaxadPizzaMenuFragment
+import fragment.restaurantMenu.TrattoriaGrazieMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +32,10 @@ class CategoryPizzaFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val LiljeholmensPizzeriaMenuFragment = LiljeholmesnPizzeriaMenuFragment()
+    private val TrattoriaGrazieMenuFragment = TrattoriaGrazieMenuFragment()
+    private val MaxadPizzaMenuFragment = MaxadPizzaMenuFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,11 +88,15 @@ class CategoryPizzaFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+                                    setCurrentFragment(LiljeholmensPizzeriaMenuFragment)
                                 }
                                 1 -> {
                                 }
                                 2 -> {
+                                    setCurrentFragment(TrattoriaGrazieMenuFragment)
+                                }
+                                3 -> {
+                                    setCurrentFragment(MaxadPizzaMenuFragment)
 
                                 }
                             }
@@ -120,5 +131,13 @@ class CategoryPizzaFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun setCurrentFragment(fragment : Fragment){
+
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 }
