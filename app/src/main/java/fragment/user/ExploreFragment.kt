@@ -17,6 +17,7 @@ import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import fragment.restaurantMenu.BrodernasMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,6 +46,8 @@ class ExploreFragment : Fragment() {
     private val CategoryItalianFragment = CategoryItalianFragment()
     private val CategoryThaiFragment = CategoryThaiFragment()
     private val CategoryMexicanFragment = CategoryMexicanFragment()
+
+    private val BrodernasMenuFragment = BrodernasMenuFragment()
 
 
     // List of categories
@@ -169,7 +172,7 @@ class ExploreFragment : Fragment() {
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
-                    val intent = Intent(context, UserInterfaceActivity::class.java)
+
                     adapter.setOnItemClickListener(object : TopRatedRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
@@ -180,12 +183,14 @@ class ExploreFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
+                                    val intent = Intent(context, UserInterfaceActivity::class.java)
                                     startActivity(intent)
+                                    
                                 }
                                 1 -> {
                                 }
                                 2 -> {
-
+                                    setCurrentFragment(BrodernasMenuFragment)
                                 }
                             }
                         }
