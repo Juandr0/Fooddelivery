@@ -1,0 +1,110 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.restaurantMenu.HanamiMenuFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/brodernasHeaderImageView7"
+            android:layout_width="394dp"
+            android:layout_height="152dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/brodernasNameText7"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasHeaderImageView7" />
+
+        <TextView
+            android:id="@+id/brodernasCategoryText7"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasNameText7" />
+
+        <TextView
+            android:id="@+id/brodernasDeliveryFee7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/brodernasDeliveryIconImageView7"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasCategoryText7" />
+
+        <TextView
+            android:id="@+id/brodernasRatingText7"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="30dp"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasHeaderImageView7" />
+
+        <ImageView
+            android:id="@+id/brodernasRatingIconImageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingText7"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasHeaderImageView7" />
+
+        <ImageView
+            android:id="@+id/brodernasDeliveryIconImageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_delivery_fee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasCategoryText7" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/sushi"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasDeliveryIconImageView7"
+            tools:layout_editor_absoluteX="24dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hanamiMenuItemsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18"
+            tools:listitem="@layout/restaurant_menu_list_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
