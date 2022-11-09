@@ -119,11 +119,6 @@ class CheckoutFragment : Fragment() {
                 )
                 db.collection("orders").document("orderNumber").set(nr)
             }
-
-
-
-            .addOnSuccessListener { Log.d("!!!","added") }
-
     }
     //Sends info to checkout page
     fun initiateBundle() : Bundle{
