@@ -64,11 +64,6 @@ class UserInterfaceActivity : AppCompatActivity() {
             disableLoadingFragment(loadingScreenFragment)
         }, 1500)
 
-        //TESTkod: Ta bort!!!!!!!!!
-            initializeSampledata("Bosses grill", "Tripple cheese med pommes frites", 129)
-            initializeSampledata("Bosses grill", "Baconburgare med sötpotatis pommes", 140)
-            initializeSampledata("Bosses grill", "Max specialmål utan dricka", 89)
-        //TESTkod: Ta bort SLUT!!!!!!
 
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
