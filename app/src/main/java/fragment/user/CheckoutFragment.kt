@@ -62,8 +62,8 @@ class CheckoutFragment : Fragment() {
         val adapter = OrderRecyclerAdapter(CheckoutFragment(), ShoppingCart.currentOrderList)
         recyclerView.adapter = adapter
 
-        //initializes the orderlist, gets ordernr & calculate total price
-        initiateOrderList()
+        //Gets ordernr & calculate total price
+
         setDeliveryFee()
         setOrderNr()
 
@@ -75,7 +75,7 @@ class CheckoutFragment : Fragment() {
 
         //Sends the user to the confirmation fragment after sending info to DB
         placeOrderBtn.setOnClickListener {
-
+            initiateOrderList()
             val currentUser = auth.currentUser
             if (currentUser != null){
                 var bundle = initiateBundle()
