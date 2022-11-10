@@ -1,19 +1,19 @@
 package fragment.user
 
 import adapters.CategoryItalianRecyclerAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.Restaurant
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import fragment.restaurantMenu.TrattoriaGrazieMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +29,11 @@ class CategoryItalianFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var categoryItalianPreviousFragmentImageButton: ImageButton
+
+    private val TrattoriaGrazieMenuFragment = TrattoriaGrazieMenuFragment()
+//    private val ExploreFragment = ExploreFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,11 @@ class CategoryItalianFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        categoryItalianPreviousFragmentImageButton = view.findViewById(R.id.categoryItalianPreviousFragmentImageButton)
+        categoryItalianPreviousFragmentImageButton.setOnClickListener {
+            returnToPreviousFragment()
+        }
+
         FirebaseFirestore.getInstance().collection("restaurants")
             .whereArrayContains("category", "italian")
             .get()
@@ -66,7 +76,7 @@ class CategoryItalianFragment : Fragment() {
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
-                    val intent = Intent(context, UserInterfaceActivity::class.java)
+
                     adapter.setOnItemClickListener(object : CategoryItalianRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
@@ -77,7 +87,7 @@ class CategoryItalianFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+                                    setCurrentFragment(TrattoriaGrazieMenuFragment)
                                 }
                                 1 -> {
                                 }
@@ -117,5 +127,19 @@ class CategoryItalianFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun setCurrentFragment(fragment : Fragment){
+
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction().addToBackStack("CategoryItalianFragment")
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
+
+    private fun returnToPreviousFragment(){
+        if(parentFragmentManager.backStackEntryCount > 0){
+            parentFragmentManager.popBackStack()
+        }
     }
 }

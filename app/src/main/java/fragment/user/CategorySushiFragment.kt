@@ -1,19 +1,19 @@
 package fragment.user
 
 import adapters.CategorySushiRecyclerAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.Restaurant
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.UserInterfaceActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import fragment.restaurantMenu.HanamiMenuFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +29,11 @@ class CategorySushiFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var categorySushiPreviousFragmentImageButton: ImageButton
+
+    private val HanamiMenuFragment = HanamiMenuFragment()
+//    private val ExploreFragment = ExploreFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,11 @@ class CategorySushiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        categorySushiPreviousFragmentImageButton = view.findViewById(R.id.categorySushiPreviousFragmentImageButton)
+        categorySushiPreviousFragmentImageButton.setOnClickListener {
+            returnToPreviousFragment()
+        }
+
         FirebaseFirestore.getInstance().collection("restaurants")
             .whereArrayContains("category", "sushi")
             .get()
@@ -66,7 +76,7 @@ class CategorySushiFragment : Fragment() {
                     recyclerView.adapter = adapter
                     //End of recyclerView
 
-                    val intent = Intent(context, UserInterfaceActivity::class.java)
+
                     adapter.setOnItemClickListener(object : CategorySushiRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             //toast to check if clicking works
@@ -77,7 +87,7 @@ class CategorySushiFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    startActivity(intent)
+                                    setCurrentFragment(HanamiMenuFragment)
                                 }
                                 1 -> {
                                 }
@@ -116,5 +126,19 @@ class CategorySushiFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun setCurrentFragment(fragment : Fragment){
+
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction().addToBackStack("CategorySushiFragment")
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
+
+    private fun returnToPreviousFragment(){
+        if(parentFragmentManager.backStackEntryCount > 0){
+            parentFragmentManager.popBackStack()
+        }
     }
 }

@@ -219,7 +219,7 @@ class ExploreFragment : Fragment() {
     private fun setCurrentFragment(fragment : Fragment){
 
         val fragmentManager = parentFragmentManager
-        val transaction = fragmentManager.beginTransaction()
+        val transaction = fragmentManager.beginTransaction().addToBackStack("ExploreFragment")
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
