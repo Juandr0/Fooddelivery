@@ -56,6 +56,8 @@ class BrodernasMenuFragment : Fragment() {
             returnToPreviousFragment()
         }
 
+
+
         FirebaseFirestore.getInstance().collection("restaurants").document("wGNxzHJszl1DLjs1Sp61").collection("menu")
             .whereArrayContains("category", "hamburger")
             .get()
@@ -129,5 +131,7 @@ class BrodernasMenuFragment : Fragment() {
            parentFragmentManager.popBackStack()
        }
     }
+
+
 
 }

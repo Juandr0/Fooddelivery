@@ -145,8 +145,5 @@ class CategoryVegetarianFragment : Fragment() {
         if(parentFragmentManager.backStackEntryCount > 0){
             parentFragmentManager.popBackStack()
         }
-        val fragmentManager = parentFragmentManager
-        val transaction = fragmentManager.beginTransaction().addToBackStack("ExplorerFragment")
-        transaction.commit()
     }
 }
