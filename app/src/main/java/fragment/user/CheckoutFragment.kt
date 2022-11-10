@@ -55,6 +55,7 @@ class CheckoutFragment : Fragment() {
         vespaIcon = view.findViewById(R.id.checkout_icon_delivery)
 
         hideShowDeliveryFee()
+        orderPriceTotal.text = ShoppingCart.calculateTotalPrice().toString()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -78,8 +79,13 @@ class CheckoutFragment : Fragment() {
             val currentUser = auth.currentUser
             if (currentUser != null){
                 var bundle = initiateBundle()
-                sendOrderToDb()
-                setCurrentFragment(OrderConfirmationFragment(), bundle)
+                if (ShoppingCart.currentOrderList.isNotEmpty()){
+                    sendOrderToDb()
+                    setCurrentFragment(OrderConfirmationFragment(), bundle)
+                } else {
+                    Toast.makeText(activity, getString(R.string.empty_shoppingcart), Toast.LENGTH_SHORT).show()
+                }
+
             } else {
                 Toast.makeText(activity, getString(R.string.sign_in_to_order), Toast.LENGTH_SHORT).show()
             }

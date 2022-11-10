@@ -161,12 +161,8 @@ class ProfileFragment : Fragment() {
                         bundle.putString("userId", currentUser)
                         arguments = bundle
                         setCurrentFragment(userEditSettingsFragment, bundle)
-
-
                     }
                 }
-
-
             }
         })
     }
