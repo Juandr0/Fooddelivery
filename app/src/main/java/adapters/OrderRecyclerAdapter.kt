@@ -1,10 +1,12 @@
 package adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
 import classes.ShoppingCart
@@ -18,6 +20,7 @@ class OrderRecyclerAdapter
     RecyclerView.Adapter<OrderRecyclerAdapter.ViewHolder>(){
 
     private lateinit var mListener : onItemClickListener
+    var backgroundColorPicker = true
 
     interface onItemClickListener{
         fun onItemClick(position : Int)
@@ -37,9 +40,11 @@ class OrderRecyclerAdapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val order = orderItemList[position]
-
         holder.order.text = order.orderFromMeny
         holder.orderPrice.text = order.price.toString() + ":-"
+        val backgroundColor = backgroundColorChanger()
+
+        holder.recyclerCard.setBackgroundColor(Color.parseColor(backgroundColor))
     }
 
     override fun getItemCount() = orderItemList.size
@@ -48,9 +53,9 @@ class OrderRecyclerAdapter
     inner class ViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         val order: TextView = itemView.findViewById(R.id.checkout_menu_itemTextView)
         val orderPrice : TextView = itemView.findViewById(R.id.checkout_order_priceTextView)
-
         val trashCan : ImageView = itemView.findViewById(R.id.checkout_trashCanImageView)
 
+        val recyclerCard : ConstraintLayout = itemView.findViewById(R.id.order_recyclerlayout_constraint)
 
         init {
             trashCan.setOnClickListener {
@@ -67,5 +72,13 @@ class OrderRecyclerAdapter
         notifyDataSetChanged()
     }
 
+    fun backgroundColorChanger() : String{
+        val colorLighterGrey = "#F3F3F3"
+        val white = "#FFFFFF"
+        backgroundColorPicker = !backgroundColorPicker
+
+        if (backgroundColorPicker) return colorLighterGrey
+        else return white
+    }
 
 }

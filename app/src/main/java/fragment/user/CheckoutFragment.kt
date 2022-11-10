@@ -55,14 +55,15 @@ class CheckoutFragment : Fragment() {
         vespaIcon = view.findViewById(R.id.checkout_icon_delivery)
 
         hideShowDeliveryFee()
+        orderPriceTotal.text = ShoppingCart.calculateTotalPrice().toString() +":-"
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = OrderRecyclerAdapter(CheckoutFragment(), ShoppingCart.currentOrderList)
         recyclerView.adapter = adapter
 
-        //initializes the orderlist, gets ordernr & calculate total price
-        initiateOrderList()
+        //Gets ordernr & calculate total price
+
         setDeliveryFee()
         setOrderNr()
 
@@ -74,12 +75,17 @@ class CheckoutFragment : Fragment() {
 
         //Sends the user to the confirmation fragment after sending info to DB
         placeOrderBtn.setOnClickListener {
-
+            initiateOrderList()
             val currentUser = auth.currentUser
             if (currentUser != null){
                 var bundle = initiateBundle()
-                sendOrderToDb()
-                setCurrentFragment(OrderConfirmationFragment(), bundle)
+                if (ShoppingCart.currentOrderList.isNotEmpty()){
+                    sendOrderToDb()
+                    setCurrentFragment(OrderConfirmationFragment(), bundle)
+                } else {
+                    Toast.makeText(activity, getString(R.string.empty_shoppingcart), Toast.LENGTH_SHORT).show()
+                }
+
             } else {
                 Toast.makeText(activity, getString(R.string.sign_in_to_order), Toast.LENGTH_SHORT).show()
             }
@@ -104,7 +110,6 @@ class CheckoutFragment : Fragment() {
     fun setDeliveryFee() {
         var deliveryFee = ShoppingCart.getDeliveryFee()
         deliveryFeePrice.text = deliveryFee.toString()
-
     }
     fun setOrderNr() {
 

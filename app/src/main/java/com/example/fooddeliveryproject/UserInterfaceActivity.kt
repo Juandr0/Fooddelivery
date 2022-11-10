@@ -64,11 +64,6 @@ class UserInterfaceActivity : AppCompatActivity() {
             disableLoadingFragment(loadingScreenFragment)
         }, 1500)
 
-        //TESTkod: Ta bort!!!!!!!!!
-            initializeSampledata("Bosses grill", "Tripple cheese med pommes frites", 129)
-            initializeSampledata("Bosses grill", "Baconburgare med sötpotatis pommes", 140)
-            initializeSampledata("Bosses grill", "Max specialmål utan dricka", 89)
-        //TESTkod: Ta bort SLUT!!!!!!
 
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
@@ -101,13 +96,6 @@ class UserInterfaceActivity : AppCompatActivity() {
 
 // Add a new document with a generated ID
 
-    //maschdata för test
-    private fun initializeSampledata(orderRestaurant : String, orderMenuItem : String, orderPrice : Int){
-        val deliveryFee = 59
-        val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
-        ShoppingCart.addItemToCart(newOrder)
-    }
-    //maschdata för test SLUT
 
     private fun isLoggedInCheck() : Boolean{
         val currentUser = auth.currentUser
