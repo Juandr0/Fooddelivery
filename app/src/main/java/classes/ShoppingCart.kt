@@ -5,10 +5,28 @@ import com.example.fooddeliveryproject.R
 
 // The list is set to private so that only the singleton object can modify it directly.
 object ShoppingCart {
-    var currentOrderList = mutableListOf<OrderItem>()
+        var currentOrderList = mutableListOf<OrderItem>()
         private set
+
+
     fun addItemToCart (orderItem: OrderItem){
-        currentOrderList.add(orderItem)
+        if (currentOrderList.isNotEmpty()){
+
+            var currentRestaurant = currentOrderList[0].restaurantName
+            var itemRestaurant = orderItem.restaurantName
+
+
+            if (itemRestaurant == currentRestaurant){
+                currentOrderList.add(orderItem)
+            } else if (itemRestaurant != currentRestaurant){
+                currentOrderList.clear()
+                currentOrderList.add(orderItem)
+            }
+
+        } else {
+            currentOrderList.add(orderItem)
+        }
+
     }
 
     fun removeItemFromCart (position : Int){
