@@ -1,5 +1,6 @@
 package fragment.user
 
+import adapters.LastOrderRecyclerAdapter
 import adapters.UserSettingsRecycleAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import classes.OrderHistory
 import classes.User
 import classes.UserSettings
 import com.example.fooddeliveryproject.R
@@ -22,13 +24,15 @@ class ProfileFragment : Fragment() {
 
     lateinit var greetingsTextView : TextView
     lateinit var lastOrderRestaurant : TextView
-    lateinit var lastOrder : TextView
+   // lateinit var lastOrder : TextView
     lateinit var completeOrderViewLayout : ConstraintLayout
     lateinit var recyclerView : RecyclerView
-
+    lateinit var lastOrderRecyclerView : RecyclerView
 
     private val settingsList = mutableListOf<UserSettings>()
     private val userEditSettingsFragment = UserEditSettingsFragment()
+    val userOrdersList = mutableListOf<String>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +51,9 @@ class ProfileFragment : Fragment() {
                 val user = document.toObject<User>()
                 greetingsTextView.text = getString(R.string.greetings) + ", ${user!!.name}"
                 lastOrderRestaurant.text = "${user.lastOrderRestaurant}"
-                lastOrder.text = "${user.lastOrder}"
+                // lastOrder.text = "${user.lastOrder}"
+
+
                 //If-statement that fills the recyclerView with user settings, if it's not already filled
 
                 initializeSettingsWithRecyclerView(requireView())
@@ -76,13 +82,39 @@ class ProfileFragment : Fragment() {
         val v =  inflater.inflate(R.layout.fragment_profile, container, false)
         greetingsTextView = v.findViewById(R.id.greetingsTextView)
         lastOrderRestaurant = v.findViewById(R.id.lastOrderRestaurantNameTextView)
-        lastOrder = v.findViewById(R.id.lastOrderTextView)
+       // lastOrder = v.findViewById(R.id.lastOrderTextView)
         completeOrderViewLayout = v.findViewById(R.id.completeOrderViewLayout)
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
+
+    private fun getLastOrder(view : View){
+
+        db.collection("users").document(auth.currentUser!!.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null){
+                    userOrdersList.clear()
+                    var tempItemList = document.get("lastOrder") as List<String>
+                    for (item in tempItemList){
+                        userOrdersList.add(item)
+                    }
+                }
+
+
+
+                lastOrderRecyclerView = view.findViewById(R.id.profile_lastOrderRecyclerView)
+                lastOrderRecyclerView.layoutManager = LinearLayoutManager(activity)
+                val lastOrderAdapter = LastOrderRecyclerAdapter(ProfileFragment(), userOrdersList)
+                lastOrderRecyclerView.adapter = lastOrderAdapter
+
+            }
+
+
+    }
+
 
     //Initializes the recyclerview so it displays the user settings
     private fun initializeSettingsWithRecyclerView(view : View) {
@@ -92,7 +124,7 @@ class ProfileFragment : Fragment() {
         val adapter = UserSettingsRecycleAdapter(ProfileFragment(), settingsList)
         recyclerView.adapter = adapter
 
-
+        getLastOrder(view)
         completeOrderViewLayout.setOnClickListener{
             setCurrentFragment(OrderHistoryFragment(), null)
         }
