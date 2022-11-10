@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CheckoutFragment">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,8 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="76dp"
-            android:layout_marginBottom="130dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/checkout_totalPriceTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
             android:text="Total:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkout_recyclerView" />
+            app:layout_constraintBottom_toTopOf="@+id/checkout_icon_delivery"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/checkout_orderPriceTotal"
@@ -79,18 +77,20 @@
             android:id="@+id/checkout_icon_delivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/ic_delivery_fee"
-            app:layout_constraintStart_toStartOf="@+id/checkout_totalPriceTextView"
-            app:layout_constraintTop_toBottomOf="@+id/checkout_totalPriceTextView" />
+            app:layout_constraintBottom_toTopOf="@+id/checkout_orderMoreBtn"
+            app:layout_constraintStart_toStartOf="@+id/checkout_totalPriceTextView" />
 
         <TextView
             android:id="@+id/checkout_deliveryFeePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
             android:text="59"
             app:layout_constraintStart_toEndOf="@+id/checkout_icon_delivery"
-            app:layout_constraintTop_toBottomOf="@+id/checkout_orderPriceTotal" />
+            app:layout_constraintTop_toTopOf="@+id/checkout_icon_delivery" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
