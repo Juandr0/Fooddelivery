@@ -9,6 +9,13 @@
     <string name="menu">Menu</string>
     <string name="images">Images</string>
 
+    <string name="thank_you">Thank you for using WoopWoop!
+                            \nWe hope to see you again soon!</string>
+    <string name="time_of_delivery"></string>
+    <string name="delivery_information">Order will be delivered to: </string>
+    <string name="order_success">Your order has successfully been sent!</string>
+    <string name="ordernumber">Order number:</string>
+    <string name="receipt_sent">A receipt has been sent to your email-address.</string>
     <string name="all_categories">All categories</string>
     <string name="top_rated">Top rated</string>
     <string name="hamburgers">Hamburgers</string>
@@ -29,6 +36,8 @@
     <string name="settings">Settings</string>
     <string name="save_setting">Save setting</string>
 
+    <string name="order_total">Total:</string>
+    <string name="sales_tax">VAT: </string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
