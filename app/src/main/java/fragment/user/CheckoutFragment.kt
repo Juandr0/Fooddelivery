@@ -55,7 +55,7 @@ class CheckoutFragment : Fragment() {
         vespaIcon = view.findViewById(R.id.checkout_icon_delivery)
 
         hideShowDeliveryFee()
-        orderPriceTotal.text = ShoppingCart.calculateTotalPrice().toString()
+        orderPriceTotal.text = ShoppingCart.calculateTotalPrice().toString() +":-"
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.checkout_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
