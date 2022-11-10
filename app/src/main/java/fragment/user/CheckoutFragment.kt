@@ -110,7 +110,6 @@ class CheckoutFragment : Fragment() {
     fun setDeliveryFee() {
         var deliveryFee = ShoppingCart.getDeliveryFee()
         deliveryFeePrice.text = deliveryFee.toString()
-
     }
     fun setOrderNr() {
 
