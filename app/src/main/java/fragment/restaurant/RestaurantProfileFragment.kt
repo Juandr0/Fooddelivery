@@ -70,16 +70,16 @@ class RestaurantProfileFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_restaurant_profile, container, false)
-        signOutButton = v.findViewById(R.id.restaurantprofile_signOutButton)
+//        signOutButton = v.findViewById(R.id.restaurantprofile_signOutButton)
         restaurantGreetingsTextView = v.findViewById(R.id.restaurantGreetingsTextView)
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        signOutButton.setOnClickListener{
-            auth.signOut()
-            activity?.finish()
-        }
+//        signOutButton.setOnClickListener{
+//            auth.signOut()
+//            activity?.finish()
+//        }
     }
 
     //Initializes the recyclerview so it displays the user settings
