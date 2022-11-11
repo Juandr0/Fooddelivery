@@ -6,3 +6,4 @@ class OrderItem (var restaurantName : String = " ",
                  var deliveryFee : Int = 0){
 
 }
+
