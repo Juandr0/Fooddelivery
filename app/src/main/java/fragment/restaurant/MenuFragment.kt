@@ -59,7 +59,6 @@ class MenuFragment : Fragment() {
                 restaurantMenuView.text = "${user!!.name} " + getString(R.string.menu)
 
                 FirebaseFirestore.getInstance().collection("restaurants").document("${user!!.menuId}").collection("menu")
-                    .whereArrayContains("category", "hamburger")
                     .get()
                     .addOnSuccessListener { documents ->
                         for(document in documents){

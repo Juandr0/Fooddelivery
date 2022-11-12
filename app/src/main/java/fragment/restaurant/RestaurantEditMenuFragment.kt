@@ -1,12 +1,18 @@
 package fragment.restaurant
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
+import classes.Restaurant
+import classes.User
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +31,8 @@ class RestaurantEditMenuFragment : Fragment() {
 
     lateinit var restaurantEditMenuGoBackButton: Button
     lateinit var  restaurantSaveMenuButton: Button
+    lateinit var restaurantDishNameEditText: EditText
+    lateinit var  restaurantDishPriceEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +45,47 @@ class RestaurantEditMenuFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        restaurantEditMenuGoBackButton.setOnClickListener {
-            setCurrentFragmentToRestaurantMenu()
-        }
+        val currentUser = fragment.user.auth.currentUser
+        val docRef = db.collection("users").document(currentUser!!.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val user = document.toObject<User>()
 
+        val docRef =db.collection("restaurants").document("${user!!.menuId}")
+                docRef.get()
+                    .addOnSuccessListener { document ->
+                        val restaurant = document.toObject<Restaurant>()
+
+                        restaurantDishNameEditText.hint = "${restaurant!!.deliveryFee}"
+
+                            restaurantEditMenuGoBackButton.setOnClickListener {
+                                setCurrentFragmentToRestaurantMenu()
+                            }
+
+                        restaurantSaveMenuButton.setOnClickListener {
+//                            val newMenuItem = OrderItem(
+//                                "${user!!.name}",
+//                                restaurantDishNameEditText.text.toString(),
+//                                restaurantDishPriceEditText.text.toString().toInt(),
+//                                restaurant!!.deliveryFee
+//                            )
+                            val data = hashMapOf(
+                                "restaurantName" to "${user!!.name}",
+                                "orderFromMeny" to restaurantDishNameEditText.text.toString(),
+                                "deliveryFee" to restaurant!!.deliveryFee,
+                                "price" to restaurantDishPriceEditText.text.toString().toInt()
+
+                            )
+                            db.collection("restaurants").document("${user!!.menuId}").collection("menu")
+                                .add(data)
+                                .addOnSuccessListener { documentReference ->
+                                    Log.d("!!!", "DocumentSnapshot written with ID: ${documentReference.id}")
+
+                                }
+                        }
+
+                    }
+    }
     }
 
     override fun onCreateView(
@@ -56,6 +101,8 @@ class RestaurantEditMenuFragment : Fragment() {
 
         restaurantEditMenuGoBackButton = view.findViewById(R.id.restaurantEditMenuGoBackButton)
         restaurantSaveMenuButton = view.findViewById(R.id.restaurantSaveMenuButton)
+        restaurantDishNameEditText = view.findViewById((R.id.restaurantDishNameEditText))
+        restaurantDishPriceEditText = view.findViewById(R.id.restaurantDishPriceEditText)
 
 
     }
