@@ -48,7 +48,7 @@ class MenuFragment : Fragment() {
         super.onResume()
 
         addNewDishButton.setOnClickListener {
-            setCurrentFragmentToRestaurantMenu()
+            setCurrentFragmentToRestaurantEditMenu()
         }
 
         val currentUser = fragment.user.auth.currentUser
@@ -146,7 +146,7 @@ class MenuFragment : Fragment() {
             }
     }
 
-    private fun setCurrentFragmentToRestaurantMenu(){
+    private fun setCurrentFragmentToRestaurantEditMenu(){
         val restaurantEditMenuFragment = RestaurantEditMenuFragment()
         val fragmentManager = parentFragmentManager
         val transaction = fragmentManager.beginTransaction()
