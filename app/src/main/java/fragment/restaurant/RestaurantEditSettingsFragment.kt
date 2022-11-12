@@ -103,7 +103,6 @@ class RestaurantEditSettingsFragment : Fragment() {
         return restaurantAttributeToChangeEditText.text.isEmpty()
     }
 
-
     //Initialize the layout by filling the textview and edittext
     //If the setting to be changed is a phone number, only digits will be displayed -
     //and vice versa if it's any other setting but with letters.

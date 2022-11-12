@@ -15,6 +15,7 @@ class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderIte
 
     //onClickListener setup
     private lateinit var mListener: onItemClickListener
+    lateinit var orderFromMenyReference: String
 
     interface onItemClickListener {
         fun onItemClick(position: Int)
@@ -47,7 +48,7 @@ class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderIte
         holder.orderItemPrice = orderItem.price
         holder.orderItemName = orderItem.orderFromMeny
 
-
+        orderFromMenyReference = orderItem.orderFromMeny
 
 
 //        //Glide for image
@@ -74,10 +75,24 @@ class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderIte
         var orderItemPrice = 0
         var orderItemName = ""
 
-//        var deleteMenuItemTrashCanImageButton = itemView.findViewById<ImageButton>(R.id.deleteMenuItemtrashCanImageView).setOnClickListener{
+//        var deleteMenuItemTrashCanImageButton = itemView.findViewById<ImageButton>(R.id.deleteMenuItemtrashCanImageButton).setOnClickListener{
+//            val currentUser = fragment.user.auth.currentUser
+//            val docRef = db.collection("users").document(currentUser!!.uid)
+//            docRef.get()
+//                .addOnSuccessListener { document ->
+//                    val user = document.toObject<User>()
+//                    db.collection("restaurants").document("$${user!!.name}").collection("menu").document("mPvueixUkD3nkpeozAnk")
+//                        .whereArrayContains("orderFromMeny", "${orderFromMenyReference}")
+//                        .delete()
+//                        .addOnSuccessListener { Log.d("!!!", "DocumentSnapshot successfully deleted!") }
+//                        .addOnFailureListener { e -> Log.w("!!!", "Error deleting document", e) }
+//                }
+//
 //        }
 
-        //init of the clicklistener that checks position
+
+
+//        init of the clicklistener that checks position
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)

@@ -12,7 +12,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/restaurantEditMenuRecyclerView"
             android:layout_width="0dp"
-            android:layout_height="325dp"
+            android:layout_height="400dp"
             android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +33,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addNewDishButton"
+            android:layout_width="167dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="113dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginEnd="113dp"
+            android:backgroundTint="@color/woopwoop_green"
+            android:text="@string/add_new_dish"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantEditMenuRecyclerView" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            tools:layout_editor_absoluteX="31dp"
+            tools:layout_editor_absoluteY="573dp" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            tools:layout_editor_absoluteX="125dp"
+            tools:layout_editor_absoluteY="86dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

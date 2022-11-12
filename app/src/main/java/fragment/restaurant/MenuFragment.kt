@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -33,6 +34,7 @@ class MenuFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var restaurantMenuView: TextView
+    lateinit var addNewDishButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,9 @@ class MenuFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        addNewDishButton.setOnClickListener {
+            setCurrentFragmentToRestaurantMenu()
+        }
 
         val currentUser = fragment.user.auth.currentUser
         val docRef = db.collection("users").document(currentUser!!.uid)
@@ -112,8 +117,13 @@ class MenuFragment : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_menu, container, false)
         restaurantMenuView = v.findViewById(R.id.restaurantMenuView)
-
         return v
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        addNewDishButton = view.findViewById(R.id.addNewDishButton)
     }
 
     companion object {
@@ -134,5 +144,13 @@ class MenuFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun setCurrentFragmentToRestaurantMenu(){
+        val restaurantEditMenuFragment = RestaurantEditMenuFragment()
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.restaurantInterfaceContainer, restaurantEditMenuFragment)
+        transaction.commit()
     }
 }

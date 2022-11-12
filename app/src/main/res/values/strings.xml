@@ -73,6 +73,9 @@
     <string name="select_image">Select Image</string>
     <string name="image_gallery">Image Gallery</string>
     <string name="restaurant_menu">Restaurant Menu</string>
+    <string name="price">Price</string>
+    <string name="delivery_fee">Delivery_fee</string>
+    <string name="add_new_dish">Add new dish</string>
 
     <string name="no_empty_fields">Please enter your %1s</string>
     <string name="incorrect_login">Incorrect username or password. Try again</string>
