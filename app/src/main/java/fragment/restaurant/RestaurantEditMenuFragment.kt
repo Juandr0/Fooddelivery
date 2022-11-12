@@ -102,35 +102,10 @@ class RestaurantEditMenuFragment : Fragment() {
 
                             }
 
-
-
-
-
-
-//                                val data = hashMapOf(
-//                                    "restaurantName" to "${user!!.name}",
-//                                    "orderFromMeny" to restaurantDishNameEditText.text.toString(),
-//                                    "deliveryFee" to restaurant!!.deliveryFee,
-//                                    "price" to restaurantDishPriceEditText.text.toString().toInt()
-//
-//                                )
-//                                db.collection("restaurants").document("${user!!.menuId}")
-//                                    .collection("menu")
-//                                    .add(data)
-//                                    .addOnSuccessListener { documentReference ->
-//                                        Log.d(
-//                                            "!!!",
-//                                            "DocumentSnapshot written with ID: ${documentReference.id}"
-//                                        )
-//
-//                                    }
-//                                setCurrentFragmentToRestaurantMenu()
-
-
                         }
 
                     }
-    }
+        }
     }
 
     override fun onCreateView(
