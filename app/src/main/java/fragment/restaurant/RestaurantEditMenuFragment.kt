@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import classes.Restaurant
 import classes.User
@@ -45,6 +46,8 @@ class RestaurantEditMenuFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        val dishName = "new dish name"
+        val dishPrice = "new dish price"
         val currentUser = fragment.user.auth.currentUser
         val docRef = db.collection("users").document(currentUser!!.uid)
         docRef.get()
@@ -56,32 +59,74 @@ class RestaurantEditMenuFragment : Fragment() {
                     .addOnSuccessListener { document ->
                         val restaurant = document.toObject<Restaurant>()
 
-                        restaurantDishNameEditText.hint = "${restaurant!!.deliveryFee}"
-
                             restaurantEditMenuGoBackButton.setOnClickListener {
                                 setCurrentFragmentToRestaurantMenu()
                             }
 
                         restaurantSaveMenuButton.setOnClickListener {
-//                            val newMenuItem = OrderItem(
-//                                "${user!!.name}",
-//                                restaurantDishNameEditText.text.toString(),
-//                                restaurantDishPriceEditText.text.toString().toInt(),
-//                                restaurant!!.deliveryFee
-//                            )
-                            val data = hashMapOf(
-                                "restaurantName" to "${user!!.name}",
-                                "orderFromMeny" to restaurantDishNameEditText.text.toString(),
-                                "deliveryFee" to restaurant!!.deliveryFee,
-                                "price" to restaurantDishPriceEditText.text.toString().toInt()
 
-                            )
-                            db.collection("restaurants").document("${user!!.menuId}").collection("menu")
-                                .add(data)
-                                .addOnSuccessListener { documentReference ->
-                                    Log.d("!!!", "DocumentSnapshot written with ID: ${documentReference.id}")
-
+                            if (restaurantDishNameEditText.text.isEmpty() || restaurantDishPriceEditText.text.isEmpty()) {
+                                if (restaurantDishNameEditText.text.toString().isEmpty()) {
+                                    Toast.makeText(
+                                        context, getString(R.string.no_empty_fields, dishName ),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
+                                if (restaurantDishPriceEditText.text.toString().isEmpty()) {
+                                    Toast.makeText(
+                                        context, getString(R.string.no_empty_fields, dishPrice),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            } else {
+
+                                val data = hashMapOf(
+                                    "restaurantName" to "${user!!.name}",
+                                    "orderFromMeny" to restaurantDishNameEditText.text.toString(),
+                                    "deliveryFee" to restaurant!!.deliveryFee,
+                                    "price" to restaurantDishPriceEditText.text.toString().toInt()
+
+                                )
+                                db.collection("restaurants").document("${user!!.menuId}")
+                                    .collection("menu")
+                                    .add(data)
+                                    .addOnSuccessListener { documentReference ->
+                                        Log.d(
+                                            "!!!",
+                                            "DocumentSnapshot written with ID: ${documentReference.id}"
+                                        )
+
+                                    }
+                                setCurrentFragmentToRestaurantMenu()
+
+
+                            }
+
+
+
+
+
+
+//                                val data = hashMapOf(
+//                                    "restaurantName" to "${user!!.name}",
+//                                    "orderFromMeny" to restaurantDishNameEditText.text.toString(),
+//                                    "deliveryFee" to restaurant!!.deliveryFee,
+//                                    "price" to restaurantDishPriceEditText.text.toString().toInt()
+//
+//                                )
+//                                db.collection("restaurants").document("${user!!.menuId}")
+//                                    .collection("menu")
+//                                    .add(data)
+//                                    .addOnSuccessListener { documentReference ->
+//                                        Log.d(
+//                                            "!!!",
+//                                            "DocumentSnapshot written with ID: ${documentReference.id}"
+//                                        )
+//
+//                                    }
+//                                setCurrentFragmentToRestaurantMenu()
+
+
                         }
 
                     }
