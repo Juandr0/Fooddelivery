@@ -57,7 +57,6 @@ class TrattoriaGrazieMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("GOltxhAY6NB5TDSFwmBD").collection("menu")
-            .whereArrayContains("category", "main dish")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){

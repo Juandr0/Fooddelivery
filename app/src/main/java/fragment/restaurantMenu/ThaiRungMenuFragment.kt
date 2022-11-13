@@ -56,7 +56,6 @@ class ThaiRungMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("PZBhflO4krmbj8GRNz5q").collection("menu")
-            .whereArrayContains("category", "main dish")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
