@@ -14,6 +14,7 @@ import classes.User
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.ktx.toObject
+import fragment.user.RestaurantLoadingScreenFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +35,8 @@ class RestaurantEditMenuFragment : Fragment() {
     lateinit var  restaurantSaveMenuButton: Button
     lateinit var restaurantDishNameEditText: EditText
     lateinit var  restaurantDishPriceEditText: EditText
+    var userID = ""
+    var documentID = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,15 +49,20 @@ class RestaurantEditMenuFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+
         val dishName = "new dish name"
         val dishPrice = "new dish price"
+
         val currentUser = fragment.user.auth.currentUser
         val docRef = db.collection("users").document(currentUser!!.uid)
         docRef.get()
             .addOnSuccessListener { document ->
                 val user = document.toObject<User>()
+                userID = "${user!!.menuId}"
+                Log.d("!!!", "${user!!.menuId}")
+                Log.d("!!!", "${userID}")
 
-        val docRef =db.collection("restaurants").document("${user!!.menuId}")
+                val docRef =db.collection("restaurants").document("${user!!.menuId}")
                 docRef.get()
                     .addOnSuccessListener { document ->
                         val restaurant = document.toObject<Restaurant>()
@@ -84,8 +92,8 @@ class RestaurantEditMenuFragment : Fragment() {
                                     "restaurantName" to "${user!!.name}",
                                     "orderFromMeny" to restaurantDishNameEditText.text.toString(),
                                     "deliveryFee" to restaurant!!.deliveryFee,
-                                    "price" to restaurantDishPriceEditText.text.toString().toInt()
-
+                                    "price" to restaurantDishPriceEditText.text.toString().toInt(),
+                                    "itemID" to ""
                                 )
                                 db.collection("restaurants").document("${user!!.menuId}")
                                     .collection("menu")
@@ -95,13 +103,24 @@ class RestaurantEditMenuFragment : Fragment() {
                                             "!!!",
                                             "DocumentSnapshot written with ID: ${documentReference.id}"
                                         )
+                                        documentID = documentReference.id
+
+                                        val updateRef =
+                                            db.collection("restaurants").document("${user!!.menuId}").collection("menu").document("${documentID}")
+                                        val update = mapOf(
+                                            "itemID" to "${documentID}"
+                                        )
+                                        updateRef.update(update)
+                                            .addOnSuccessListener {
+                                                Log.d("!!!", "Update success!")
+                                            }
+                                            .addOnFailureListener {
+                                                Log.d("!!!", "Update failed!")
+                                            }
 
                                     }
-                                setCurrentFragmentToRestaurantMenu()
-
-
+                                setCurrentFragmentToLoadingScreen()
                             }
-
                         }
 
                     }
@@ -126,6 +145,7 @@ class RestaurantEditMenuFragment : Fragment() {
 
 
     }
+
 
     companion object {
         /**
@@ -152,6 +172,14 @@ class RestaurantEditMenuFragment : Fragment() {
         val fragmentManager = parentFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.restaurantInterfaceContainer, menuFragment)
+        transaction.commit()
+    }
+
+    private fun setCurrentFragmentToLoadingScreen(){
+        val restaurantLoadingScreenFragment = RestaurantLoadingScreenFragment()
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.restaurantInterfaceContainer, restaurantLoadingScreenFragment)
         transaction.commit()
     }
 }

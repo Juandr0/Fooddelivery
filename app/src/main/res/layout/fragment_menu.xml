@@ -48,5 +48,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/restaurantEditMenuRecyclerView" />
 
+        <ImageButton
+            android:id="@+id/refreshImageButton"
+            android:layout_width="46dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="7dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_refresh"
+            app:layout_constraintBottom_toTopOf="@+id/restaurantEditMenuRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantMenuView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

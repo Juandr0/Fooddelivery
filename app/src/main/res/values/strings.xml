@@ -78,6 +78,7 @@
     <string name="add_new_dish">Add new dish</string>
     <string name="enter_dish_name">Enter dish name</string>
     <string name="enter_dish_price">Enter dish price</string>
+    <string name="save_settings">Save settings</string>
 
 
     <string name="no_empty_fields">Please enter your %1s</string>

@@ -1,12 +1,17 @@
 package adapters.restaurantMenuAdapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.User
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
+import com.google.firebase.firestore.ktx.toObject
 import fragment.restaurant.MenuFragment
 
 class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderItems: List<OrderItem>) :
@@ -47,8 +52,10 @@ class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderIte
         holder.orderDeliveryFee = orderItem.deliveryFee
         holder.orderItemPrice = orderItem.price
         holder.orderItemName = orderItem.orderFromMeny
+        holder.orderID = orderItem.itemID
 
         orderFromMenyReference = orderItem.orderFromMeny
+
 
 
 //        //Glide for image
@@ -74,21 +81,46 @@ class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderIte
         var orderDeliveryFee = 0
         var orderItemPrice = 0
         var orderItemName = ""
+        var orderID = ""
 
-//        var deleteMenuItemTrashCanImageButton = itemView.findViewById<ImageButton>(R.id.deleteMenuItemtrashCanImageButton).setOnClickListener{
-//            val currentUser = fragment.user.auth.currentUser
-//            val docRef = db.collection("users").document(currentUser!!.uid)
-//            docRef.get()
-//                .addOnSuccessListener { document ->
-//                    val user = document.toObject<User>()
-//                    db.collection("restaurants").document("$${user!!.name}").collection("menu").document("mPvueixUkD3nkpeozAnk")
-//                        .whereArrayContains("orderFromMeny", "${orderFromMenyReference}")
-//                        .delete()
-//                        .addOnSuccessListener { Log.d("!!!", "DocumentSnapshot successfully deleted!") }
-//                        .addOnFailureListener { e -> Log.w("!!!", "Error deleting document", e) }
-//                }
+
+        var deleteImageButton = itemView.findViewById<ImageButton>(R.id.deleteButton).setOnClickListener{
+            val currentUser = fragment.user.auth.currentUser
+            val docRef = db.collection("users").document(currentUser!!.uid)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject<User>()
+                    val docRef = db.collection("restaurants").document("${user!!.menuId}").collection("menu").document("${orderID}")
+
+                            docRef
+                        .delete()
+                        .addOnSuccessListener { Log.d("!!!", "DocumentSnapshot successfully deleted!") }
+                        .addOnFailureListener { e -> Log.w("!!!", "Error deleting document", e) }
+
+
+
+
+
+
+
+                    Log.d("!!!","${orderItemName}")
+                    Log.d("!!!","${user!!.menuId}")
+                    Log.d("!!!","${orderID}")
+////                    val docRef = db.collection("restaurants").document("${user!!.uID}").collection("menu").document("${documentReference.id}")
 //
-//        }
+//                    val update = mapOf(
+//                        "itemID" to "haaj"
+//                    )
+//                    docRef
+//                        .update(update)
+//                        .addOnSuccessListener {
+//                            Log.d("!!!", "Update success!")
+//                        }
+
+                }
+
+
+        }
 
 
 
@@ -103,5 +135,6 @@ class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderIte
 
 
     }
+
 
 }

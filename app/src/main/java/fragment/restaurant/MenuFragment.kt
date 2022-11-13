@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -35,6 +36,7 @@ class MenuFragment : Fragment() {
 
     lateinit var restaurantMenuView: TextView
     lateinit var addNewDishButton: Button
+    lateinit var  refreshImageButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,10 @@ class MenuFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        refreshImageButton.setOnClickListener {
+            refreshFragment()
+        }
 
         addNewDishButton.setOnClickListener {
             setCurrentFragmentToRestaurantEditMenu()
@@ -83,13 +89,12 @@ class MenuFragment : Fragment() {
 
                                     when (position) {
                                         0 -> {
-
-
+//
                                         }
                                         1 -> {
+
                                         }
                                         2 -> {
-
                                         }
                                     }
                                 }
@@ -97,11 +102,6 @@ class MenuFragment : Fragment() {
                             }) // End of click handler
 
                         }
-
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(context,"failed", Toast.LENGTH_SHORT)
-                            .show()
                     }
             }
 
@@ -123,6 +123,7 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         addNewDishButton = view.findViewById(R.id.addNewDishButton)
+        refreshImageButton = view.findViewById(R.id.refreshImageButton)
     }
 
     companion object {
@@ -152,4 +153,13 @@ class MenuFragment : Fragment() {
         transaction.replace(R.id.restaurantInterfaceContainer, restaurantEditMenuFragment)
         transaction.commit()
     }
+
+    private fun refreshFragment(){
+        val menuFragment = MenuFragment()
+        val fragmentManager = parentFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.restaurantInterfaceContainer, menuFragment)
+        transaction.commit()
+    }
+
 }
