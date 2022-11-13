@@ -56,7 +56,6 @@ class OlearysMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("QpWMx7nDGyzD6Zz4AlKt").collection("menu")
-            .whereArrayContains("category", "hamburger")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){

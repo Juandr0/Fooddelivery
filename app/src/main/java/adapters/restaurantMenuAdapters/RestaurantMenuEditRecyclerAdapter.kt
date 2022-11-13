@@ -90,32 +90,12 @@ class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderIte
             docRef.get()
                 .addOnSuccessListener { document ->
                     val user = document.toObject<User>()
-                    val docRef = db.collection("restaurants").document("${user!!.menuId}").collection("menu").document("${orderID}")
+                        val docRef = db.collection("restaurants").document("${user!!.menuId}").collection("menu").document("${orderID}")
 
                             docRef
                         .delete()
                         .addOnSuccessListener { Log.d("!!!", "DocumentSnapshot successfully deleted!") }
                         .addOnFailureListener { e -> Log.w("!!!", "Error deleting document", e) }
-
-
-
-
-
-
-
-                    Log.d("!!!","${orderItemName}")
-                    Log.d("!!!","${user!!.menuId}")
-                    Log.d("!!!","${orderID}")
-////                    val docRef = db.collection("restaurants").document("${user!!.uID}").collection("menu").document("${documentReference.id}")
-//
-//                    val update = mapOf(
-//                        "itemID" to "haaj"
-//                    )
-//                    docRef
-//                        .update(update)
-//                        .addOnSuccessListener {
-//                            Log.d("!!!", "Update success!")
-//                        }
 
                 }
 

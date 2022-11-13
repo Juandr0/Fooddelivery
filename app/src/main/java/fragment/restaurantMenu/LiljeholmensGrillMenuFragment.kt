@@ -56,7 +56,6 @@ class LiljeholmensGrillMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("1YmjyWxO3JvGbtp5keH8").collection("menu")
-            .whereArrayContains("category", "hamburger")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
