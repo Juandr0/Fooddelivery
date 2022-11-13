@@ -59,6 +59,8 @@ class BrodernasMenuFragment : Fragment() {
 
 
         FirebaseFirestore.getInstance().collection("restaurants").document("wGNxzHJszl1DLjs1Sp61").collection("menu")
+            // för att sortera utefter kategori av maträtt. Funktion för att kunna göra flera recyclerviews med olika maträtter och olika rubriker
+//            .whereArrayContains("cateogry","hamburger")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
