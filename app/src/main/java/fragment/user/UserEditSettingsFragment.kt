@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
+import java.util.*
 
 class UserEditSettingsFragment : Fragment() {
     private lateinit var userAttributeToChangeTextView : TextView
@@ -59,7 +60,9 @@ class UserEditSettingsFragment : Fragment() {
             } else {
                 var redColor = "#FFB0B0"
                 userAttributeToChangeEditText.setBackgroundColor(Color.parseColor(redColor))
-                Toast.makeText(context, getString(R.string.no_empty_fields, userAttributeToChangeTextView.text.toString().toLowerCase()),Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.no_empty_fields,
+                    userAttributeToChangeTextView.text.toString().lowercase(Locale.getDefault())
+                ),Toast.LENGTH_SHORT).show()
 
             }
 

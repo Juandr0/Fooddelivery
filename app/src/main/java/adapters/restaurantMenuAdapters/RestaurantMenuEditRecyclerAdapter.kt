@@ -1,22 +1,26 @@
 package adapters.restaurantMenuAdapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
-import classes.ShoppingCart
+import classes.User
 import com.example.fooddeliveryproject.R
-import fragment.restaurantMenu.LiljeholmensGrillMenuFragment
+import com.example.fooddeliveryproject.db
+import com.google.firebase.firestore.ktx.toObject
+import fragment.restaurant.MenuFragment
 
-class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFragment, val orderItems: List<OrderItem>) :
-    RecyclerView.Adapter<LiljeholmensGrillMenuRecyclerAdapter.ViewHolder>() {
+class RestaurantMenuEditRecyclerAdapter (val context: MenuFragment, val orderItems: List<OrderItem>) :
+    RecyclerView.Adapter<RestaurantMenuEditRecyclerAdapter.ViewHolder>() {
 
 
     //onClickListener setup
     private lateinit var mListener: onItemClickListener
+    lateinit var orderFromMenyReference: String
 
     interface onItemClickListener {
         fun onItemClick(position: Int)
@@ -28,7 +32,7 @@ class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFr
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.restaurant_menu_list_item, parent, false)
+            .inflate(R.layout.restaurant_edit_menu_list_item, parent, false)
         return ViewHolder(itemView, mListener)
 
 
@@ -41,14 +45,16 @@ class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFr
 //        val orderRestaurantName = orderItem.restaurantName
 //        val orderDeliveryFee = orderItem.deliveryFee
         //Assigns the right information to the restaurant
-        holder.orderItemNameView.text = orderItem.orderFromMeny
-        holder.orderItemNPriceView.text = "${orderItem.price} kr"
+        holder.orderItemEditNameView.text = orderItem.orderFromMeny
+        holder.orderItemEditPriceView.text = "${orderItem.price} kr"
 
         holder.orderRestaurantName = orderItem.restaurantName
         holder.orderDeliveryFee = orderItem.deliveryFee
         holder.orderItemPrice = orderItem.price
         holder.orderItemName = orderItem.orderFromMeny
-        holder.orderItemID = orderItem.itemID
+        holder.orderID = orderItem.itemID
+
+        orderFromMenyReference = orderItem.orderFromMeny
 
 
 
@@ -68,26 +74,37 @@ class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFr
     inner class ViewHolder(itemView: View, listener: onItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
         //When a viewHolder is created, it finds the ImageView and textViews in our itemView
-        var orderItemNameView = itemView.findViewById<TextView>(R.id.orderItemNameView)
-        var orderItemNPriceView = itemView.findViewById<TextView>(R.id.orderItemPriceView)
+        var orderItemEditNameView = itemView.findViewById<TextView>(R.id.orderItemEditNameView)
+        var orderItemEditPriceView = itemView.findViewById<TextView>(R.id.orderItemEditPriceView)
 
         var orderRestaurantName = ""
         var orderDeliveryFee = 0
         var orderItemPrice = 0
         var orderItemName = ""
-        var orderItemID = ""
+        var orderID = ""
 
-        var orderButton = itemView.findViewById<Button>(R.id.addToOrderButton).setOnClickListener{
-            val orderRestaurant = orderRestaurantName
-            val orderMenuItem = orderItemName
-            val orderPrice = orderItemPrice
-            val deliveryFee = orderDeliveryFee
-            val orderID = orderItemID
-            val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderID, orderPrice, deliveryFee)
-            ShoppingCart.addItemToCart(newOrder)
+
+        var deleteImageButton = itemView.findViewById<ImageButton>(R.id.deleteButton).setOnClickListener{
+            val currentUser = fragment.user.auth.currentUser
+            val docRef = db.collection("users").document(currentUser!!.uid)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject<User>()
+                        val docRef = db.collection("restaurants").document("${user!!.menuId}").collection("menu").document("${orderID}")
+
+                            docRef
+                        .delete()
+                        .addOnSuccessListener { Log.d("!!!", "DocumentSnapshot successfully deleted!") }
+                        .addOnFailureListener { e -> Log.w("!!!", "Error deleting document", e) }
+
+                }
+
+
         }
 
-        //init of the clicklistener that checks position
+
+
+//        init of the clicklistener that checks position
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
@@ -98,5 +115,6 @@ class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFr
 
 
     }
+
 
 }

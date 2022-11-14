@@ -48,6 +48,7 @@ class MaxLiljeholmenMenuRecyclerAdapter (val context: MaxLiljeholmenMenuFragment
         holder.orderDeliveryFee = orderItem.deliveryFee
         holder.orderItemPrice = orderItem.price
         holder.orderItemName = orderItem.orderFromMeny
+        holder.orderItemID = orderItem.itemID
 
 
 
@@ -75,13 +76,15 @@ class MaxLiljeholmenMenuRecyclerAdapter (val context: MaxLiljeholmenMenuFragment
         var orderDeliveryFee = 0
         var orderItemPrice = 0
         var orderItemName = ""
+        var orderItemID = ""
 
         var orderButton = itemView.findViewById<Button>(R.id.addToOrderButton).setOnClickListener{
             val orderRestaurant = orderRestaurantName
             val orderMenuItem = orderItemName
             val orderPrice = orderItemPrice
             val deliveryFee = orderDeliveryFee
-            val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderPrice, deliveryFee)
+            val orderID = orderItemID
+            val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderID, orderPrice, deliveryFee)
             ShoppingCart.addItemToCart(newOrder)
         }
 

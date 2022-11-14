@@ -10,25 +10,37 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/settingsHeaderTextView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Restaurant profile fragment"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="50dp"
+            android:text="@string/settings"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/restaurantSettingsRecyclerView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/restaurantGreetingsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/greetings"
+            android:textColor="@color/black"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/restaurantprofile_signOutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="72dp"
-            android:text="Sign Out"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/restaurantSettingsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="245dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            tools:listitem="@layout/usersettings_list" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

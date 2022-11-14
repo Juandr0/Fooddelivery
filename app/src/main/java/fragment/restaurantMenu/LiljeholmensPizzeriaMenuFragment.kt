@@ -57,7 +57,6 @@ class LiljeholmesnPizzeriaMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("0obYh2kHAF5bYPL4GANW").collection("menu")
-            .whereArrayContains("category", "pizza")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){

@@ -58,7 +58,6 @@ class HanamiMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("q7gBWJ5YXq5F5kiUWAwD").collection("menu")
-            .whereArrayContains("category", "sushi")
             .orderBy("listOrder", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { documents ->

@@ -57,7 +57,6 @@ class IndianGardenMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("RF1GfTjrS8DQYcVzVjZ7").collection("menu")
-            .whereArrayContains("category", "curry")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){

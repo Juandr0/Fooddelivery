@@ -56,7 +56,6 @@ class TacoBarMenuFragment : Fragment() {
         }
 
         FirebaseFirestore.getInstance().collection("restaurants").document("sxPm5xMT8dQYuBT7L78u").collection("menu")
-            .whereArrayContains("category", "taco")
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){

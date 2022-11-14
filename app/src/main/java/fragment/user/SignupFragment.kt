@@ -97,14 +97,14 @@ class SignupFragment : Fragment() {
             address.isEmpty() ||
             phoneNumber.isEmpty() ||
             password.isEmpty()) {
-            Toast.makeText(getActivity(),getString(R.string.error_reqinfo),Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,getString(R.string.error_reqinfo),Toast.LENGTH_SHORT).show()
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     createUserToDBCatalougeFromSignupFieldHelperFunction(
                         name, email, address, phoneNumber.toString().toInt())
                 }.addOnFailureListener {  e ->
-                    Toast.makeText(getActivity(),"$e",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity,"$e",Toast.LENGTH_SHORT).show()
                     Log.d("!!!", "No user created error: + $e" )
                 }
         }
@@ -146,7 +146,7 @@ class SignupFragment : Fragment() {
                         setCurrentFragment(profileFragment)
                     }
                     .addOnFailureListener {e ->
-                        Toast.makeText(getActivity(),"$e",Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity,"$e",Toast.LENGTH_LONG).show()
                     }
             }
 

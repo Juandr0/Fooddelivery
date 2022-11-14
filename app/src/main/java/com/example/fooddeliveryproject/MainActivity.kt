@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         //Intent som tar input om användarens adress och skickar vidare till fragment-aktiviteten
         //Intentet nedan ska köras vid knapptryck genom en clicklistener
-          continuebutton.setOnClickListener(){
+          continuebutton.setOnClickListener {
               val userAdressInput= userAdressInput.text.toString()
 
               val intent = Intent(this, UserInterfaceActivity::class.java)
