@@ -1,5 +1,6 @@
 package adapters.restaurantMenuAdapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,10 @@ import fragment.restaurantMenu.TacoBarMenuFragment
 class TacoBarMenuRecyclerAdapter (val context: TacoBarMenuFragment, val orderItems: List<OrderItem>) :
     RecyclerView.Adapter<TacoBarMenuRecyclerAdapter.ViewHolder>() {
 
-
+    private lateinit var thisContext : Context
     //onClickListener setup
     private lateinit var mListener: onItemClickListener
+
 
     interface onItemClickListener {
         fun onItemClick(position: Int)
@@ -27,6 +29,7 @@ class TacoBarMenuRecyclerAdapter (val context: TacoBarMenuFragment, val orderIte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        thisContext = parent.context
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.restaurant_menu_list_item, parent, false)
         return ViewHolder(itemView, mListener)
@@ -85,7 +88,7 @@ class TacoBarMenuRecyclerAdapter (val context: TacoBarMenuFragment, val orderIte
             val deliveryFee = orderDeliveryFee
             val orderID = orderItemID
             val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderID, orderPrice, deliveryFee)
-            ShoppingCart.addItemToCart(newOrder)
+            ShoppingCart.addItemToCart(newOrder, thisContext)
         }
 
         //init of the clicklistener that checks position

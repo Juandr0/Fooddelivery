@@ -1,5 +1,6 @@
 package adapters.restaurantMenuAdapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFr
 
     //onClickListener setup
     private lateinit var mListener: onItemClickListener
+    private lateinit var thisContext : Context
 
     interface onItemClickListener {
         fun onItemClick(position: Int)
@@ -27,6 +29,7 @@ class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        thisContext = parent.context
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.restaurant_menu_list_item, parent, false)
         return ViewHolder(itemView, mListener)
@@ -84,7 +87,7 @@ class LiljeholmensGrillMenuRecyclerAdapter (val context: LiljeholmensGrillMenuFr
             val deliveryFee = orderDeliveryFee
             val orderID = orderItemID
             val newOrder = OrderItem(orderRestaurant, orderMenuItem, orderID, orderPrice, deliveryFee)
-            ShoppingCart.addItemToCart(newOrder)
+            ShoppingCart.addItemToCart(newOrder, thisContext)
         }
 
         //init of the clicklistener that checks position
