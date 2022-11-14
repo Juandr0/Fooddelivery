@@ -104,8 +104,7 @@ class SignupFragment : Fragment() {
                     createUserToDBCatalougeFromSignupFieldHelperFunction(
                         name, email, address, phoneNumber.toString().toInt())
                 }.addOnFailureListener {  e ->
-                    Toast.makeText(activity,"$e",Toast.LENGTH_SHORT).show()
-                    Log.d("!!!", "No user created error: + $e" )
+                    Toast.makeText(activity,"${e.message}",Toast.LENGTH_SHORT).show()
                 }
         }
     }
