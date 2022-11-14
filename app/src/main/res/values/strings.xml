@@ -9,6 +9,12 @@
     <string name="menu">Menu</string>
     <string name="images">Images</string>
 
+    <string name="warning">Warning!</string>
+    <string name="warning_removeitems_text">You are trying to add items from multiple restaurants, and you can only order from one restaurant at a time with WoopWoop!
+                                            \n\nIf you wish and add the new item press "OK", but doing so will also empty your cart. Press "cancel" to keep your current order.</string>
+
+    <string name="cancel">Cancel</string>
+
     <string name="thank_you">Thank you for using WoopWoop!
                             \nWe hope to see you again soon!</string>
     <string name="time_of_delivery"></string>

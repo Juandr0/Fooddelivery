@@ -1,13 +1,9 @@
 package classes
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.res.Resources
-import android.util.Log
 import com.example.fooddeliveryproject.R
-import com.example.fooddeliveryproject.UserInterfaceActivity
 
 // The list is set to private so that only the singleton object can modify it directly.
 object ShoppingCart {
@@ -27,7 +23,7 @@ object ShoppingCart {
             if (itemRestaurant == currentRestaurant) {
                 currentOrderList.add(orderItem)
             } else if (itemRestaurant != currentRestaurant) {
-                orderFromDifferentRestaurant(orderItem, context)
+                orderFromDifferentRestaurantWarning(orderItem, context)
             }
 
         } else {
@@ -37,15 +33,25 @@ object ShoppingCart {
     }
 
 
-    fun orderFromDifferentRestaurant(orderItem: OrderItem, context : Context) {
-        var alertDialogBuilder = AlertDialog.Builder(context)
-            .setTitle("Warning")
-            .setMessage("Test")
-           alertDialogBuilder.show()
+    fun orderFromDifferentRestaurantWarning(orderItem: OrderItem, context : Context) {
+        var dialogBuilder = AlertDialog.Builder(context)
+            .setTitle(context.getString(R.string.warning))
+            .setMessage(context.getString(R.string.warning_removeitems_text))
+            .setCancelable(true)
+
+            .setNegativeButton(context.getString(R.string.cancel), DialogInterface.OnClickListener{
+                    dialogInterface, i ->
+            })
+            .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialogInterface, i ->
+                    dialogInterface.dismiss()
+                currentOrderList.clear()
+                currentOrderList.add(orderItem)
+            })
 
 
-        currentOrderList.clear()
-        currentOrderList.add(orderItem)
+           dialogBuilder.show()
+
 
     }
 

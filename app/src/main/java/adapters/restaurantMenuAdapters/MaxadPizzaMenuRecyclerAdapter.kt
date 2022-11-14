@@ -29,7 +29,7 @@ class MaxadPizzaMenuRecyclerAdapter (val context: MaxadPizzaMenuFragment, val or
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        thisContext
+        thisContext = parent.context
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.restaurant_menu_list_item, parent, false)
         return ViewHolder(itemView, mListener)
