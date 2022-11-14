@@ -10,6 +10,3 @@ data class User (var name : String? = null,
                  var lastOrder : List<String>? = null,
                  var menuId : String? = null,
                  )
-{
-
-}

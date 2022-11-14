@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 import fragment.user.auth
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,7 +84,10 @@ class RestaurantEditSettingsFragment : Fragment() {
             } else {
                 var redColor = "#FFB0B0"
                 restaurantAttributeToChangeEditText.setBackgroundColor(Color.parseColor(redColor))
-                Toast.makeText(context, getString(R.string.no_empty_fields, restaurantAttributeToChangeTextView.text.toString().toLowerCase()),
+                Toast.makeText(context, getString(R.string.no_empty_fields,
+                    restaurantAttributeToChangeTextView.text.toString()
+                        .lowercase(Locale.getDefault())
+                ),
                     Toast.LENGTH_SHORT).show()
 
             }

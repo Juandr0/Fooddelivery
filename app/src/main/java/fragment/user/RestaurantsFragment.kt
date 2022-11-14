@@ -11,10 +11,6 @@ import com.example.fooddeliveryproject.R
 class RestaurantsFragment : Fragment() {
     lateinit var logOut : TextView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
