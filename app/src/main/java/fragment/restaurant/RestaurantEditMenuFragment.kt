@@ -59,10 +59,10 @@ class RestaurantEditMenuFragment : Fragment() {
             .addOnSuccessListener { document ->
                 val user = document.toObject<User>()
                 userID = "${user!!.menuId}"
-                Log.d("!!!", "${user!!.menuId}")
+                Log.d("!!!", "${user.menuId}")
                 Log.d("!!!", "${userID}")
 
-                val docRef =db.collection("restaurants").document("${user!!.menuId}")
+                val docRef =db.collection("restaurants").document("${user.menuId}")
                 docRef.get()
                     .addOnSuccessListener { document ->
                         val restaurant = document.toObject<Restaurant>()
@@ -89,13 +89,13 @@ class RestaurantEditMenuFragment : Fragment() {
                             } else {
 
                                 val data = hashMapOf(
-                                    "restaurantName" to "${user!!.name}",
+                                    "restaurantName" to "${user.name}",
                                     "orderFromMeny" to restaurantDishNameEditText.text.toString(),
                                     "deliveryFee" to restaurant!!.deliveryFee,
                                     "price" to restaurantDishPriceEditText.text.toString().toInt(),
                                     "itemID" to ""
                                 )
-                                db.collection("restaurants").document("${user!!.menuId}")
+                                db.collection("restaurants").document("${user.menuId}")
                                     .collection("menu")
                                     .add(data)
                                     .addOnSuccessListener { documentReference ->
@@ -106,7 +106,7 @@ class RestaurantEditMenuFragment : Fragment() {
                                         documentID = documentReference.id
 
                                         val updateRef =
-                                            db.collection("restaurants").document("${user!!.menuId}").collection("menu").document("${documentID}")
+                                            db.collection("restaurants").document("${user.menuId}").collection("menu").document("${documentID}")
                                         val update = mapOf(
                                             "itemID" to "${documentID}"
                                         )

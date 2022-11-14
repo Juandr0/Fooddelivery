@@ -5,7 +5,4 @@ class OrderItem (var restaurantName : String = " ",
                  var itemID : String = "",
                  var price : Int = 0,
                  var deliveryFee : Int = 0)
-                {
-
-}
 

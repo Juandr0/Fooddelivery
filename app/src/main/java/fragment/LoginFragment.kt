@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +26,6 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import fragment.user.ProfileFragment
 import fragment.user.SignupFragment
-import fragment.user.TEMPORARY_MENU_FRAGMENT
 
 
 class LoginFragment : Fragment()  {
@@ -50,9 +48,7 @@ class LoginFragment : Fragment()  {
 
     private var currentUserType = ""
 
-    // TA BORT KNAPP SEN
-    private lateinit var restaurantTestButton: Button
-    private lateinit var shoppingCartTestButton : Button
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -63,10 +59,7 @@ class LoginFragment : Fragment()  {
         //knappar & edittext i onCreateView inflatern för att de annars inte
         //går att nå på ett enkelt sätt.
 
-        //TEST
-        restaurantTestButton = v.findViewById(R.id.restaurantTestButton)
-        shoppingCartTestButton = v.findViewById(R.id.shoppingCartTempFragment)
-        //TEST SLUT
+
 
         db = Firebase.firestore
         auth = Firebase.auth
@@ -126,14 +119,6 @@ class LoginFragment : Fragment()  {
             setCurrentFragment(userSignupFragment)
         }
 
-        restaurantTestButton.setOnClickListener {
-            val intent = Intent(context, RestaurantInterfaceActivity::class.java)
-            startActivity(intent)
-        }
-
-        shoppingCartTestButton.setOnClickListener {
-            setCurrentFragment(TEMPORARY_MENU_FRAGMENT())
-        }
     }
 
     private fun togglePassword(isShowing : Boolean) {

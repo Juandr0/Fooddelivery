@@ -34,11 +34,6 @@ class ProfileFragment : Fragment() {
     val userOrdersList = mutableListOf<String>()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onResume() {
 
         super.onResume()

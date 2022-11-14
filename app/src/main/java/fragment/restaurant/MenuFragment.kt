@@ -64,7 +64,7 @@ class MenuFragment : Fragment() {
                 val user = document.toObject<User>()
                 restaurantMenuView.text = "${user!!.name} " + getString(R.string.menu)
 
-                FirebaseFirestore.getInstance().collection("restaurants").document("${user!!.menuId}").collection("menu")
+                FirebaseFirestore.getInstance().collection("restaurants").document("${user.menuId}").collection("menu")
                     .get()
                     .addOnSuccessListener { documents ->
                         for(document in documents){
