@@ -1,5 +1,6 @@
 package classes
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -33,6 +34,7 @@ object ShoppingCart {
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     fun orderFromDifferentRestaurantWarning(orderItem: OrderItem, context : Context) {
         var dialogBuilder = AlertDialog.Builder(context)
             .setTitle(context.getString(R.string.warning))
