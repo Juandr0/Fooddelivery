@@ -8,8 +8,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import classes.OrderItem
-import classes.ShoppingCart
 import classes.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -51,7 +49,7 @@ class UserInterfaceActivity : AppCompatActivity() {
         navigationMenu = findViewById(R.id.navigationbar)
         loadingScreenFragmentContainer = findViewById(R.id.loadingPageFragmentContainer)
 
-
+        isCompanySignedIn()
         setCurrentFragment(exploreFragment)
 
         //Loading screen
@@ -126,6 +124,29 @@ class UserInterfaceActivity : AppCompatActivity() {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, fragment)
             transaction.commit()
+
+    }
+
+    fun isCompanySignedIn(){
+
+            var type : String = ""
+            val currentUser = auth.currentUser
+
+            if (currentUser == null){
+                return
+            }
+
+            val docRef = db.collection("users").document(currentUser.uid)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject<User>()
+                    if (user != null){
+                        type = user.type.toString()
+                    }
+                    if (type == "restaurant"){
+                        startNewActivity(RestaurantInterfaceActivity)
+                    }
+                }
 
     }
 
