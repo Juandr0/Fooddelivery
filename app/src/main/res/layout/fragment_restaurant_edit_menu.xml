@@ -18,6 +18,8 @@
             android:hint="@string/enter_dish_name"
             android:inputType="textPersonName"
             android:textSize="16sp"
+            android:cursorVisible="false"
+            android:backgroundTint="@color/restaurant_blue"
             app:layout_constraintBaseline_toBaselineOf="@+id/restaurantDishNameEditView"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -76,6 +78,8 @@
             android:hint="@string/enter_dish_price"
             android:inputType="number"
             android:textSize="16sp"
+            android:backgroundTint="@color/restaurant_blue"
+            android:cursorVisible="false"
             app:layout_constraintBaseline_toBaselineOf="@+id/restaurantDishPriceEditView"
             app:layout_constraintEnd_toEndOf="parent" />
 

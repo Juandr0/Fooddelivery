@@ -22,23 +22,20 @@
         android:id="@+id/uploadImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/woopwoop_green"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/restaurant_blue"
         android:text="@string/upload_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toEndOf="@+id/selectImageButton"
         app:layout_constraintTop_toBottomOf="@+id/uploadPreviewImageVIew" />
 
     <Button
         android:id="@+id/selectImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
-        android:backgroundTint="@color/woopwoop_green"
+        android:backgroundTint="@color/restaurant_blue"
         android:text="@string/select_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uploadPreviewImageVIew" />
