@@ -2,6 +2,7 @@ package fragment.user
 
 import adapters.OrderConfirmationRecyclerAdapter
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import classes.Restaurant
 import classes.ShoppingCart
 import classes.User
 import com.example.fooddeliveryproject.R
@@ -29,6 +31,7 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var orderAddress : TextView
     lateinit var salesTax : TextView
 
+
     //Restaurant rating
     lateinit var imageStar1 : ImageView
     lateinit var imageStar2 : ImageView
@@ -45,6 +48,7 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var ratingTextView : TextView
     //Restaurant rating END
 
+    lateinit var restaurantName : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,8 +84,8 @@ class OrderConfirmationFragment : Fragment() {
         salesTax = view.findViewById(R.id.confirmation_salesTaxTextView)
 
 
-        activateRatingClickListener()
         initiateBundleToViews()
+        activateRatingClickListener()
         setTextViews()
         initalizeRecyclerView(view)
 
@@ -94,7 +98,59 @@ class OrderConfirmationFragment : Fragment() {
     //Deactivates clicklisteners, pass rating to DB, update textview
     private fun updateRating(rating : Int){
         deactivateClickListeners()
+        updateDb(rating)
         ratingTextView.text = getString(R.string.rate_feedback)
+    }
+
+
+    //Fetches restaurant pathway from user collections
+    //Fetches restaurant info from restaurant collection
+    //Calculates new rating
+    //Updates rating
+
+    private fun updateDb(rating : Int){
+    var currentRestaurant : User
+    var restaurantId = ""
+        val docRef = db.collection("users").whereEqualTo("name", restaurantName)
+        docRef.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents){
+                    currentRestaurant = document.toObject()
+                    restaurantId = currentRestaurant.menuId.toString()
+                }
+
+                //Fetch restaurant rating data, and update it
+                var restaurantInfo : Restaurant
+                val restaurantRef = db.collection("restaurants").document(restaurantId)
+                restaurantRef.get()
+                    .addOnSuccessListener { document ->
+                        restaurantInfo = document.toObject()!!
+
+                        var totalRating : Double
+                        var totalVotes : Int
+
+
+                        totalRating = restaurantInfo.totalRating + rating
+                        totalVotes = restaurantInfo.totalVotes
+                        totalVotes++
+
+                        if (totalVotes == 0) {
+                            totalVotes = 1
+                        }
+
+                        val newRating = (totalRating/totalVotes)
+                        val newRatingWithTwoDecimals : Double = String.format("%2f", newRating).toDouble()
+
+                        val mapUpdate = mapOf(
+                            "rating" to newRatingWithTwoDecimals,
+                            "totalRating" to totalRating,
+                            "totalVotes" to totalVotes
+                        )
+
+                        restaurantRef.update(mapUpdate)
+                    }
+
+            }
     }
 
     private fun deactivateClickListeners(){
@@ -129,6 +185,7 @@ class OrderConfirmationFragment : Fragment() {
         val taxPercentile = 0.12
         salesTax.text = getString(R.string.sales_tax) + " " +  price * taxPercentile + ":-"
 
+        ratingTextView.text = getString(R.string.rate_restaurant, restaurantName)
 
         //Gets the current time and the user address and displays it in textview
         val currentTime = getTimePlusThrityMinutes()
@@ -150,7 +207,7 @@ class OrderConfirmationFragment : Fragment() {
         val args = this.arguments
         val orderNumberBundle = args?.getInt("orderNumber")
         val lastOrder = args?.getStringArrayList("bundleList")
-        val restaurantName = args?.getString("restaurantName")
+        restaurantName = args?.getString("restaurantName")!!
 
         if (lastOrder != null) {
             for (item in lastOrder){
@@ -158,7 +215,6 @@ class OrderConfirmationFragment : Fragment() {
             }
         }
         orderNumber.text = getString(R.string.ordernumber) + " " + orderNumberBundle.toString()
-        ratingTextView.text = getString(R.string.rate_restaurant, restaurantName)
 
     }
 
