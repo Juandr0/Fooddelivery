@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class MaxadPizzaMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var maxadPizzaHeaderImageView: ImageView
+    lateinit var maxadPizzaNameView: TextView
+    lateinit var maxadPizzaOpeningTimeView: TextView
+    lateinit var maxadPizzaDeliveryFeeView: TextView
+    lateinit var maxadPizzaRatingView: TextView
 
     lateinit var maxadPizzaPreviousFragmentImageButton: ImageButton
 
@@ -50,6 +62,14 @@ class MaxadPizzaMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        maxadPizzaNameView = view.findViewById(R.id.maxadPizzaNameView)
+        maxadPizzaOpeningTimeView = view.findViewById(R.id.maxadPizzaOpeningTimeView)
+        maxadPizzaDeliveryFeeView = view.findViewById(R.id.maxadPizzaDeliveryFeeView)
+        maxadPizzaRatingView = view.findViewById(R.id.maxadPizzaRatingView)
+        maxadPizzaHeaderImageView = view.findViewById(R.id.maxadPizzaHeaderImageView)
+
+        setMenuInformation()
 
         maxadPizzaPreviousFragmentImageButton = view.findViewById(R.id.maxadPizzeriaPreviousFragmentImageButton)
         maxadPizzaPreviousFragmentImageButton.setOnClickListener {
@@ -81,8 +101,6 @@ class MaxadPizzaMenuFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-
-
                                 }
                                 1 -> {
                                 }
@@ -128,4 +146,22 @@ class MaxadPizzaMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("vcR8iEMgkEsmftTeKdyH")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                maxadPizzaNameView.text = restaurantInfo?.name
+                maxadPizzaOpeningTimeView.text = restaurantInfo?.openingTime
+                maxadPizzaDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                maxadPizzaRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( maxadPizzaHeaderImageView)
+            }
+    }
+
 }

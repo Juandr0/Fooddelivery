@@ -22,12 +22,13 @@
         <TextView
             android:id="@+id/liljeholmensPizzeriaNameView"
             android:layout_width="0dp"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="11dp"
             android:text="TextView"
             android:textColor="#000000"
+            android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView3"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/liljeholmensPizzeriaOpeningTimeView" />
 
         <TextView
-            android:id="@+id/liljeholmensPizzerialRatingView"
+            android:id="@+id/liljeholmensPizzeriaRatingView"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="13dp"
@@ -75,7 +76,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="3dp"
             android:src="@drawable/ic_baseline_star_rate_24"
-            app:layout_constraintEnd_toStartOf="@+id/liljeholmensPizzerialRatingView"
+            app:layout_constraintEnd_toStartOf="@+id/liljeholmensPizzeriaRatingView"
             app:layout_constraintTop_toBottomOf="@+id/liljeholmensPizzeriaHeaderImageView" />
 
         <ImageView

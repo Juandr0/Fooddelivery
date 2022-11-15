@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class OlearysMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var olearysHeaderImageView: ImageView
+    lateinit var olearysNameView: TextView
+    lateinit var olearysOpeningTimeView: TextView
+    lateinit var olearysDeliveryFeeView: TextView
+    lateinit var olearysRatingView: TextView
 
     lateinit var olearysPreviousFragmentImageButton: ImageButton
 
@@ -49,6 +61,14 @@ class OlearysMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        olearysNameView = view.findViewById(R.id.olearysNameView)
+        olearysOpeningTimeView = view.findViewById(R.id.olearysOpeningTimeView)
+        olearysDeliveryFeeView = view.findViewById(R.id.olearysDeliveryFeeView)
+        olearysRatingView = view.findViewById(R.id.olearysRatingView)
+        olearysHeaderImageView = view.findViewById(R.id.olearysHeaderImageView)
+
+        setMenuInformation()
 
         olearysPreviousFragmentImageButton = view.findViewById(R.id.olearysPreviousFragmentImageButton)
         olearysPreviousFragmentImageButton.setOnClickListener {
@@ -126,5 +146,22 @@ class OlearysMenuFragment : Fragment() {
         if(parentFragmentManager.backStackEntryCount > 0){
             parentFragmentManager.popBackStack()
         }
+    }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("QpWMx7nDGyzD6Zz4AlKt")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                olearysNameView.text = restaurantInfo?.name
+                olearysOpeningTimeView.text = restaurantInfo?.openingTime
+                olearysDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                olearysRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( olearysHeaderImageView)
+            }
     }
 }

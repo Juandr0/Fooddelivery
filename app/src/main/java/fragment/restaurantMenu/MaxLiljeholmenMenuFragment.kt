@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class MaxLiljeholmenMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var maxLiljeholmenHeaderImageView: ImageView
+    lateinit var maxLiljeholmenNameView: TextView
+    lateinit var maxLiljeholmenOpeningTimeView: TextView
+    lateinit var maxLiljeholmenDeliveryFeeView: TextView
+    lateinit var maxLiljeholmenRatingView: TextView
 
     lateinit var maxLiljeholmenPreviousFragmentImageButton: ImageButton
 
@@ -50,6 +62,14 @@ class MaxLiljeholmenMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        maxLiljeholmenNameView = view.findViewById(R.id.maxLiljeholmenNameView)
+        maxLiljeholmenOpeningTimeView = view.findViewById(R.id.maxLiljeholmenOpeningTimeView)
+        maxLiljeholmenDeliveryFeeView = view.findViewById(R.id.maxLiljeholmenDeliveryFeeView)
+        maxLiljeholmenRatingView = view.findViewById(R.id.maxLiljeholmenRatingView)
+        maxLiljeholmenHeaderImageView = view.findViewById(R.id.maxLiljeholmenHeaderImageView)
+
+        setMenuInformation()
 
         maxLiljeholmenPreviousFragmentImageButton = view.findViewById(R.id.maxLiljeholmenPreviousFragmentImageButton)
         maxLiljeholmenPreviousFragmentImageButton.setOnClickListener {
@@ -128,4 +148,22 @@ class MaxLiljeholmenMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("hxRwezFHifL1b9IYmREH")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                maxLiljeholmenNameView.text = restaurantInfo?.name
+                maxLiljeholmenOpeningTimeView.text = restaurantInfo?.openingTime
+                maxLiljeholmenDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                maxLiljeholmenRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( maxLiljeholmenHeaderImageView)
+            }
+    }
+
 }

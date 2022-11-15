@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class LiljeholmesnPizzeriaMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var liljeholmensPizzeriaHeaderImageView: ImageView
+    lateinit var liljeholmensPizzeriaNameView: TextView
+    lateinit var liljeholmensPizzeriaOpeningTimeView: TextView
+    lateinit var liljeholmensPizzeriaDeliveryFeeView: TextView
+    lateinit var liljeholmensPizzeriaRatingView: TextView
 
     lateinit var liljeholmensPizzeriaPreviousFragmentImageButton: ImageButton
 
@@ -50,6 +62,14 @@ class LiljeholmesnPizzeriaMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        liljeholmensPizzeriaNameView = view.findViewById(R.id.liljeholmensPizzeriaNameView)
+        liljeholmensPizzeriaOpeningTimeView = view.findViewById(R.id.liljeholmensPizzeriaOpeningTimeView)
+        liljeholmensPizzeriaDeliveryFeeView = view.findViewById(R.id.liljeholmensPizzeriaDeliveryFeeView)
+        liljeholmensPizzeriaRatingView = view.findViewById(R.id.liljeholmensPizzeriaRatingView)
+        liljeholmensPizzeriaHeaderImageView = view.findViewById(R.id.liljeholmensPizzeriaHeaderImageView)
+
+        setMenuInformation()
 
         liljeholmensPizzeriaPreviousFragmentImageButton = view.findViewById(R.id.liljeholmensPizzeriaPreviousFragmentImageButton)
         liljeholmensPizzeriaPreviousFragmentImageButton.setOnClickListener {
@@ -129,6 +149,21 @@ class LiljeholmesnPizzeriaMenuFragment : Fragment() {
         }
     }
 
+    fun setMenuInformation(){
+        db.collection("restaurants").document("0obYh2kHAF5bYPL4GANW")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
 
+                liljeholmensPizzeriaNameView.text = restaurantInfo?.name
+                liljeholmensPizzeriaOpeningTimeView.text = restaurantInfo?.openingTime
+                liljeholmensPizzeriaDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                liljeholmensPizzeriaRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( liljeholmensPizzeriaHeaderImageView)
+            }
+    }
 
 }
