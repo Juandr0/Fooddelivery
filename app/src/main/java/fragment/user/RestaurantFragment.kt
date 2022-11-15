@@ -1,6 +1,6 @@
 package fragment.user
 
-import adapters.SearchBarRecyclerAdapter
+import adapters.RecyclerAdapterRestaurantFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 
-class SearchFragment : Fragment() {
+class RestaurantFragment : Fragment() {
 
     lateinit var restaurantNamesList : List<String>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         getRestaurantNames()
     }
 
@@ -32,7 +32,7 @@ class SearchFragment : Fragment() {
     private fun initializeRecyclerView(view : View){
         var recyclerView = view.findViewById<RecyclerView>(R.id.search_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = SearchBarRecyclerAdapter(this, restaurantNamesList)
+        val adapter = RecyclerAdapterRestaurantFragment(this, restaurantNamesList)
         recyclerView.adapter = adapter
     }
 

@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryproject.R
 import fragment.restaurantMenu.*
-import fragment.user.SearchFragment
+import fragment.user.RestaurantFragment
 
-class SearchBarRecyclerAdapter(val context : SearchFragment, val restaurantNameList : List<String> ) :
-    RecyclerView.Adapter<SearchBarRecyclerAdapter.ViewHolder>()
+class RecyclerAdapterRestaurantFragment(val context : RestaurantFragment, val restaurantNameList : List<String> ) :
+    RecyclerView.Adapter<RecyclerAdapterRestaurantFragment.ViewHolder>()
 {
 
 lateinit var thisContext : Context
@@ -30,9 +30,7 @@ lateinit var thisContext : Context
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val restaurantTitle = restaurantNameList[position]
         holder.restaurantTitle.text = restaurantTitle
-
         holder.menuButton.setOnClickListener {
-
             fragmentDecider(restaurantTitle)
         }
     }
@@ -75,7 +73,7 @@ lateinit var thisContext : Context
 
         val fragmentManager = thisContext as AppCompatActivity
         fragment.arguments = bundle
-        fragmentManager.supportFragmentManager.beginTransaction()
+        fragmentManager.supportFragmentManager.beginTransaction().addToBackStack("RestaurantFragment")
         .replace(R.id.fragment_container, fragment)
         .commit()
     }
