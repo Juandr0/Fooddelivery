@@ -67,8 +67,12 @@ class OrderConfirmationFragment : Fragment() {
         val price = ShoppingCart.calculateTotalPrice()
         orderPrice.text =getString(R.string.order_total) + " " + price.toString() + ":-"
 
+        //calculates the VAT and rounds it to 2 decimals before displaying it, so that the user do not see numbers like "19.9999999999999998"
         var taxPercentile = 0.12
-        salesTax.text = getString(R.string.sales_tax) + " " +  price * taxPercentile + ":-"
+        val totalTax = price * taxPercentile
+        val taxPercentile2digits = String.format("%.2f", totalTax).toDouble()
+
+        salesTax.text = getString(R.string.sales_tax) + " " + taxPercentile2digits + ":-"
 
 
         //Gets the current time and the user address and displays it in textview

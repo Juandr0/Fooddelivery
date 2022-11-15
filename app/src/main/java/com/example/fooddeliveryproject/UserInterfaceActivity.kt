@@ -127,16 +127,12 @@ class UserInterfaceActivity : AppCompatActivity() {
 
     }
 
-    fun isCompanySignedIn(){
+    private fun isCompanySignedIn(){
 
             var type : String = ""
-            val currentUser = auth.currentUser
+            val currentUser = auth.currentUser ?: return
 
-            if (currentUser == null){
-                return
-            }
-
-            val docRef = db.collection("users").document(currentUser.uid)
+        val docRef = db.collection("users").document(currentUser.uid)
             docRef.get()
                 .addOnSuccessListener { document ->
                     val user = document.toObject<User>()
@@ -150,14 +146,10 @@ class UserInterfaceActivity : AppCompatActivity() {
 
     }
 
-    open fun userTypeCheck() {
+    private fun userTypeCheck() {
 
         var type : String
-        val currentUser = auth.currentUser
-
-        if (currentUser == null){
-            return
-        }
+        val currentUser = auth.currentUser ?: return
 
         val docRef = db.collection("users").document(currentUser.uid)
         docRef.get()
@@ -171,7 +163,7 @@ class UserInterfaceActivity : AppCompatActivity() {
             }
     }
 
-    open fun activateCorrectProfile(userType : String){
+    private fun activateCorrectProfile(userType : String){
 
         if (currentUserType == ""){
             return
