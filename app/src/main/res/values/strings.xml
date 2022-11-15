@@ -72,6 +72,7 @@
     <string name="main_dish">Main dish</string>
     <string name="curry">Curry</string>
     <string name="add_to_order">Add to order</string>
+    <string name="deliveryFee">%1s kr</string>
 
     <string name="error_reqinfo">Enter the required information to sign up.</string>
 
