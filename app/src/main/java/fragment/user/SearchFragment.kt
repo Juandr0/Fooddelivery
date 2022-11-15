@@ -2,21 +2,18 @@ package fragment.user
 
 import adapters.SearchBarRecyclerAdapter
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import classes.Restaurant
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 
-
 class SearchFragment : Fragment() {
 
-lateinit var restaurantNamesList : List<String>
+    lateinit var restaurantNamesList : List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +49,7 @@ lateinit var restaurantNamesList : List<String>
                 restaurantList.sortWith(String.CASE_INSENSITIVE_ORDER)
                 restaurantNamesList = restaurantList
                 initializeRecyclerView(requireView())
-        }
+            }
 
     }
 

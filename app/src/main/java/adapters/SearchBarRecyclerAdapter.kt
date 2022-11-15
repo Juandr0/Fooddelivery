@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryproject.R
 import fragment.restaurantMenu.*
-import fragment.user.ProfileFragment
 import fragment.user.SearchFragment
 
 class SearchBarRecyclerAdapter(val context : SearchFragment, val restaurantNameList : List<String> ) :

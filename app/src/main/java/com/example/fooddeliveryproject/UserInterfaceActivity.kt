@@ -26,7 +26,6 @@ val storage = Firebase.storage
 class UserInterfaceActivity : AppCompatActivity() {
 
     private val exploreFragment = ExploreFragment()
-    private val restaurantsFragment = RestaurantsFragment()
     private val searchFragment = SearchFragment()
     private val profileFragment = ProfileFragment()
     private val loginFragment = LoginFragment()
@@ -66,8 +65,7 @@ class UserInterfaceActivity : AppCompatActivity() {
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
                 R.id.ic_explore -> setCurrentFragment(exploreFragment)
-                R.id.ic_restaurants -> setCurrentFragment(restaurantsFragment)
-                R.id.ic_search -> setCurrentFragment(searchFragment)
+                R.id.ic_restaurants -> setCurrentFragment(searchFragment)
                 R.id.ic_profile -> {
                     // if-sats som kollar ifall användaren är inloggad -> om false skicka anv till
                     // login-fragment
