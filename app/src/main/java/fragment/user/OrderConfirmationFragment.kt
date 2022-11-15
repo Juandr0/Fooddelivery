@@ -150,6 +150,7 @@ class OrderConfirmationFragment : Fragment() {
         val args = this.arguments
         val orderNumberBundle = args?.getInt("orderNumber")
         val lastOrder = args?.getStringArrayList("bundleList")
+        val restaurantName = args?.getString("restaurantName")
 
         if (lastOrder != null) {
             for (item in lastOrder){
@@ -157,6 +158,7 @@ class OrderConfirmationFragment : Fragment() {
             }
         }
         orderNumber.text = getString(R.string.ordernumber) + " " + orderNumberBundle.toString()
+        ratingTextView.text = getString(R.string.rate_restaurant, restaurantName)
 
     }
 
