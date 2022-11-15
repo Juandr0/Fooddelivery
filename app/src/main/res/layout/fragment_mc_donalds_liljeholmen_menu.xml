@@ -9,6 +9,94 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/indianGardenOpeningTimeIconImageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_opening_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mcdonaldsLiljeholmenNameView" />
+
+        <TextView
+            android:id="@+id/mcdonaldsLiljeholmenNameView"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="11dp"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mcdonaldsLiljeholmenHeaderImageView" />
+
+        <TextView
+            android:id="@+id/mcdonaldsLiljeholmenOpeningTimeView"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView8"
+            app:layout_constraintStart_toEndOf="@+id/indianGardenOpeningTimeIconImageView6"
+            tools:layout_editor_absoluteY="252dp" />
+
+        <TextView
+            android:id="@+id/mcdonaldsLiljeholmenDeliveryFeeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="13dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/brodernasDeliveryIconImageView8"
+            app:layout_constraintTop_toBottomOf="@+id/mcdonaldsLiljeholmenOpeningTimeView" />
+
+        <TextView
+            android:id="@+id/mcdonaldsLiljeholmenRatingView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="30dp"
+            android:text="5.0"
+            android:textAlignment="textEnd"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mcdonaldsLiljeholmenHeaderImageView" />
+
+        <ImageView
+            android:id="@+id/brodernasRatingIconImageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintTop_toBottomOf="@+id/mcdonaldsLiljeholmenHeaderImageView"
+            tools:layout_editor_absoluteX="316dp" />
+
+        <ImageView
+            android:id="@+id/brodernasDeliveryIconImageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_delivery_fee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenOpeningTimeIconImageView6" />
+
+        <ImageView
+            android:id="@+id/mcdonaldsLiljeholmenHeaderImageView"
+            android:layout_width="0dp"
+            android:layout_height="152dp"
+            android:layout_marginTop="60dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
         <ImageButton
             android:id="@+id/mcDonaldsPreviousFragmentImageButton"
             android:layout_width="55dp"
@@ -25,19 +113,20 @@
             android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="268dp"
-            android:text="@string/menus"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/menu"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/brodernasDeliveryIconImageView8" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mcDonaldsLiljeholmenMenuItemsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -9,6 +9,94 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/indianGardenOpeningTimeIconImageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_opening_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trattoriagrazieNameView" />
+
+        <TextView
+            android:id="@+id/trattoriagrazieNameView"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trattoriagrazieHeaderImageView" />
+
+        <TextView
+            android:id="@+id/trattoriagrazieOpeningTimeView"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView12"
+            app:layout_constraintStart_toEndOf="@+id/indianGardenOpeningTimeIconImageView10"
+            app:layout_constraintTop_toBottomOf="@+id/trattoriagrazieNameView" />
+
+        <TextView
+            android:id="@+id/trattoriagrazieDeliveryFeeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="13dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/brodernasDeliveryIconImageView12"
+            app:layout_constraintTop_toBottomOf="@+id/trattoriagrazieOpeningTimeView" />
+
+        <TextView
+            android:id="@+id/trattoriagrazieRatingView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="30dp"
+            android:text="5.0"
+            android:textAlignment="textEnd"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trattoriagrazieHeaderImageView" />
+
+        <ImageView
+            android:id="@+id/brodernasRatingIconImageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintEnd_toStartOf="@+id/trattoriagrazieRatingView"
+            app:layout_constraintTop_toBottomOf="@+id/trattoriagrazieHeaderImageView" />
+
+        <ImageView
+            android:id="@+id/brodernasDeliveryIconImageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_delivery_fee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenOpeningTimeIconImageView10" />
+
+        <ImageView
+            android:id="@+id/trattoriagrazieHeaderImageView"
+            android:layout_width="0dp"
+            android:layout_height="152dp"
+            android:layout_marginTop="60dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
         <ImageButton
             android:id="@+id/trattoriaGraziePreviousFragmentImageButton"
             android:layout_width="55dp"
@@ -25,19 +113,20 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="268dp"
-            android:text="@string/main_dish"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/menu"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/brodernasDeliveryIconImageView12" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trattoriaGrazieMenuItemsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
