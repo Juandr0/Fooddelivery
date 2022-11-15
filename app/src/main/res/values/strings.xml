@@ -16,7 +16,9 @@
     <string name="cancel">Cancel</string>
     
     <string name="rate_restaurant">Click on the stars below to rate 2%s</string>
-    
+    <string name="rate_feedback">Thank you for the feedback!</string>
+
+
     <string name="poor">Poor</string>
     <string name="fair">Fair</string>
     <string name="good">Good</string>

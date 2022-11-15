@@ -42,6 +42,9 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var imageStarText4 : TextView
     lateinit var imageStarText5 : TextView
 
+    lateinit var ratingTextView : TextView
+    //Restaurant rating END
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +57,7 @@ class OrderConfirmationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Rating
         imageStar1 = view.findViewById(R.id.confirmation_star1)
         imageStar2 = view.findViewById(R.id.confirmation_star2)
         imageStar3 = view.findViewById(R.id.confirmation_star3)
@@ -66,10 +70,15 @@ class OrderConfirmationFragment : Fragment() {
         imageStarText4 = view.findViewById(R.id.confirmation_star4TextView)
         imageStarText5 = view.findViewById(R.id.confirmation_star5TextView)
 
+        ratingTextView = view.findViewById(R.id.confirmation_rateTextView)
+        //Rating ENDS
+
+
         orderNumber = view.findViewById(R.id.confirmation_OrderNumber)
         orderPrice = view.findViewById(R.id.confirmation_totalPriceTextView)
         orderAddress = view.findViewById(R.id.confirmation_deliveryAddressTextview)
         salesTax = view.findViewById(R.id.confirmation_salesTaxTextView)
+
 
         activateRatingClickListener()
         initiateBundleToViews()
@@ -81,25 +90,28 @@ class OrderConfirmationFragment : Fragment() {
         ShoppingCart.clearItemsFromCart()
     }
 
-    private fun activateRatingClickListener(){
-        imageStar1.setOnClickListener { updateDbRating(1) }
-        imageStarText1.setOnClickListener{ updateDbRating(1) }
 
-        imageStar2.setOnClickListener { updateDbRating(2) }
-        imageStarText2.setOnClickListener{ updateDbRating(2) }
-
-        imageStar3.setOnClickListener { updateDbRating(3) }
-        imageStarText3.setOnClickListener{ updateDbRating(3) }
-
-        imageStar4.setOnClickListener { updateDbRating(4) }
-        imageStarText4.setOnClickListener{ updateDbRating(4) }
-
-        imageStar5.setOnClickListener { updateDbRating(5) }
-        imageStarText5.setOnClickListener{ updateDbRating(5) }
+    //Deactivates clicklisteners, pass rating to DB, update textview
+    private fun updateRating(rating : Int){
+        deactivateClickListeners()
+        ratingTextView.text = getString(R.string.rate_feedback)
     }
 
-    private fun updateDbRating(rating : Int){
-        //Göm bilderna, visa textview som säger "Thank you for your feedback"
+    private fun deactivateClickListeners(){
+        imageStar1.setOnClickListener (null)
+        imageStarText1.setOnClickListener (null)
+
+        imageStar2.setOnClickListener (null)
+        imageStarText2.setOnClickListener (null)
+
+        imageStar3.setOnClickListener (null)
+        imageStarText3.setOnClickListener (null)
+
+        imageStar4.setOnClickListener (null)
+        imageStarText4.setOnClickListener (null)
+
+        imageStar5.setOnClickListener (null)
+        imageStarText5.setOnClickListener (null)
     }
 
     //takes local time and adds 30 minutes
@@ -114,7 +126,7 @@ class OrderConfirmationFragment : Fragment() {
         val price = ShoppingCart.calculateTotalPrice()
         orderPrice.text =getString(R.string.order_total) + " " + price.toString() + ":-"
 
-        var taxPercentile = 0.12
+        val taxPercentile = 0.12
         salesTax.text = getString(R.string.sales_tax) + " " +  price * taxPercentile + ":-"
 
 
@@ -153,6 +165,66 @@ class OrderConfirmationFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = OrderConfirmationRecyclerAdapter(OrderConfirmationFragment(), itemsList)
         recyclerView.adapter = adapter
+    }
+
+
+    //  Activates clicklistener and passes the equivalent response to update rating function
+    private fun activateRatingClickListener(){
+
+        //  Sets textview to default text if user already have rated a restaurant
+        ratingTextView.text = getString(R.string.rate_restaurant)
+        var ratingNumber : Int
+        // If user press star number one, or the textview below it
+        imageStar1.setOnClickListener {
+            ratingNumber = 1
+            updateRating(ratingNumber)}
+        imageStarText1.setOnClickListener{
+            ratingNumber = 1
+            updateRating(ratingNumber)
+        }
+
+
+        // If user press star number two, or the textview below it
+        imageStar2.setOnClickListener {
+            ratingNumber = 2
+            updateRating(ratingNumber)
+        }
+        imageStarText2.setOnClickListener{
+            ratingNumber = 2
+            updateRating(ratingNumber)
+        }
+
+
+        // If user press star number three, or the textview below it
+        imageStar3.setOnClickListener  {
+            ratingNumber = 3
+            updateRating(ratingNumber)
+        }
+        imageStarText3.setOnClickListener{
+            ratingNumber = 3
+            updateRating(ratingNumber)
+        }
+
+        // If user press star number four, or the textview below it
+        imageStar4.setOnClickListener {
+            ratingNumber = 4
+            updateRating(ratingNumber)
+        }
+        imageStarText4.setOnClickListener{
+            ratingNumber = 4
+            updateRating(ratingNumber)
+        }
+
+
+        // If user press star number five, or the textview below it
+        imageStar5.setOnClickListener {
+            ratingNumber = 5
+            updateRating(ratingNumber)
+        }
+        imageStarText5.setOnClickListener{
+            ratingNumber = 5
+            updateRating(ratingNumber)
+        }
     }
 
 }
