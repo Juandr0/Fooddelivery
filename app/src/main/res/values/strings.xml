@@ -76,7 +76,7 @@
     <string name="recent_order">Most recent order</string>
     <string name="empty_shoppingcart">The shoppingcart is empty.
                                     \nAdd items to order</string>
-
+    <string name="queryhint">Enter restaurant name</string >
 
     <string name="tacos">Tacos</string>
     <string name="menus">Menus</string>
