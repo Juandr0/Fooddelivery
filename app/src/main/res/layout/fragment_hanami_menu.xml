@@ -17,7 +17,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_opening_time"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hanamiNameText" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiNameView" />
 
         <ImageView
             android:id="@+id/hanamiHeaderImageView"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/hanamiNameText"
+            android:id="@+id/hanamiNameView"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="30dp"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/hanamiHeaderImageView" />
 
         <TextView
-            android:id="@+id/hanamiCategoryText"
+            android:id="@+id/hanamiOpeningTimeView"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="5dp"
@@ -67,20 +67,20 @@
             android:text="TextView"
             app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView7"
             app:layout_constraintStart_toEndOf="@+id/brodernasOpeningTimeIconImageView2"
-            app:layout_constraintTop_toBottomOf="@+id/hanamiNameText" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiNameView" />
 
         <TextView
-            android:id="@+id/hanamiDeliveryFee"
+            android:id="@+id/hanamiDeliveryFeeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="13dp"
             android:text="TextView"
             app:layout_constraintStart_toEndOf="@+id/brodernasDeliveryIconImageView7"
-            app:layout_constraintTop_toBottomOf="@+id/hanamiCategoryText" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiOpeningTimeView" />
 
         <TextView
-            android:id="@+id/hanamiRatingText"
+            android:id="@+id/hanamiRatingView"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="13dp"
@@ -99,7 +99,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="2dp"
             android:src="@drawable/ic_baseline_star_rate_24"
-            app:layout_constraintEnd_toStartOf="@+id/hanamiRatingText"
+            app:layout_constraintEnd_toStartOf="@+id/hanamiRatingView"
             app:layout_constraintTop_toBottomOf="@+id/hanamiHeaderImageView" />
 
         <ImageView
@@ -110,7 +110,7 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_delivery_fee"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hanamiCategoryText" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiOpeningTimeView" />
 
         <TextView
             android:id="@+id/textView18"

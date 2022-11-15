@@ -6,14 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +35,13 @@ class HanamiMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var hanamiHeaderImageView: ImageView
+    lateinit var hanamiNameText: TextView
+    lateinit var hanamiOpeningTimeView: TextView
+    lateinit var hanamiDeliveryFeeView: TextView
+    lateinit var hanamiRatingView: TextView
+
 
     lateinit var hanamiPreviousFragmentImageButton: ImageButton
 
@@ -51,6 +64,15 @@ class HanamiMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        hanamiNameText = view.findViewById(R.id.hanamiNameView)
+        hanamiOpeningTimeView = view.findViewById(R.id.hanamiOpeningTimeView)
+        hanamiDeliveryFeeView = view.findViewById(R.id.hanamiDeliveryFeeView)
+        hanamiRatingView = view.findViewById(R.id.hanamiRatingView)
+        hanamiHeaderImageView = view.findViewById(R.id.hanamiHeaderImageView)
+
+        setMenuInformation()
 
         hanamiPreviousFragmentImageButton = view.findViewById(R.id.hanamiPreviousFragmentImageButton)
         hanamiPreviousFragmentImageButton.setOnClickListener {
@@ -130,4 +152,23 @@ class HanamiMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("q7gBWJ5YXq5F5kiUWAwD")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                hanamiNameText.text = restaurantInfo?.name
+                hanamiOpeningTimeView.text = restaurantInfo?.openingTime
+                hanamiDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                hanamiRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into(hanamiHeaderImageView)
+            }
+    }
+
+
 }
