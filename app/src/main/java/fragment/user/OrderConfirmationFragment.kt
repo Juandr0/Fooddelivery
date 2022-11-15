@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,19 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var orderAddress : TextView
     lateinit var salesTax : TextView
 
+    //Restaurant rating
+    lateinit var imageStar1 : ImageView
+    lateinit var imageStar2 : ImageView
+    lateinit var imageStar3 : ImageView
+    lateinit var imageStar4 : ImageView
+    lateinit var imageStar5 : ImageView
+
+    lateinit var imageStarText1 : TextView
+    lateinit var imageStarText2 : TextView
+    lateinit var imageStarText3 : TextView
+    lateinit var imageStarText4 : TextView
+    lateinit var imageStarText5 : TextView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,19 +54,52 @@ class OrderConfirmationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        imageStar1 = view.findViewById(R.id.confirmation_star1)
+        imageStar2 = view.findViewById(R.id.confirmation_star2)
+        imageStar3 = view.findViewById(R.id.confirmation_star3)
+        imageStar4 = view.findViewById(R.id.confirmation_star4)
+        imageStar5 = view.findViewById(R.id.confirmation_star5)
+
+        imageStarText1 = view.findViewById(R.id.confirmation_star1TextView)
+        imageStarText2 = view.findViewById(R.id.confirmation_star2TextView)
+        imageStarText3 = view.findViewById(R.id.confirmation_star3TextView)
+        imageStarText4 = view.findViewById(R.id.confirmation_star4TextView)
+        imageStarText5 = view.findViewById(R.id.confirmation_star5TextView)
 
         orderNumber = view.findViewById(R.id.confirmation_OrderNumber)
         orderPrice = view.findViewById(R.id.confirmation_totalPriceTextView)
         orderAddress = view.findViewById(R.id.confirmation_deliveryAddressTextview)
         salesTax = view.findViewById(R.id.confirmation_salesTaxTextView)
 
+        activateRatingClickListener()
         initiateBundleToViews()
         setTextViews()
         initalizeRecyclerView(view)
 
-
+        //Hämta restaurangnamn
 
         ShoppingCart.clearItemsFromCart()
+    }
+
+    private fun activateRatingClickListener(){
+        imageStar1.setOnClickListener { updateDbRating(1) }
+        imageStarText1.setOnClickListener{ updateDbRating(1) }
+
+        imageStar2.setOnClickListener { updateDbRating(2) }
+        imageStarText2.setOnClickListener{ updateDbRating(2) }
+
+        imageStar3.setOnClickListener { updateDbRating(3) }
+        imageStarText3.setOnClickListener{ updateDbRating(3) }
+
+        imageStar4.setOnClickListener { updateDbRating(4) }
+        imageStarText4.setOnClickListener{ updateDbRating(4) }
+
+        imageStar5.setOnClickListener { updateDbRating(5) }
+        imageStarText5.setOnClickListener{ updateDbRating(5) }
+    }
+
+    private fun updateDbRating(rating : Int){
+        //Göm bilderna, visa textview som säger "Thank you for your feedback"
     }
 
     //takes local time and adds 30 minutes
