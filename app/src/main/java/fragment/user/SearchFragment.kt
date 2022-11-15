@@ -43,14 +43,15 @@ lateinit var restaurantNamesList : List<String>
 
     private fun getRestaurantNames(){
         var restaurantList = mutableListOf<String>()
-        val docRef = db.collection("restaurants")
+        db.collection("restaurants")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents){
                     restaurantList.add(document["name"].toString())
                 }
+                restaurantList.sortWith(String.CASE_INSENSITIVE_ORDER)
                 restaurantNamesList = restaurantList
-            initializeRecyclerView(requireView())
+                initializeRecyclerView(requireView())
         }
 
     }
