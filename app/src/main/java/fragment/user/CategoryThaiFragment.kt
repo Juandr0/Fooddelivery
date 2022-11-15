@@ -78,11 +78,6 @@ class CategoryThaiFragment : Fragment() {
 
                     adapter.setOnItemClickListener(object : CategoryThaiRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            //toast to check if clicking works
-                            Toast.makeText(context,
-                                "you clicked on item no. $position",
-                                Toast.LENGTH_SHORT
-                            ).show()
 
                             when (position) {
                                 0 -> {

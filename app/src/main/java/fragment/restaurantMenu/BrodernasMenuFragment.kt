@@ -100,7 +100,6 @@ class BrodernasMenuFragment : Fragment() {
                             when (position) {
                                 0 -> {
 
-
                                 }
                                 1 -> {
                                 }
