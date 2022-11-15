@@ -25,6 +25,18 @@
             app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
             app:layout_constraintTop_toBottomOf="@+id/confirmation_deliveryAddressTextview" />
 
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#000000"
+            android:backgroundTint="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_OrderSuccessTextView"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_star3" />
+
         <TextView
             android:id="@+id/confirmation_OrderSuccessTextView"
             android:layout_width="wrap_content"
@@ -135,5 +147,118 @@
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="@+id/confirmation_OrderSuccessTextView"
             app:layout_constraintTop_toBottomOf="@+id/confirmation_totalPriceTextView" />
+
+        <TextView
+            android:id="@+id/confirmation_rateTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Rate"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="@+id/divider7"
+            app:layout_constraintStart_toStartOf="@+id/divider7"
+            app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+        <ImageView
+            android:id="@+id/confirmation_star1"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintBottom_toBottomOf="@+id/confirmation_star3"
+            app:layout_constraintEnd_toStartOf="@+id/confirmation_star2" />
+
+        <ImageView
+            android:id="@+id/confirmation_star2"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintBottom_toBottomOf="@+id/confirmation_star3"
+            app:layout_constraintEnd_toStartOf="@+id/confirmation_star3" />
+
+        <TextView
+            android:id="@+id/confirmation_star2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fair"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_star2"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_star2"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_star1" />
+
+        <TextView
+            android:id="@+id/confirmation_star3TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/good"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_star3"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_star3"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_star1" />
+
+        <TextView
+            android:id="@+id/confirmation_star5TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/excellent"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_star5"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_star5"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_star1" />
+
+        <TextView
+            android:id="@+id/confirmation_star4TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/great"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_star4"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_star4"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_star1" />
+
+        <ImageView
+            android:id="@+id/confirmation_star3"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintEnd_toEndOf="@+id/divider7"
+            app:layout_constraintStart_toStartOf="@+id/divider7"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_rateTextView" />
+
+        <ImageView
+            android:id="@+id/confirmation_star4"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintBottom_toBottomOf="@+id/confirmation_star3"
+            app:layout_constraintStart_toEndOf="@+id/confirmation_star3" />
+
+        <ImageView
+            android:id="@+id/confirmation_star5"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintBottom_toBottomOf="@+id/confirmation_star3"
+            app:layout_constraintStart_toEndOf="@+id/confirmation_star4" />
+
+        <TextView
+            android:id="@+id/confirmation_star1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/poor"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_star1"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_star1"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_star1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
