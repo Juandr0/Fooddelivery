@@ -2,6 +2,7 @@ package fragment.user
 
 import adapters.OrderConfirmationRecyclerAdapter
 import android.os.Bundle
+import android.text.format.DateFormat.format
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,10 +18,12 @@ import classes.User
 import com.example.fooddeliveryproject.R
 import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.ktx.toObject
+import java.text.NumberFormat
 import java.time.Duration
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import java.util.*
 
 class OrderConfirmationFragment : Fragment() {
 
@@ -138,16 +141,22 @@ class OrderConfirmationFragment : Fragment() {
                             totalVotes = 1
                         }
 
-                        val newRating = (totalRating/totalVotes)
-                        val newRatingWithTwoDecimals : Double = String.format("%2f", newRating).toDouble()
+
+                        val calcRating = totalRating/totalVotes
+                        var format = NumberFormat.getInstance()
+                        var newRating = String.format("%.1f", calcRating).format(calcRating)
+                        val newRatingFormat = format.parse(newRating).toDouble()
+
+
 
                         val mapUpdate = mapOf(
-                            "rating" to newRatingWithTwoDecimals,
+                            "rating" to newRatingFormat,
                             "totalRating" to totalRating,
                             "totalVotes" to totalVotes
                         )
 
                         restaurantRef.update(mapUpdate)
+
                     }
 
             }
