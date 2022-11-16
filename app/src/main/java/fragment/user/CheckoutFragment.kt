@@ -98,7 +98,6 @@ class CheckoutFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 adapter.removeItemFromReyclerView(position)
                 orderPriceTotal()
-
                 hideShowDeliveryFee()
             }
         })
@@ -140,7 +139,7 @@ class CheckoutFragment : Fragment() {
 
         bundle.putInt("price", ShoppingCart.calculateTotalPrice())
         bundle.putInt("orderNumber", orderNumber)
-
+        bundle.putString("restaurantName", restaurantHeaderTextView.text.toString())
         return bundle
     }
 
@@ -176,6 +175,7 @@ class CheckoutFragment : Fragment() {
                 var date = Calendar.getInstance().time
                 //Adress skickas med bundle som går till orderconfirmation
                 userAddress = user.address.toString()
+
 
                 val dataToBeSent = hashMapOf(
                     "restaurant" to  restaurant ,
@@ -231,7 +231,6 @@ class CheckoutFragment : Fragment() {
     }
 
     fun setCurrentFragment(fragment : Fragment, bundle: Bundle?){
-
         val fragmentManager = parentFragmentManager
         fragment.arguments = bundle
         val transaction = fragmentManager.beginTransaction()

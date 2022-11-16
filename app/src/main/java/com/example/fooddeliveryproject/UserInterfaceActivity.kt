@@ -8,8 +8,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import classes.OrderItem
-import classes.ShoppingCart
 import classes.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -28,8 +26,7 @@ val storage = Firebase.storage
 class UserInterfaceActivity : AppCompatActivity() {
 
     private val exploreFragment = ExploreFragment()
-    private val restaurantsFragment = RestaurantsFragment()
-    private val searchFragment = SearchFragment()
+    private val restaurantFragment = RestaurantFragment()
     private val profileFragment = ProfileFragment()
     private val loginFragment = LoginFragment()
     private val RestaurantInterfaceActivity = RestaurantInterfaceActivity()
@@ -51,7 +48,7 @@ class UserInterfaceActivity : AppCompatActivity() {
         navigationMenu = findViewById(R.id.navigationbar)
         loadingScreenFragmentContainer = findViewById(R.id.loadingPageFragmentContainer)
 
-
+        isCompanySignedIn()
         setCurrentFragment(exploreFragment)
 
         //Loading screen
@@ -68,8 +65,7 @@ class UserInterfaceActivity : AppCompatActivity() {
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
                 R.id.ic_explore -> setCurrentFragment(exploreFragment)
-                R.id.ic_restaurants -> setCurrentFragment(restaurantsFragment)
-                R.id.ic_search -> setCurrentFragment(searchFragment)
+                R.id.ic_restaurants -> setCurrentFragment(restaurantFragment)
                 R.id.ic_profile -> {
                     // if-sats som kollar ifall användaren är inloggad -> om false skicka anv till
                     // login-fragment
@@ -126,17 +122,31 @@ class UserInterfaceActivity : AppCompatActivity() {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, fragment)
             transaction.commit()
+    }
+
+    private fun isCompanySignedIn(){
+
+            var type : String = ""
+            val currentUser = auth.currentUser ?: return
+
+        val docRef = db.collection("users").document(currentUser.uid)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject<User>()
+                    if (user != null){
+                        type = user.type.toString()
+                    }
+                    if (type == "restaurant"){
+                        startNewActivity(RestaurantInterfaceActivity)
+                    }
+                }
 
     }
 
-    open fun userTypeCheck() {
+    private fun userTypeCheck() {
 
         var type : String
-        val currentUser = auth.currentUser
-
-        if (currentUser == null){
-            return
-        }
+        val currentUser = auth.currentUser ?: return
 
         val docRef = db.collection("users").document(currentUser.uid)
         docRef.get()
@@ -150,7 +160,7 @@ class UserInterfaceActivity : AppCompatActivity() {
             }
     }
 
-    open fun activateCorrectProfile(userType : String){
+    private fun activateCorrectProfile(userType : String){
 
         if (currentUserType == ""){
             return

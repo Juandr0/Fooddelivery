@@ -39,14 +39,14 @@
             android:layout_width="167dp"
             android:layout_height="63dp"
             android:layout_marginStart="113dp"
-            android:layout_marginTop="57dp"
             android:layout_marginEnd="113dp"
-            android:backgroundTint="@color/woopwoop_green"
+            android:layout_marginBottom="36dp"
+            android:backgroundTint="@color/restaurant_blue"
             android:text="@string/add_new_dish"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restaurantEditMenuRecyclerView" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/refreshImageButton"
@@ -56,9 +56,9 @@
             android:background="#00FFFFFF"
             android:scaleType="fitStart"
             android:src="@drawable/ic_refresh"
+            android:tint="@color/restaurant_blue"
             app:layout_constraintBottom_toTopOf="@+id/restaurantEditMenuRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restaurantMenuView" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
