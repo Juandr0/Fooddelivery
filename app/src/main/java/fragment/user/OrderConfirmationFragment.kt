@@ -262,6 +262,7 @@ class OrderConfirmationFragment : Fragment() {
         imageStar1.setOnClickListener {
             ratingNumber = 1
             updateRating(ratingNumber)
+
             imageStar2.visibility = View.INVISIBLE
             imageStarText2.visibility = View.INVISIBLE
 
