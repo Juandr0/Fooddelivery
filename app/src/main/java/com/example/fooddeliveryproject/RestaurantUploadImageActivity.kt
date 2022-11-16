@@ -1,9 +1,11 @@
 package com.example.fooddeliveryproject
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
@@ -19,6 +21,7 @@ class RestaurantUploadImageActivity : AppCompatActivity() {
     lateinit var selectImageButton: Button
     lateinit var uploadPreviewImageView: ImageView
     lateinit var imageUri: Uri
+    lateinit var returnImageButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +31,7 @@ class RestaurantUploadImageActivity : AppCompatActivity() {
         uploadImageButton = findViewById(R.id.uploadImageButton)
         selectImageButton = findViewById(R.id.selectImageButton)
         uploadPreviewImageView = findViewById(R.id.uploadPreviewImageVIew)
+        returnImageButton = findViewById(R.id.returnImageButton)
 
         //gets image from phone and shows it in the ImageVIew
         val getImage = registerForActivityResult(
@@ -41,7 +45,10 @@ class RestaurantUploadImageActivity : AppCompatActivity() {
             }
         )
 
-
+        returnImageButton.setOnClickListener {
+            val intent = Intent(this, RestaurantInterfaceActivity::class.java)
+                startActivity(intent)
+        }
 
         selectImageButton.setOnClickListener {
 
