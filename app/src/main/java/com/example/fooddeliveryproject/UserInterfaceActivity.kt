@@ -26,8 +26,7 @@ val storage = Firebase.storage
 class UserInterfaceActivity : AppCompatActivity() {
 
     private val exploreFragment = ExploreFragment()
-    private val restaurantsFragment = RestaurantsFragment()
-    private val searchFragment = SearchFragment()
+    private val restaurantFragment = RestaurantFragment()
     private val profileFragment = ProfileFragment()
     private val loginFragment = LoginFragment()
     private val RestaurantInterfaceActivity = RestaurantInterfaceActivity()
@@ -66,8 +65,7 @@ class UserInterfaceActivity : AppCompatActivity() {
         navigationMenu.setOnItemSelectedListener{
             when(it.itemId) {
                 R.id.ic_explore -> setCurrentFragment(exploreFragment)
-                R.id.ic_restaurants -> setCurrentFragment(restaurantsFragment)
-                R.id.ic_search -> setCurrentFragment(searchFragment)
+                R.id.ic_restaurants -> setCurrentFragment(restaurantFragment)
                 R.id.ic_profile -> {
                     // if-sats som kollar ifall användaren är inloggad -> om false skicka anv till
                     // login-fragment
@@ -124,7 +122,6 @@ class UserInterfaceActivity : AppCompatActivity() {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, fragment)
             transaction.commit()
-
     }
 
     private fun isCompanySignedIn(){

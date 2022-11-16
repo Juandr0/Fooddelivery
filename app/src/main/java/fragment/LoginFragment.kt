@@ -1,5 +1,6 @@
 package fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -152,6 +153,7 @@ class LoginFragment : Fragment()  {
 
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun startNewActivity(newActivity : AppCompatActivity) {
     val intent = Intent(activity, newActivity::class.java)
         startActivity(intent)

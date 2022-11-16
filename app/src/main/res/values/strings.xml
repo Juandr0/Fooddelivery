@@ -14,6 +14,17 @@
                                             \n\nIf you wish and add the new item press "OK", but doing so will also empty your cart. Press "cancel" to keep your current order.</string>
 
     <string name="cancel">Cancel</string>
+    
+    <string name="rate_restaurant">Click on the stars below to rate
+                                    \n%2s</string>
+    <string name="rate_feedback">Thank you for the feedback!</string>
+
+
+    <string name="poor">Poor</string>
+    <string name="fair">Fair</string>
+    <string name="good">Good</string>
+    <string name="great">Great</string>
+    <string name="excellent">Excellent</string>
 
     <string name="thank_you">Thank you for using WoopWoop!
                             \nWe hope to see you again soon!</string>
@@ -65,7 +76,7 @@
     <string name="recent_order">Most recent order</string>
     <string name="empty_shoppingcart">The shoppingcart is empty.
                                     \nAdd items to order</string>
-
+    <string name="queryhint">Enter restaurant name</string >
 
     <string name="tacos">Tacos</string>
     <string name="menus">Menus</string>
