@@ -182,20 +182,20 @@ class ExploreFragment : Fragment() {
 
                             when (position) {
                                 0 -> {
-                                    setCurrentFragment(MaxadPizzaMenuFragment)
+
                                     
                                 }
                                 1 -> {
-                                    setCurrentFragment(MaxLiljeholmenMenuFragment)
+
                                 }
                                 2 -> {
-                                    setCurrentFragment(BrodernasMenuFragment)
+
                                 }
                                  3-> {
-                                     setCurrentFragment(TrattoriaGrazieMenuFragment)
+
                                 }
                                 4 -> {
-                                    setCurrentFragment(HanamiMenuFragment)
+
                                 }
 
                             }
