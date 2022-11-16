@@ -44,7 +44,7 @@ lateinit var thisContext : Context
 
 
         when (restaurantName){
-            //"Liljeholmens Pizzeria" -> setCurrentFragment()
+            "Liljeholmens Pizzeria" -> setCurrentFragment(LiljeholmesnPizzeriaMenuFragment(), null)
             "Liljeholmens Grill" -> setCurrentFragment(LiljeholmensGrillMenuFragment(), null)
             "Trattoria Grazie" -> setCurrentFragment(TrattoriaGrazieMenuFragment(), null)
             "McDonalds Liljeholmen" -> setCurrentFragment(McDonaldsLiljeholmenMenuFragment(), null)
