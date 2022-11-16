@@ -53,6 +53,7 @@
                 android:textColor="#333333"
                 android:background="@color/white"
                 android:textSize="16sp"
+                android:digits="abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"
                 app:layout_constraintBottom_toTopOf="@+id/line"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintHorizontal_bias="0.837"
