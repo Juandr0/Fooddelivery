@@ -132,7 +132,6 @@ class CheckoutFragment : Fragment() {
 
         for (item in newOrderItemList){
             bundleList.add(item)
-            Log.d("!!!", "bundle item")
         }
 
         bundle.putStringArrayList("bundleList", bundleList)

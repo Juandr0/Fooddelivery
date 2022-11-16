@@ -185,9 +185,11 @@ class OrderConfirmationFragment : Fragment() {
         //calculates the VAT and rounds it to 2 decimals before displaying it, so that the user do not see numbers like "19.9999999999999998"
         var taxPercentile = 0.12
         val totalTax = price * taxPercentile
-        val taxPercentile2digits = String.format("%.2f", totalTax).toDouble()
 
-        salesTax.text = getString(R.string.sales_tax) + " " + taxPercentile2digits + ":-"
+
+
+        val taxPercentile2digits = String.format("%.2f", totalTax)
+       salesTax.text = getString(R.string.sales_tax) + " " + taxPercentile2digits + ":-"
 
 
         ratingTextView.text = getString(R.string.rate_restaurant, restaurantName)
