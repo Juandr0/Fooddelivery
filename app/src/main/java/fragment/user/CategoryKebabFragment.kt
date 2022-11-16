@@ -33,7 +33,7 @@ class CategoryKebabFragment : Fragment() {
     lateinit var categoryKebabPreviousFragmentImageButton: ImageButton
 
     private val LiljeholmensGrillMenuFragment = LiljeholmensGrillMenuFragment()
-//    private val ExploreFragment = ExploreFragment()
+
 
 
 
