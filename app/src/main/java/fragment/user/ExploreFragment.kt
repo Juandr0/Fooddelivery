@@ -15,7 +15,6 @@ import classes.Restaurant
 import com.example.fooddeliveryproject.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import fragment.restaurantMenu.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,13 +43,6 @@ class ExploreFragment : Fragment() {
     private val CategoryItalianFragment = CategoryItalianFragment()
     private val CategoryThaiFragment = CategoryThaiFragment()
     private val CategoryMexicanFragment = CategoryMexicanFragment()
-
-    private val BrodernasMenuFragment = BrodernasMenuFragment()
-    private val HanamiMenuFragment = HanamiMenuFragment()
-    private val MaxadPizzaMenuFragment = MaxadPizzaMenuFragment()
-    private val MaxLiljeholmenMenuFragment = MaxLiljeholmenMenuFragment()
-    private val TrattoriaGrazieMenuFragment = TrattoriaGrazieMenuFragment()
-
 
     // List of categories
     var categories = mutableListOf<FoodCategory>(
@@ -118,8 +110,6 @@ class ExploreFragment : Fragment() {
         // Handler for the clicks on the items in the list
         adapter.setOnItemClickListener(object: FoodCategoryRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(context, "you clicked on item no. $position", Toast.LENGTH_SHORT).show()
-
                 when(position){
                     0->{
                         setCurrentFragment(CategoryHamburgersFragment)

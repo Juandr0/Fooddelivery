@@ -37,7 +37,7 @@ class CategoryHamburgersFragment : Fragment() {
     private val McDonaldsLiljeholmenMenuFragment = McDonaldsLiljeholmenMenuFragment()
     private val BrodernasMenuFragment = BrodernasMenuFragment()
     private val OlearysMenuFragment = OlearysMenuFragment()
-//    private val ExploreFragment = ExploreFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

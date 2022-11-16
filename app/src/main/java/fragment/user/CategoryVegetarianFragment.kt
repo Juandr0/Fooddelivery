@@ -37,7 +37,6 @@ class CategoryVegetarianFragment : Fragment() {
     private val IndianGardenMenuFragment = IndianGardenMenuFragment()
     private val ThaiRungMenuFragment = ThaiRungMenuFragment()
     private val HanamiMenuFragment = HanamiMenuFragment()
-//    private val ExploreFragment = ExploreFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

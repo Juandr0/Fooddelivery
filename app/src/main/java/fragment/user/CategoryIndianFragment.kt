@@ -33,7 +33,7 @@ class CategoryIndianFragment : Fragment() {
     lateinit var categoryIndianPreviousFragmentImageButton: ImageButton
 
     private val IndianGardenMenuFragment = IndianGardenMenuFragment()
-//    private val ExploreFragment = ExploreFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

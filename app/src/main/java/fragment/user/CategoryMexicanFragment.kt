@@ -33,7 +33,7 @@ class CategoryMexicanFragment : Fragment() {
     lateinit var categoryMexicanPreviousFragmentImageButton: ImageButton
 
     private val TacoBarMenuFragment = TacoBarMenuFragment()
-//    private val ExploreFragment = ExploreFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
