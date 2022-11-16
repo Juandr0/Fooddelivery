@@ -79,4 +79,5 @@
         app:layout_constraintStart_toEndOf="@+id/restaurantNameView"
         app:layout_constraintTop_toBottomOf="@+id/restaurantHeaderImageVIew"
         app:srcCompat="@drawable/ic_baseline_star_rate_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class TrattoriaGrazieMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var trattoriagrazieHeaderImageView: ImageView
+    lateinit var trattoriagrazieNameView: TextView
+    lateinit var trattoriagrazieOpeningTimeView: TextView
+    lateinit var trattoriagrazieDeliveryFeeView: TextView
+    lateinit var trattoriagrazieRatingView: TextView
 
     lateinit var trattoriaGraziePreviousFragmentImageButton: ImageButton
 
@@ -51,6 +63,14 @@ class TrattoriaGrazieMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        trattoriagrazieNameView = view.findViewById(R.id.trattoriagrazieNameView)
+        trattoriagrazieOpeningTimeView = view.findViewById(R.id.trattoriagrazieOpeningTimeView)
+        trattoriagrazieDeliveryFeeView = view.findViewById(R.id.trattoriagrazieDeliveryFeeView)
+        trattoriagrazieRatingView = view.findViewById(R.id.trattoriagrazieRatingView)
+        trattoriagrazieHeaderImageView = view.findViewById(R.id.trattoriagrazieHeaderImageView)
+
+        setMenuInformation()
+
         trattoriaGraziePreviousFragmentImageButton = view.findViewById(R.id.trattoriaGraziePreviousFragmentImageButton)
         trattoriaGraziePreviousFragmentImageButton.setOnClickListener {
             returnToPreviousFragment()
@@ -73,11 +93,6 @@ class TrattoriaGrazieMenuFragment : Fragment() {
 
                     adapter.setOnItemClickListener(object : TrattoriaGrazieMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            //toast to check if clicking works
-                            Toast.makeText(context,
-                                "you clicked on item no. $position",
-                                Toast.LENGTH_SHORT
-                            ).show()
 
                             when (position) {
                                 0 -> {
@@ -128,4 +143,22 @@ class TrattoriaGrazieMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("GOltxhAY6NB5TDSFwmBD")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                trattoriagrazieNameView.text = restaurantInfo?.name
+                trattoriagrazieOpeningTimeView.text = restaurantInfo?.openingTime
+                trattoriagrazieDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                trattoriagrazieRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( trattoriagrazieHeaderImageView)
+            }
+    }
+
 }

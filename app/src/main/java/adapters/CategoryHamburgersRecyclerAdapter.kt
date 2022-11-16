@@ -46,6 +46,7 @@ class CategoryHamburgersRecyclerAdapter(val context: CategoryHamburgersFragment,
             .load(restaurant.image)
             .into(holder.restaurantHeaderImageView)
 
+
     }
 
     //counts how many restaurants there are in the list

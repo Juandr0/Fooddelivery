@@ -10,10 +10,23 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/brodernasHeaderImageView7"
-            android:layout_width="394dp"
+            android:id="@+id/brodernasOpeningTimeIconImageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_opening_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hanamiNameView" />
+
+        <ImageView
+            android:id="@+id/hanamiHeaderImageView"
+            android:layout_width="0dp"
             android:layout_height="152dp"
+            android:layout_marginTop="60dp"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
@@ -31,87 +44,93 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/brodernasNameText7"
+            android:id="@+id/hanamiNameView"
             android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:text="TextView"
             android:textColor="#000000"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brodernasHeaderImageView7" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiHeaderImageView" />
 
         <TextView
-            android:id="@+id/brodernasCategoryText7"
+            android:id="@+id/hanamiOpeningTimeView"
             android:layout_width="0dp"
             android:layout_height="20dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:text="TextView"
             app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brodernasNameText7" />
+            app:layout_constraintStart_toEndOf="@+id/brodernasOpeningTimeIconImageView2"
+            app:layout_constraintTop_toBottomOf="@+id/hanamiNameView" />
 
         <TextView
-            android:id="@+id/brodernasDeliveryFee7"
+            android:id="@+id/hanamiDeliveryFeeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="13dp"
             android:text="TextView"
             app:layout_constraintStart_toEndOf="@+id/brodernasDeliveryIconImageView7"
-            app:layout_constraintTop_toBottomOf="@+id/brodernasCategoryText7" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiOpeningTimeView" />
 
         <TextView
-            android:id="@+id/brodernasRatingText7"
-            android:layout_width="40dp"
+            android:id="@+id/hanamiRatingView"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="30dp"
-            android:text="TextView"
+            android:text="5.0"
+            android:textAlignment="textEnd"
             android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brodernasHeaderImageView7" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiHeaderImageView" />
 
         <ImageView
             android:id="@+id/brodernasRatingIconImageView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="2dp"
             android:src="@drawable/ic_baseline_star_rate_24"
-            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingText7"
-            app:layout_constraintTop_toBottomOf="@+id/brodernasHeaderImageView7" />
+            app:layout_constraintEnd_toStartOf="@+id/hanamiRatingView"
+            app:layout_constraintTop_toBottomOf="@+id/hanamiHeaderImageView" />
 
         <ImageView
             android:id="@+id/brodernasDeliveryIconImageView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_delivery_fee"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brodernasCategoryText7" />
+            app:layout_constraintTop_toBottomOf="@+id/hanamiOpeningTimeView" />
 
         <TextView
             android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
-            android:text="@string/sushi"
+            android:text="@string/menu"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/brodernasDeliveryIconImageView7"
-            tools:layout_editor_absoluteX="24dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brodernasDeliveryIconImageView7" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hanamiMenuItemsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

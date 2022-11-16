@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class IndianGardenMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var indiangardenHeaderImageView: ImageView
+    lateinit var indiangardenNameView: TextView
+    lateinit var indiangardenOpeningTimeView: TextView
+    lateinit var indiangardenDeliveryFeeView: TextView
+    lateinit var indiangardenRatingView: TextView
 
     lateinit var indianGardenPreviousFragmentImageButton: ImageButton
 
@@ -51,6 +63,14 @@ class IndianGardenMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        indiangardenNameView = view.findViewById(R.id.indianGardenNameView)
+        indiangardenOpeningTimeView = view.findViewById(R.id.indianGardenOpeningTimeView)
+        indiangardenDeliveryFeeView = view.findViewById(R.id.indianGardenDeliveryFeeView)
+        indiangardenRatingView = view.findViewById(R.id.indianGardenRatingView)
+        indiangardenHeaderImageView = view.findViewById(R.id.indianGardenHeaderImageView)
+
+        setMenuInformation()
+
         indianGardenPreviousFragmentImageButton = view.findViewById(R.id.indianGardenPreviousFragmentImageButton)
         indianGardenPreviousFragmentImageButton.setOnClickListener {
             returnToPreviousFragment()
@@ -73,11 +93,7 @@ class IndianGardenMenuFragment : Fragment() {
 
                     adapter.setOnItemClickListener(object : IndianGardenMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            //toast to check if clicking works
-                            Toast.makeText(context,
-                                "you clicked on item no. $position",
-                                Toast.LENGTH_SHORT
-                            ).show()
+
 
                             when (position) {
                                 0 -> {
@@ -127,4 +143,24 @@ class IndianGardenMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("RF1GfTjrS8DQYcVzVjZ7")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                indiangardenNameView.text = restaurantInfo?.name
+                indiangardenOpeningTimeView.text = restaurantInfo?.openingTime
+                indiangardenDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                indiangardenRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( indiangardenHeaderImageView)
+            }
+    }
+
+
+
 }

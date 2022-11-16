@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class LiljeholmensGrillMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var liljeholmensGrillHeaderImageView: ImageView
+    lateinit var liljeholmensGrillNameView: TextView
+    lateinit var liljeholmensGrillOpeningTimeView: TextView
+    lateinit var liljeholmensGrillDeliveryFeeView: TextView
+    lateinit var liljeholmensGrillRatingView: TextView
 
     lateinit var liljeholmensGrillPreviousFragmentImageButton: ImageButton
 
@@ -49,6 +61,15 @@ class LiljeholmensGrillMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        liljeholmensGrillNameView = view.findViewById(R.id.liljeholmensGrillNameView)
+        liljeholmensGrillOpeningTimeView = view.findViewById(R.id.liljeholmensGrillOpeningTimeView)
+        liljeholmensGrillDeliveryFeeView = view.findViewById(R.id.liljeholmensGrillDeliveryFeeView)
+        liljeholmensGrillRatingView = view.findViewById(R.id.liljeholmensGrillRatingView)
+        liljeholmensGrillHeaderImageView = view.findViewById(R.id.liljeholmensGrillHeaderImageView)
+
+        setMenuInformation()
 
         liljeholmensGrillPreviousFragmentImageButton = view.findViewById(R.id.liljeholmensGrillPreviousFragmentImageButton)
         liljeholmensGrillPreviousFragmentImageButton.setOnClickListener {
@@ -72,11 +93,6 @@ class LiljeholmensGrillMenuFragment : Fragment() {
 
                     adapter.setOnItemClickListener(object : LiljeholmensGrillMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            //toast to check if clicking works
-                            Toast.makeText(context,
-                                "you clicked on item no. $position",
-                                Toast.LENGTH_SHORT
-                            ).show()
 
                             when (position) {
                                 0 -> {
@@ -126,4 +142,25 @@ class LiljeholmensGrillMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("1YmjyWxO3JvGbtp5keH8")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                liljeholmensGrillNameView.text = restaurantInfo?.name
+                liljeholmensGrillOpeningTimeView.text = restaurantInfo?.openingTime
+                liljeholmensGrillDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                liljeholmensGrillRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( liljeholmensGrillHeaderImageView)
+            }
+    }
+
+
+
 }

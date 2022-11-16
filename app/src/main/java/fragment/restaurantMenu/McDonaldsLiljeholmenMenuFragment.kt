@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class McDonaldsLiljeholmenMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var mcdonaldsLiljeholmenHeaderImageView: ImageView
+    lateinit var mcdonaldsLiljeholmenNameView: TextView
+    lateinit var mcdonaldsLiljeholmenOpeningTimeView: TextView
+    lateinit var mcdonaldsLiljeholmenDeliveryFeeView: TextView
+    lateinit var mcdonaldsLiljeholmenRatingView: TextView
 
     lateinit var mcDonaldsLiljeholmenPreviousFragmentImageButton: ImageButton
 
@@ -49,6 +61,14 @@ class McDonaldsLiljeholmenMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mcdonaldsLiljeholmenNameView = view.findViewById(R.id.mcdonaldsLiljeholmenNameView)
+        mcdonaldsLiljeholmenOpeningTimeView = view.findViewById(R.id.mcdonaldsLiljeholmenOpeningTimeView)
+        mcdonaldsLiljeholmenDeliveryFeeView = view.findViewById(R.id.mcdonaldsLiljeholmenDeliveryFeeView)
+        mcdonaldsLiljeholmenRatingView = view.findViewById(R.id.mcdonaldsLiljeholmenRatingView)
+        mcdonaldsLiljeholmenHeaderImageView = view.findViewById(R.id.mcdonaldsLiljeholmenHeaderImageView)
+
+        setMenuInformation()
 
         mcDonaldsLiljeholmenPreviousFragmentImageButton = view.findViewById(R.id.mcDonaldsPreviousFragmentImageButton)
         mcDonaldsLiljeholmenPreviousFragmentImageButton.setOnClickListener {
@@ -72,11 +92,7 @@ class McDonaldsLiljeholmenMenuFragment : Fragment() {
 
                     adapter.setOnItemClickListener(object : McDonaldsLiljeholmenMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            //toast to check if clicking works
-                            Toast.makeText(context,
-                                "you clicked on item no. $position",
-                                Toast.LENGTH_SHORT
-                            ).show()
+
 
                             when (position) {
                                 0 -> {
@@ -128,4 +144,22 @@ class McDonaldsLiljeholmenMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("MYTJUx2kyeSyfHjwUy5n")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                mcdonaldsLiljeholmenNameView.text = restaurantInfo?.name
+                mcdonaldsLiljeholmenOpeningTimeView.text = restaurantInfo?.openingTime
+                mcdonaldsLiljeholmenDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                mcdonaldsLiljeholmenRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( mcdonaldsLiljeholmenHeaderImageView)
+            }
+    }
+
 }
