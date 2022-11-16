@@ -58,11 +58,13 @@ class OrderConfirmationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_order_confirmation, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         //Rating
         imageStar1 = view.findViewById(R.id.confirmation_star1)
@@ -78,6 +80,7 @@ class OrderConfirmationFragment : Fragment() {
         imageStarText5 = view.findViewById(R.id.confirmation_star5TextView)
 
         ratingTextView = view.findViewById(R.id.confirmation_rateTextView)
+        displayStars()
         //Rating ENDS
 
 
@@ -95,6 +98,23 @@ class OrderConfirmationFragment : Fragment() {
         //Hämta restaurangnamn
 
         ShoppingCart.clearItemsFromCart()
+    }
+
+    private fun displayStars() {
+        imageStar1.visibility = View.VISIBLE
+        imageStarText1.visibility = View.VISIBLE
+
+        imageStar2.visibility = View.VISIBLE
+        imageStarText2.visibility = View.VISIBLE
+
+        imageStar3.visibility = View.VISIBLE
+        imageStarText3.visibility = View.VISIBLE
+
+        imageStar4.visibility = View.VISIBLE
+        imageStarText4.visibility = View.VISIBLE
+
+        imageStar5.visibility = View.VISIBLE
+        imageStarText5.visibility = View.VISIBLE
     }
 
 
@@ -164,19 +184,10 @@ class OrderConfirmationFragment : Fragment() {
 
     private fun deactivateClickListeners(){
         imageStar1.setOnClickListener (null)
-        imageStarText1.setOnClickListener (null)
-
         imageStar2.setOnClickListener (null)
-        imageStarText2.setOnClickListener (null)
-
         imageStar3.setOnClickListener (null)
-        imageStarText3.setOnClickListener (null)
-
         imageStar4.setOnClickListener (null)
-        imageStarText4.setOnClickListener (null)
-
         imageStar5.setOnClickListener (null)
-        imageStarText5.setOnClickListener (null)
     }
 
     //takes local time and adds 30 minutes
@@ -250,53 +261,82 @@ class OrderConfirmationFragment : Fragment() {
         // If user press star number one, or the textview below it
         imageStar1.setOnClickListener {
             ratingNumber = 1
-            updateRating(ratingNumber)}
-        imageStarText1.setOnClickListener{
-            ratingNumber = 1
             updateRating(ratingNumber)
+
+            imageStar2.visibility = View.INVISIBLE
+            imageStarText2.visibility = View.INVISIBLE
+
+            imageStar3.visibility = View.INVISIBLE
+            imageStarText3.visibility = View.INVISIBLE
+
+            imageStar4.visibility = View.INVISIBLE
+            imageStarText4.visibility = View.INVISIBLE
+
+            imageStar5.visibility = View.INVISIBLE
+            imageStarText5.visibility = View.INVISIBLE
         }
+
+
 
 
         // If user press star number two, or the textview below it
         imageStar2.setOnClickListener {
             ratingNumber = 2
             updateRating(ratingNumber)
-        }
-        imageStarText2.setOnClickListener{
-            ratingNumber = 2
-            updateRating(ratingNumber)
-        }
+            imageStarText1.visibility = View.INVISIBLE
 
+
+            imageStar3.visibility = View.INVISIBLE
+            imageStarText3.visibility = View.INVISIBLE
+
+            imageStar4.visibility = View.INVISIBLE
+            imageStarText4.visibility = View.INVISIBLE
+
+            imageStar5.visibility = View.INVISIBLE
+            imageStarText5.visibility = View.INVISIBLE
+        }
 
         // If user press star number three, or the textview below it
         imageStar3.setOnClickListener  {
             ratingNumber = 3
             updateRating(ratingNumber)
+
+            imageStarText1.visibility = View.INVISIBLE
+            imageStarText2.visibility = View.INVISIBLE
+
+
+            imageStar4.visibility = View.INVISIBLE
+            imageStarText4.visibility = View.INVISIBLE
+
+            imageStar5.visibility = View.INVISIBLE
+            imageStarText5.visibility = View.INVISIBLE
         }
-        imageStarText3.setOnClickListener{
-            ratingNumber = 3
-            updateRating(ratingNumber)
-        }
+
 
         // If user press star number four, or the textview below it
         imageStar4.setOnClickListener {
             ratingNumber = 4
             updateRating(ratingNumber)
+
+            imageStarText1.visibility = View.INVISIBLE
+            imageStarText2.visibility = View.INVISIBLE
+            imageStarText3.visibility = View.INVISIBLE
+
+            imageStar5.visibility = View.INVISIBLE
+            imageStarText5.visibility = View.INVISIBLE
         }
-        imageStarText4.setOnClickListener{
-            ratingNumber = 4
-            updateRating(ratingNumber)
-        }
+
 
 
         // If user press star number five, or the textview below it
         imageStar5.setOnClickListener {
             ratingNumber = 5
             updateRating(ratingNumber)
-        }
-        imageStarText5.setOnClickListener{
-            ratingNumber = 5
-            updateRating(ratingNumber)
+
+            imageStarText1.visibility = View.INVISIBLE
+            imageStarText2.visibility = View.INVISIBLE
+            imageStarText3.visibility = View.INVISIBLE
+            imageStarText4.visibility = View.INVISIBLE
         }
     }
 
