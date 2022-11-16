@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +36,12 @@ class BrodernasMenuFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var brodernasPreviousFragmentImageButton: ImageButton
+    lateinit var brodernasHeaderImageView: ImageView
+    lateinit var brodernasNameText: TextView
+    lateinit var brodernasOpeningTimeView: TextView
+    lateinit var brodernasDeliveryFeeView: TextView
+    lateinit var brodernasRatingView: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +63,19 @@ class BrodernasMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        brodernasNameText = view.findViewById(R.id.brodernasNameView)
+        brodernasOpeningTimeView = view.findViewById(R.id.brodernasOpeningTimeView)
+        brodernasDeliveryFeeView = view.findViewById(R.id.brodernasDeliveryFeeView)
+        brodernasRatingView = view.findViewById(R.id.brodernasRatingView)
+        brodernasHeaderImageView = view.findViewById(R.id.brodernasHeaderImageView)
+
         brodernasPreviousFragmentImageButton = view.findViewById(R.id.brodernasPreviousFragmentImageButton)
         brodernasPreviousFragmentImageButton.setOnClickListener {
             returnToPreviousFragment()
         }
 
 
+        setMenuInformation()
 
         FirebaseFirestore.getInstance().collection("restaurants").document("wGNxzHJszl1DLjs1Sp61").collection("menu")
             // för att sortera utefter kategori av maträtt. Funktion för att kunna göra flera recyclerviews med olika maträtter och olika rubriker
@@ -77,15 +96,9 @@ class BrodernasMenuFragment : Fragment() {
 
                     adapter.setOnItemClickListener(object : BrodernasMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            //toast to check if clicking works
-                            Toast.makeText(context,
-                                "you clicked on item no. $position",
-                                Toast.LENGTH_SHORT
-                            ).show()
 
                             when (position) {
                                 0 -> {
-
 
                                 }
                                 1 -> {
@@ -98,13 +111,14 @@ class BrodernasMenuFragment : Fragment() {
 
                     }) // End of click handler
 
-                }
 
+                }
             }
             .addOnFailureListener {
                 Toast.makeText(context,"failed", Toast.LENGTH_SHORT)
                     .show()
             }
+
     }
 
     companion object {
@@ -133,6 +147,21 @@ class BrodernasMenuFragment : Fragment() {
        }
     }
 
+fun setMenuInformation(){
+    db.collection("restaurants").document("wGNxzHJszl1DLjs1Sp61")
+        .get()
+        .addOnSuccessListener { document ->
+            val restaurantInfo = document.toObject<RestaurantInfo>()
 
+            brodernasNameText.text = restaurantInfo?.name
+            brodernasOpeningTimeView.text = restaurantInfo?.openingTime
+            brodernasDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+            brodernasRatingView.text = restaurantInfo!!.rating.toString()
+
+            Glide.with(this)
+                .load(restaurantInfo?.image)
+                .into(brodernasHeaderImageView)
+        }
+}
 
 }

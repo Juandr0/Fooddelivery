@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import classes.Restaurant
 import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import fragment.restaurantMenu.*
 import fragment.user.ExploreFragment
 
 class TopRatedRecyclerAdapter(val context: ExploreFragment, val restaurants: List<Restaurant>) :
@@ -43,10 +45,106 @@ class TopRatedRecyclerAdapter(val context: ExploreFragment, val restaurants: Lis
         holder.restaurantRatingView.text = restaurant.rating.toString()
         holder.restaurantDeliveryFeeView.text = "${restaurant.deliveryFee} kr"
 
+        holder.itemView.setOnClickListener(object:  View.OnClickListener{
+            override fun onClick(v: View?) {
+
+                val activity = v!!.context as AppCompatActivity
+
+
+
+                when(holder.restaurantNameView.text) {
+                    "Brödernas Liljeholmen" ->{
+                        val BrodernasMenuFragment = BrodernasMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, BrodernasMenuFragment)
+                        transaction.commit()
+                    }
+                    "Max Liljeholmen" ->{
+                        val MaxLiljeholmenMenuFragment= MaxLiljeholmenMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, MaxLiljeholmenMenuFragment)
+                        transaction.commit()
+                    }
+                    "Liljeholmens Grill" ->{
+                        val LiljeholmensGrillMenuFragment = LiljeholmensGrillMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, LiljeholmensGrillMenuFragment)
+                        transaction.commit()
+                    }
+                    "McDonalds Liljeholmen" ->{
+                        val McDonaldsLiljeholmenMenuFragment = McDonaldsLiljeholmenMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, McDonaldsLiljeholmenMenuFragment)
+                        transaction.commit()
+                    }
+                    "O'Learys Liljeholmen" ->{
+                        val OlearysMenuFragment = OlearysMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, OlearysMenuFragment)
+                        transaction.commit()
+                    }
+                    "Indian Garden" ->{
+                         val IndianGardenMenuFragment = IndianGardenMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, IndianGardenMenuFragment)
+                        transaction.commit()
+
+                    }
+                    "Trattoria Grazie" ->{
+                        val TrattoriaGrazieMenuFragment = TrattoriaGrazieMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, TrattoriaGrazieMenuFragment)
+                        transaction.commit()
+                    }
+                    "Taco Bar" ->{
+                        val TacoBarMenuFragment = TacoBarMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, TacoBarMenuFragment)
+                        transaction.commit()
+                    }
+                    "Liljeholmens Pizzeria" ->{
+                        val LiljeholmensPizzeriaMenuFragment = LiljeholmesnPizzeriaMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, LiljeholmensPizzeriaMenuFragment)
+                        transaction.commit()
+                    }
+                    "Liljeholmens Pizzeria" ->{
+                        val LiljeholmensPizzeriaMenuFragment = LiljeholmesnPizzeriaMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, LiljeholmensPizzeriaMenuFragment)
+                        transaction.commit()
+                    }
+                    "Maxad Pizza" ->{
+                        val MaxadPizzaMenuFragment = MaxadPizzaMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, MaxadPizzaMenuFragment)
+                        transaction.commit()
+                    }
+                    "Hanami Hawaiian Poke & Sushi" ->{
+                        val HanamiMenuFragment = HanamiMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, HanamiMenuFragment)
+                        transaction.commit()
+                    }
+                    "Thai Rung" ->{
+                        val ThaiRungMenuFragment = ThaiRungMenuFragment()
+                        val transaction = activity.supportFragmentManager.beginTransaction().addToBackStack("ExploreFragment")
+                        transaction.replace(R.id.fragment_container, ThaiRungMenuFragment)
+                        transaction.commit()
+                    }
+                }
+
+
+            }
+        })
+
         //Glide for image
         Glide.with(context)
             .load(restaurant.image)
             .into(holder.restaurantHeaderImageView)
+
+
+
 
     }
 

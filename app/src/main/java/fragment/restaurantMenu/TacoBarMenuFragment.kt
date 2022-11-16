@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import classes.OrderItem
+import classes.RestaurantInfo
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryproject.R
+import com.example.fooddeliveryproject.db
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +34,12 @@ class TacoBarMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var tacobarHeaderImageView: ImageView
+    lateinit var tacobarNameView: TextView
+    lateinit var tacobarOpeningTimeView: TextView
+    lateinit var tacobarDeliveryFeeView: TextView
+    lateinit var tacobarRatingView: TextView
 
     lateinit var tacoBarPreviousFragmentImageButton: ImageButton
 
@@ -49,6 +61,14 @@ class TacoBarMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        tacobarNameView = view.findViewById(R.id.tacobarNameView)
+        tacobarOpeningTimeView = view.findViewById(R.id.tacobarOpeningTimeView)
+        tacobarDeliveryFeeView = view.findViewById(R.id.tacobarDeliveryFeeView)
+        tacobarRatingView = view.findViewById(R.id.tacobarRatingView)
+        tacobarHeaderImageView = view.findViewById(R.id.tacobarHeaderImageView)
+
+        setMenuInformation()
 
         tacoBarPreviousFragmentImageButton = view.findViewById(R.id.tacoBarPreviousFragmentImageButton)
         tacoBarPreviousFragmentImageButton.setOnClickListener {
@@ -72,11 +92,6 @@ class TacoBarMenuFragment : Fragment() {
 
                     adapter.setOnItemClickListener(object : TacoBarMenuRecyclerAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            //toast to check if clicking works
-                            Toast.makeText(context,
-                                "you clicked on item no. $position",
-                                Toast.LENGTH_SHORT
-                            ).show()
 
                             when (position) {
                                 0 -> {
@@ -126,4 +141,22 @@ class TacoBarMenuFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
     }
+
+    fun setMenuInformation(){
+        db.collection("restaurants").document("sxPm5xMT8dQYuBT7L78u")
+            .get()
+            .addOnSuccessListener { document ->
+                val restaurantInfo = document.toObject<RestaurantInfo>()
+
+                tacobarNameView.text = restaurantInfo?.name
+                tacobarOpeningTimeView.text = restaurantInfo?.openingTime
+                tacobarDeliveryFeeView.text = getString(R.string.deliveryFee, "${restaurantInfo?.deliveryFee}")
+                tacobarRatingView.text = restaurantInfo!!.rating.toString()
+
+                Glide.with(this)
+                    .load(restaurantInfo?.image)
+                    .into( tacobarHeaderImageView)
+            }
+    }
+
 }

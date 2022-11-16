@@ -9,6 +9,98 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/indianGardenOpeningTimeIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_opening_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenNameView" />
+
+        <TextView
+            android:id="@+id/indianGardenNameView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenHeaderImageView" />
+
+        <TextView
+            android:id="@+id/indianGardenOpeningTimeView"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toStartOf="@+id/brodernasRatingIconImageView4"
+            app:layout_constraintStart_toEndOf="@+id/indianGardenOpeningTimeIconImageView"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenNameView" />
+
+        <TextView
+            android:id="@+id/indianGardenDeliveryFeeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="13dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/brodernasDeliveryIconImageView4"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenOpeningTimeView" />
+
+        <TextView
+            android:id="@+id/indianGardenRatingView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="30dp"
+            android:text="5.0"
+            android:textAlignment="textEnd"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenHeaderImageView" />
+
+        <ImageView
+            android:id="@+id/brodernasRatingIconImageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintEnd_toStartOf="@+id/indianGardenRatingView"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenHeaderImageView" />
+
+        <ImageView
+            android:id="@+id/brodernasDeliveryIconImageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_delivery_fee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indianGardenOpeningTimeIconImageView" />
+
+        <ImageView
+            android:id="@+id/indianGardenHeaderImageView"
+            android:layout_width="0dp"
+            android:layout_height="152dp"
+            android:layout_marginTop="60dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
         <ImageButton
             android:id="@+id/indianGardenPreviousFragmentImageButton"
             android:layout_width="55dp"
@@ -25,19 +117,20 @@
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="268dp"
-            android:text="@string/curry"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/menu"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/brodernasDeliveryIconImageView4" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/indianGardenMenuItemsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

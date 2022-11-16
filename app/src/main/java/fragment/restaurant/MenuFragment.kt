@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -82,11 +81,6 @@ class MenuFragment : Fragment() {
                             adapter.setOnItemClickListener(object : RestaurantMenuEditRecyclerAdapter.onItemClickListener {
                                 override fun onItemClick(position: Int) {
                                     //toast to check if clicking works
-                                    Toast.makeText(context,
-                                        "you clicked on item no. $position",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-
                                     when (position) {
                                         0 -> {
 //
