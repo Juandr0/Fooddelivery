@@ -40,9 +40,10 @@
         android:id="@+id/checkout_trashCanImageView"
         android:layout_width="31dp"
         android:layout_height="27dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toTopOf="@+id/designLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_foreground"
+        app:srcCompat="@drawable/ic_baseline_delete_24"
         app:tint="@color/red" />
 </androidx.constraintlayout.widget.ConstraintLayout>
