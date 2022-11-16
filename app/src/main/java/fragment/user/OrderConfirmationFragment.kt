@@ -201,7 +201,6 @@ class OrderConfirmationFragment : Fragment() {
                 user = document.toObject<User>()!!
                 orderAddress.text = getString(R.string.delivery_information) + " " + user.address + " " + "at $currentTime"
             }
-
     }
 
 
