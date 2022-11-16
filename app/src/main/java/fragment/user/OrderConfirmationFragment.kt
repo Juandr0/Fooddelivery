@@ -186,10 +186,10 @@ class OrderConfirmationFragment : Fragment() {
         var taxPercentile = 0.12
         val totalTax = price * taxPercentile
 
-        Log.d("!!!",taxPercentile.toString())
-        val taxPercentile2digits = String.format("%.2f", totalTax).toDouble()
 
-        salesTax.text = getString(R.string.sales_tax) + " " + taxPercentile2digits + ":-"
+
+        val taxPercentile2digits = String.format("%.2f", totalTax)
+       salesTax.text = getString(R.string.sales_tax) + " " + taxPercentile2digits + ":-"
 
 
         ratingTextView.text = getString(R.string.rate_restaurant, restaurantName)
