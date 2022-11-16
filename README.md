@@ -5,7 +5,7 @@ Courses involved:
 * Android Development, IT-högskolan Stockholm
 * Project management, IT-högskolan Stockholm
 
-Made by
+Contributors
 * Developers: Alexander Carlsson & Andrei Pirogov Huertas
 * Project managers: Anuja Back, Christopher Raitis, Jessica Lissel & Yousef Salman
        
