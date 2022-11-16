@@ -1,9 +1,9 @@
 # WoopWoop
-A fooddelivery app for the courses:
+A fooddelivery app assignment, where developers works with project managers for the first time. 
 
--Android Development, 2022 -Dev
-
--project management, 2022 -Project manager
+Courses:
+-Android Development, 2022 
+-Project management, 2022 
 
 Made by
 Developers: Alexander Carlsson & Andrei Pirogov Huertas
