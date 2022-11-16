@@ -1,5 +1,5 @@
 # WoopWoop
-A fooddelivery app assignment, where developers works with project managers for the first time. 
+A fooddelivery app assignment where developers works with project managers for the first time. 
 
 Courses:
 -Android Development, 2022 
