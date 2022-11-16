@@ -3,7 +3,6 @@ A fooddelivery app assignment where developers works with project managers for t
 
 Courses:
 -Android Development, 2022 (Dev)
-
 -Project management, 2022 
 
 #Made by
