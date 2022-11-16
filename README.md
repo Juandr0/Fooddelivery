@@ -6,6 +6,6 @@ Courses involved:
 * Project management, 2022 
 
 #Made by
-Developers: Alexander Carlsson & Andrei Pirogov Huertas
-Project managers: Anuja Back, Christopher Raitis, Jessica Lissel & Yousef Salman
+* Developers: Alexander Carlsson & Andrei Pirogov Huertas
+* Project managers: Anuja Back, Christopher Raitis, Jessica Lissel & Yousef Salman
        
