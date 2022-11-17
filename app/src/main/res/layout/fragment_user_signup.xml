@@ -41,8 +41,6 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/email"
-            android:inputType="textPersonName"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
